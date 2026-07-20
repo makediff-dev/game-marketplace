@@ -1,0 +1,126 @@
+.navbar {
+  width: 100%;
+  max-width: var(--content-width);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-20) var(--spacing-32);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-24);
+}
+
+.logo {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: var(--line-height-h2);
+  color: var(--brand-500);
+}
+
+.searchGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-40);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 376px;
+  height: 41px;
+  padding: var(--spacing-6) var(--spacing-4);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-12);
+  transition: box-shadow 0.2s ease;
+}
+
+.search:focus-within {
+  box-shadow: 0 0 0 2px var(--brand-500);
+}
+
+.searchInput {
+  flex: 1;
+  padding-left: var(--spacing-4);
+  font-size: var(--font-size-body-s);
+  color: var(--text-primary);
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+.searchButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 31px;
+  height: 29px;
+  background: var(--neutral-200);
+  border-radius: 9px;
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.sellLink {
+  font-size: var(--font-size-body-l);
+  color: var(--text-tertiary);
+  padding: 9px 0;
+  transition: color 0.2s ease;
+}
+
+.sellLink:hover {
+  color: var(--brand-500);
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+@media (max-width: 1200px) {
+  .search {
+    width: 280px;
+  }
+
+  .searchGroup {
+    gap: var(--spacing-16);
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    height: auto;
+    padding: var(--spacing-16);
+  }
+
+  .inner {
+    flex-wrap: wrap;
+    gap: var(--spacing-16);
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .searchGroup {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+}

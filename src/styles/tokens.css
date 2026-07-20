@@ -1,0 +1,72 @@
+:root {
+  /* Brand */
+  --brand-500: #6d5df7;
+  --brand-600: #5b4be6;
+  --brand-300: #b9abff;
+  --brand-100: #e9e6ff;
+
+  /* Text */
+  --text-primary: #16161a;
+  --text-tertiary: #6f7280;
+  --text-muted: #9699a6;
+  --text-error: #ff3b5f;
+  --text-success: #1fa463;
+  --text-accent: #6d5df7;
+  --text-inverse: #ffffff;
+  --text-disabled: #bfc1cc;
+
+  /* Surface & neutral */
+  --surface-secondary: #f6f6f6;
+  --neutral-0: #ffffff;
+  --neutral-200: #eeeef0;
+  --neutral-300: #dfe0e5;
+  --neutral-400: #bfc1cc;
+  --neutral-500: #9699a6;
+
+  /* Radius */
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-full: 999px;
+
+  /* Spacing */
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-64: 64px;
+
+  /* Typography */
+  --font-size-caption: 12px;
+  --font-size-body-s: 12px;
+  --font-size-body-m: 14px;
+  --font-size-body-l: 16px;
+  --font-size-button: 14px;
+  --font-size-h4: 18px;
+  --font-size-price: 18px;
+  --font-size-h2: 24px;
+
+  --line-height-caption: 16px;
+  --line-height-body-s: 16px;
+  --line-height-body-m: 20px;
+  --line-height-body-l: 24px;
+  --line-height-button: 18px;
+  --line-height-h4: 24px;
+  --line-height-price: 24px;
+  --line-height-h2: 32px;
+  --line-height-h3: 28px;
+
+  /* Layout */
+  --content-width: 1136px;
+  --page-padding-x: 120px;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(90deg, var(--brand-500) 0%, var(--brand-300) 100%);
+}

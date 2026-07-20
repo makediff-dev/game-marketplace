@@ -1,0 +1,67 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-10);
+  padding: var(--spacing-12) var(--spacing-24);
+  border-radius: var(--radius-12);
+  font-size: var(--font-size-button);
+  font-weight: 500;
+  line-height: var(--line-height-button);
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+}
+
+.primary {
+  background: var(--brand-500);
+  border: 1px solid var(--brand-500);
+  color: var(--text-inverse);
+}
+
+.outline {
+  background: transparent;
+  border: 1px solid var(--brand-500);
+  color: var(--brand-500);
+}
+
+.gradient {
+  background: var(--gradient-brand);
+  border: none;
+  color: var(--text-inverse);
+  padding: var(--spacing-12) var(--spacing-32);
+  border-radius: var(--radius-16);
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h3);
+}
+
+.ghost {
+  background: var(--neutral-0);
+  border: none;
+  color: var(--brand-500);
+  padding: var(--spacing-10) var(--spacing-24);
+  border-radius: var(--radius-16);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.large {
+  height: 56px;
+  padding: 5px 26px;
+  border-radius: 14px;
+  font-size: 18px;
+  line-height: 40px;
+}

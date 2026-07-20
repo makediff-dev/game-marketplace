@@ -1,0 +1,46 @@
+.stub {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-64) var(--page-padding-x);
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  padding: var(--spacing-40);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-24);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.title {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: var(--line-height-h2);
+}
+
+.description {
+  color: var(--text-tertiary);
+  line-height: var(--line-height-body-l);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-12) var(--spacing-24);
+  background: var(--brand-500);
+  color: var(--text-inverse);
+  border-radius: var(--radius-12);
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.backLink:hover {
+  opacity: 0.9;
+}

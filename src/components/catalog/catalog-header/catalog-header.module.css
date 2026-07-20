@@ -1,0 +1,63 @@
+.header {
+  width: 100%;
+  max-width: var(--content-width);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-24);
+  padding: var(--spacing-16);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  text-align: center;
+}
+
+.title {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: var(--line-height-h2);
+  color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: var(--font-size-body-l);
+  font-weight: 500;
+  line-height: var(--line-height-body-l);
+  color: var(--brand-500);
+}
+
+.categoriesButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-10);
+  padding: var(--spacing-10) var(--spacing-24);
+  background: var(--neutral-0);
+  border-radius: var(--radius-16);
+  color: var(--brand-500);
+  font-size: var(--font-size-h4);
+  font-weight: 500;
+  line-height: var(--line-height-h2);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.categoriesButton:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.gridIcon {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: var(--spacing-16);
+    text-align: center;
+  }
+}

@@ -1,0 +1,38 @@
+.arrowButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--surface-secondary);
+  transition: background 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.arrowButton:hover {
+  background: var(--neutral-200);
+}
+
+.arrowButton:active {
+  transform: scale(0.95);
+}
+
+.arrowButton:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+}
+
+.arrowButtonLeft {
+  transform: rotate(180deg);
+}
+
+.arrowButtonLeft:hover {
+  transform: rotate(180deg) scale(0.95);
+}
+
+.icon {
+  width: 16px;
+  height: 13px;
+  object-fit: contain;
+}

@@ -1,0 +1,216 @@
+.panel {
+  width: 100%;
+  max-width: 600px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--neutral-0);
+  border-radius: var(--radius-24);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-32);
+}
+
+.title {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+}
+
+.reset {
+  position: absolute;
+  left: 32px;
+  color: var(--brand-500);
+  font-size: var(--font-size-body-l);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sectionLabel {
+  padding: 0 var(--spacing-32);
+  font-size: var(--font-size-body-m);
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-16);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  padding: var(--spacing-16) var(--spacing-32);
+}
+
+.optionTitle {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+.optionDescription {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.separator {
+  height: 1px;
+  margin: 0 var(--spacing-32);
+  background: var(--surface-secondary);
+}
+
+.checkbox {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.checkboxChecked {
+  background: var(--brand-500);
+}
+
+.checkboxUnchecked {
+  background: var(--neutral-300);
+}
+
+.checkIcon {
+  width: 14px;
+  height: 10px;
+}
+
+.rangeSection {
+  padding: 0 var(--spacing-32) var(--spacing-24);
+}
+
+.rangeLabel {
+  font-size: var(--font-size-body-m);
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-16);
+}
+
+.rangeRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rangeInput {
+  width: 240px;
+  padding: var(--spacing-16) var(--spacing-20);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-16);
+  border: none;
+  font-size: var(--font-size-h4);
+  color: var(--text-primary);
+}
+
+.rangeInput::placeholder {
+  color: var(--text-muted);
+}
+
+.rangeDash {
+  width: 56px;
+  height: 2px;
+  object-fit: contain;
+}
+
+.switchRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-16) var(--spacing-32);
+  border-bottom: 1px solid var(--surface-secondary);
+}
+
+.switchRow:last-child {
+  border-bottom: none;
+}
+
+.switchLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-10);
+  font-size: var(--font-size-h4);
+  color: var(--text-primary);
+}
+
+.discountBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  height: 26px;
+  background: var(--text-error);
+  color: var(--text-inverse);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.starIcon {
+  width: 26px;
+  height: 26px;
+}
+
+.switch {
+  width: 56px;
+  height: 32px;
+  border-radius: 100px;
+  background: var(--neutral-300);
+  border: none;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.switchOn {
+  background: var(--brand-500);
+}
+
+.switchKnob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 100px;
+  background: var(--neutral-0);
+  transition: transform 0.2s ease;
+}
+
+.switchOn .switchKnob {
+  transform: translateX(24px);
+}
+
+.footer {
+  padding: var(--spacing-32);
+}
+
+.showButton {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .panel {
+    max-width: none;
+    border-radius: var(--radius-24) var(--radius-24) 0 0;
+    max-height: 90vh;
+  }
+
+  .rangeInput {
+    width: 120px;
+  }
+}

@@ -1,0 +1,57 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(22, 22, 26, 0.5);
+  padding: var(--spacing-24);
+}
+
+.modal {
+  width: 100%;
+  max-width: 440px;
+  background: var(--neutral-0);
+  border-radius: var(--radius-24);
+  padding: var(--spacing-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.title {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: var(--line-height-h2);
+  color: var(--text-primary);
+}
+
+.content {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-12);
+  justify-content: flex-end;
+}
+
+.input {
+  width: 100%;
+  padding: var(--spacing-16) var(--spacing-20);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-16);
+  font-size: var(--font-size-body-l);
+  color: var(--text-primary);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  outline: 2px solid var(--brand-500);
+}

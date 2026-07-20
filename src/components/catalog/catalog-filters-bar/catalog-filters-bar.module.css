@@ -1,0 +1,81 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--content-width);
+  height: 40px;
+}
+
+.chips {
+  display: flex;
+  gap: var(--spacing-12);
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--content-width);
+  height: 40px;
+}
+
+.filterGroup {
+  display: flex;
+  gap: var(--spacing-12);
+}
+
+.iconButton,
+.priceButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: var(--spacing-10) var(--spacing-20);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-8, 8px);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.iconButton {
+  width: 40px;
+  padding: 0;
+}
+
+.iconButton:hover,
+.priceButton:hover {
+  opacity: 0.85;
+}
+
+.iconButton:focus-visible,
+.priceButton:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.priceLabel {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+}
+
+.total {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-muted);
+}

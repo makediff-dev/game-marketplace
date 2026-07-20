@@ -1,0 +1,222 @@
+.section {
+  width: 100%;
+  max-width: var(--content-width);
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.title {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: var(--line-height-h2);
+}
+
+.subtitle {
+  font-size: var(--font-size-body-m);
+  color: var(--text-muted);
+}
+
+.text {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.note {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.moreButton {
+  align-self: flex-end;
+  color: var(--brand-500);
+  font-size: var(--font-size-body-l);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sellerSection {
+  width: 100%;
+  max-width: var(--content-width);
+  align-self: stretch;
+  margin-top: var(--spacing-40);
+}
+
+.sellerCard {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-16);
+}
+
+.sellerLogo {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-16);
+  background: var(--brand-500);
+  color: var(--text-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+}
+
+.sellerName {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  font-size: var(--font-size-body-l);
+  font-weight: 500;
+}
+
+.sellerInfo {
+  font-size: var(--font-size-body-m);
+  color: var(--text-muted);
+}
+
+.paymentRow {
+  display: flex;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-12);
+}
+
+.paymentIcon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.policy {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-16);
+  font-size: var(--font-size-body-l);
+}
+
+.checkBadge {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--text-success);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.checkBadge::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 5px;
+  width: 6px;
+  height: 10px;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+}
+
+.similarSection {
+  width: 100%;
+  max-width: var(--content-width);
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
+.similarHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding-bottom: var(--spacing-16);
+  border-bottom: 1px solid var(--neutral-300);
+}
+
+.similarTitle {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+}
+
+.similarGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-24);
+}
+
+.loadMore {
+  width: 100%;
+  padding: var(--spacing-16);
+  background: rgba(22, 22, 26, 0.04);
+  border-radius: var(--radius-16);
+  font-size: var(--font-size-body-l);
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .similarGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .similarGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chatInfo {
+  margin-top: var(--spacing-20);
+  font-size: var(--font-size-body-m);
+  color: var(--text-muted);
+}
+
+.reviewsSection {
+  width: 100%;
+  max-width: var(--content-width);
+  align-self: stretch;
+  margin-top: var(--spacing-40);
+  padding: var(--spacing-24) var(--spacing-32);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-24);
+}
+
+.reviewsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-24);
+}
+
+.reviewsTitle {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+}
+
+.reset {
+  color: var(--brand-500);
+  font-size: var(--font-size-body-l);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 0;
+  }
+}
