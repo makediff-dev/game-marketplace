@@ -14,6 +14,7 @@ export function Button({
   large = false,
   className,
   children,
+  type = "button",
   ...props
 }: ButtonProps) {
   const classNames = [
@@ -27,7 +28,7 @@ export function Button({
     .join(" ");
 
   return (
-    <button type="button" className={classNames} {...props}>
+    <button type={type} className={classNames} {...props}>
       {children}
     </button>
   );

@@ -34,7 +34,7 @@ export function CatalogProductGrid({
   const hasMore = visibleCount < filteredProducts.length;
 
   return (
-    <section className={styles.section} aria-label="Товары">
+    <section className={`contentBlock ${styles.section}`} aria-label="Товары">
       {showHeader ? (
         <div className={styles.header}>
           <span className={styles.title}>Самые популярные товары</span>

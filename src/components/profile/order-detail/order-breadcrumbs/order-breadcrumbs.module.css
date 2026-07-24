@@ -1,0 +1,26 @@
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-size: 13px;
+  line-height: var(--line-height-body-m);
+}
+
+.link {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--text-primary);
+}
+
+.separator {
+  color: var(--text-muted);
+}
+
+.current {
+  color: var(--text-primary);
+  font-weight: 500;
+}

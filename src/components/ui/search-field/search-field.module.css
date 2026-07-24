@@ -1,0 +1,81 @@
+.field {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 376px;
+  height: 48px;
+  padding: 0 var(--spacing-16);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-12);
+  transition: box-shadow 0.2s ease;
+}
+
+.field:focus-within {
+  box-shadow: 0 0 0 2px var(--brand-500);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.flexible {
+  flex: 1;
+  max-width: 376px;
+  min-width: 0;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  color: var(--text-primary);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:read-only {
+  cursor: pointer;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.iconWrap[aria-hidden="true"] {
+  cursor: default;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 1200px) {
+  .field {
+    width: 280px;
+  }
+
+  .flexible {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .field,
+  .flexible {
+    width: 100%;
+    max-width: none;
+  }
+}

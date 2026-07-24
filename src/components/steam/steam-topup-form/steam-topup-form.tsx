@@ -3,11 +3,11 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { Icon } from "@/components/ui/icon/icon";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "@/components/ui/button/button";
-import { Modal, modalStyles } from "@/components/ui/modal/modal";
+import { PromoCodeModal } from "@/components/steam/promo-code-modal/promo-code-modal";
+import { BalancePaymentModal } from "@/components/profile/balance-payment-modal/balance-payment-modal";
 import {
   currencyIcons,
   currencySymbols,
@@ -43,6 +43,7 @@ function TopupFormPanel({ platformId }: TopupFormPanelProps) {
   const { form: config } = platform;
   const [currency, setCurrency] = useState<Currency>(config.currencies[0]);
   const [promoOpen, setPromoOpen] = useState(false);
+  const [paymentOpen, setPaymentOpen] = useState(false);
   const [promoCode, setPromoCode] = useState("");
   const [showTooltip, setShowTooltip] = useState(false);
   const showToast = useToastStore((state) => state.show);
@@ -53,6 +54,7 @@ function TopupFormPanel({ platformId }: TopupFormPanelProps) {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -65,9 +67,14 @@ function TopupFormPanel({ platformId }: TopupFormPanelProps) {
     [amount, config.feePercent],
   );
 
-  const onSubmit = (data: FormValues) => {
+  const openPaymentModal = handleSubmit(() => {
+    setPaymentOpen(true);
+  });
+
+  const handleProceedToPayment = () => {
+    setPaymentOpen(false);
     showToast(
-      `Заявка на пополнение ${platform.name} на ${formatPrice(data.amount)} ${currencySymbols[currency]} отправлена (прототип)`,
+      `Переход к оплате ${formatPrice(total)} ${currencySymbols[currency]} через выбранный способ (прототип)`,
     );
   };
 
@@ -77,9 +84,28 @@ function TopupFormPanel({ platformId }: TopupFormPanelProps) {
     setPromoCode("");
   };
 
+  const parseAmountValue = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+    return digits ? Number(digits) : 0;
+  };
+
+  const getCurrencyIconClassName = (key: Currency) => {
+    const classNames = [styles.currencyIcon];
+
+    if (currency === key) {
+      if (key !== "rub") {
+        classNames.push(styles.currencyIconActiveDark);
+      }
+    } else if (key === "rub") {
+      classNames.push(styles.currencyIconRubInactive);
+    }
+
+    return classNames.join(" ");
+  };
+
   return (
     <>
-      <form className={styles.formPanel} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.formPanel} onSubmit={(event) => event.preventDefault()}>
         <div className={styles.formRow}>
           <div className={styles.headerBlock}>
             <div className={styles.titleRow}>
@@ -103,95 +129,107 @@ function TopupFormPanel({ platformId }: TopupFormPanelProps) {
             ) : null}
           </div>
 
-          <div className={styles.fieldGroup}>
-            <div className={styles.field}>
-              <input
-                {...register("login")}
-                className={styles.fieldInput}
-                placeholder={config.accountPlaceholder}
-                aria-label={config.accountLabel}
-              />
-              <div
-                className={styles.infoButton}
-                onMouseEnter={() => setShowTooltip(true)}
-                onMouseLeave={() => setShowTooltip(false)}
-              >
-                <Icon src="/assets/info.svg" alt="Подсказка" width={24} height={24} />
-                {showTooltip ? (
-                  <span className={styles.infoTooltip}>{config.accountTooltip}</span>
-                ) : null}
-              </div>
-            </div>
-            {errors.login ? <span role="alert">{errors.login.message}</span> : null}
-
-            <div className={`${styles.field} ${styles.amountField}`}>
-              <div className={styles.amountBlock}>
-                <span className={styles.amountLabel}>Сумма</span>
-                <input
-                  {...register("amount", { valueAsNumber: true })}
-                  type="number"
-                  className={styles.amountInput}
-                  aria-label="Сумма пополнения"
-                />
-              </div>
-              <div className={styles.currencyGroup} role="radiogroup" aria-label="Валюта">
-                {config.currencies.map((key) => (
-                  <button
-                    key={key}
-                    type="button"
-                    className={`${styles.currencyButton} ${
-                      currency === key ? styles.currencyActive : ""
-                    }`}
-                    onClick={() => setCurrency(key)}
-                    aria-pressed={currency === key}
-                    aria-label={key.toUpperCase()}
+          <div className={styles.fieldsContainer}>
+            <div className={styles.fieldGroup}>
+              <div className={`${styles.fieldWrap} ${styles.loginFieldWrap}`}>
+                <div className={`${styles.field} ${styles.loginField}`}>
+                  <input
+                    {...register("login")}
+                    className={styles.fieldInput}
+                    placeholder={config.accountPlaceholder}
+                    aria-label={config.accountLabel}
+                  />
+                  <div
+                    className={styles.infoButton}
+                    onMouseEnter={() => setShowTooltip(true)}
+                    onMouseLeave={() => setShowTooltip(false)}
                   >
-                    <Icon
-                      src={currencyIcons[key]}
-                      width={24}
-                      height={24}
-                      className={styles.currencyIcon}
-                    />
-                  </button>
-                ))}
+                    <Icon src="/assets/info.svg" alt="Подсказка" width={24} height={24} />
+                    {showTooltip ? (
+                      <span className={styles.infoTooltip}>{config.accountTooltip}</span>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+
+              <div className={`${styles.fieldWrap} ${styles.amountFieldWrap}`}>
+                <div className={`${styles.field} ${styles.amountField}`}>
+                  <div className={styles.amountBlock}>
+                    <span className={styles.amountLabel}>Сумма</span>
+                    <div className={styles.amountValueGroup}>
+                      <Controller
+                        name="amount"
+                        control={control}
+                        render={({ field }) => (
+                          <input
+                            type="text"
+                            inputMode="numeric"
+                            className={styles.amountValue}
+                            value={formatPrice(field.value || 0)}
+                            size={Math.max(formatPrice(field.value || 0).length, 1)}
+                            onChange={(event) => {
+                              field.onChange(parseAmountValue(event.target.value));
+                            }}
+                            aria-label="Сумма пополнения"
+                          />
+                        )}
+                      />
+                      <span className={styles.amountSymbol}>{currencySymbols[currency]}</span>
+                    </div>
+                  </div>
+                  <div className={styles.currencyGroup} role="radiogroup" aria-label="Валюта">
+                  {config.currencies.map((key) => (
+                    <button
+                      key={key}
+                      type="button"
+                      className={`${styles.currencyButton} ${
+                        currency === key ? styles.currencyActive : ""
+                      }`}
+                      onClick={() => setCurrency(key)}
+                      aria-pressed={currency === key}
+                      aria-label={key.toUpperCase()}
+                    >
+                      <Icon
+                        src={currencyIcons[key]}
+                        width={24}
+                        height={24}
+                        className={getCurrencyIconClassName(key)}
+                      />
+                    </button>
+                  ))}
+                </div>
+                </div>
               </div>
             </div>
-            {errors.amount ? <span role="alert">{errors.amount.message}</span> : null}
-          </div>
 
-          <div className={styles.payButton}>
-            <Button variant="gradient" type="submit" className={styles.paySubmit}>
-              Оплатить {formatPrice(total)} {currencySymbols[currency]}
-            </Button>
+            <div className={styles.payButton}>
+              <button type="button" className={styles.paySubmit} onClick={openPaymentModal}>
+                Оплатить {formatPrice(total)} {currencySymbols[currency]}
+              </button>
+            </div>
           </div>
         </div>
+        {errors.login ? <span role="alert">{errors.login.message}</span> : null}
+        {errors.amount ? <span role="alert">{errors.amount.message}</span> : null}
       </form>
 
       {config.showPromo ? (
-        <Modal
+        <PromoCodeModal
           isOpen={promoOpen}
-          title="Ввести промокод"
+          value={promoCode}
+          onChange={setPromoCode}
           onClose={() => setPromoOpen(false)}
-          actions={
-            <div style={{ display: "flex", gap: 12 }}>
-              <Button variant="outline" onClick={() => setPromoOpen(false)}>
-                Отмена
-              </Button>
-              <Button variant="primary" onClick={applyPromo}>
-                Применить
-              </Button>
-            </div>
-          }
-        >
-          <input
-            className={modalStyles.input}
-            value={promoCode}
-            onChange={(event) => setPromoCode(event.target.value)}
-            placeholder="Введите промокод"
-            aria-label="Промокод"
-          />
-        </Modal>
+          onActivate={applyPromo}
+        />
       ) : null}
+
+      <BalancePaymentModal
+        isOpen={paymentOpen}
+        amount={String(total)}
+        operation="deposit"
+        onClose={() => setPaymentOpen(false)}
+        onProceed={handleProceedToPayment}
+      />
     </>
   );
 }
@@ -202,36 +240,40 @@ export function SteamTopupForm() {
 
   return (
     <section
-      className={styles.section}
+      className={`contentBlock ${styles.section}`}
       aria-label={`Пополнение ${activePlatformData.name}`}
     >
-      <div className={styles.platformPanel}>
-        {platforms.map((platform) => (
-          <button
-            key={platform.id}
-            type="button"
-            className={`${styles.platformButton} ${
-              activePlatform === platform.id
-                ? styles.platformActive
-                : styles.platformInactive
-            }`}
-            onClick={() => setActivePlatform(platform.id)}
-            aria-label={platform.name}
-            aria-pressed={activePlatform === platform.id}
-          >
-            <Image
-              src={platform.image}
-              alt=""
-              width={32}
-              height={32}
-              className={styles.platformIcon}
-            />
-          </button>
-        ))}
-        <span className={styles.newBadge}>Новое</span>
+      <div className={styles.platformSide}>
+        <div className={styles.platformPanel}>
+          {platforms.map((platform) => (
+            <button
+              key={platform.id}
+              type="button"
+              className={`${styles.platformButton} ${
+                activePlatform === platform.id
+                  ? styles.platformActive
+                  : styles.platformInactive
+              }`}
+              onClick={() => setActivePlatform(platform.id)}
+              aria-label={platform.name}
+              aria-pressed={activePlatform === platform.id}
+            >
+              <Image
+                src={platform.image}
+                alt=""
+                width={32}
+                height={32}
+                className={styles.platformIcon}
+              />
+            </button>
+          ))}
+          <span className={styles.newBadge}>Новое</span>
+        </div>
       </div>
 
-      <TopupFormPanel key={activePlatform} platformId={activePlatform} />
+      <div className={styles.formSide}>
+        <TopupFormPanel key={activePlatform} platformId={activePlatform} />
+      </div>
     </section>
   );
 }

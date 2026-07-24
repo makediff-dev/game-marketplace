@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AppIconLabel } from "@/components/ui/app-icon-label/app-icon-label";
 import type { CatalogGame } from "@/lib/mock/catalog-games";
 import styles from "./catalog-game-card.module.css";
 
@@ -14,18 +15,18 @@ export function CatalogGameCard({ game }: CatalogGameCardProps) {
         <Image
           src={game.image}
           alt={game.name}
-          width={90}
-          height={90}
+          width={80}
+          height={80}
           className={styles.icon}
         />
-        {game.badge === "new" ? (
-          <span className={`${styles.badge} ${styles.badgeNew}`}>Новое</span>
-        ) : null}
-        {game.badge === "viewed" ? (
-          <span className={`${styles.badge} ${styles.badgeViewed}`}>👀</span>
-        ) : null}
       </div>
-      <span className={styles.name}>{game.name}</span>
+      {game.badge === "new" ? (
+        <span className={`${styles.badge} ${styles.badgeNew}`}>Новое</span>
+      ) : null}
+      {game.badge === "viewed" ? (
+        <span className={`${styles.badge} ${styles.badgeViewed}`}>👀</span>
+      ) : null}
+      <AppIconLabel name={game.name} />
     </Link>
   );
 }

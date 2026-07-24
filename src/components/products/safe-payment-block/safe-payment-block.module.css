@@ -1,0 +1,25 @@
+.paymentBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+.paymentLabel {
+  margin: 0;
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.paymentRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-16);
+}
+
+.paymentIcon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}

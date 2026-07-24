@@ -1,0 +1,106 @@
+.actionsWrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: var(--spacing-8);
+}
+
+.actionSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 11px 24px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-16);
+  font-size: var(--font-size-h4);
+  font-weight: 500;
+  line-height: var(--line-height-h4);
+  letter-spacing: -0.44px;
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.actionSecondary:hover {
+  background: var(--neutral-200);
+}
+
+.actionGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 11px 24px;
+  background: var(--neutral-0);
+  border: 1px solid transparent;
+  border-radius: var(--radius-16);
+  font-size: var(--font-size-h4);
+  font-weight: 500;
+  line-height: var(--line-height-h4);
+  letter-spacing: -0.44px;
+  color: var(--brand-500);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.actionGhost:hover {
+  background: var(--brand-100);
+}
+
+.actionAccent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 11px 24px;
+  background: var(--brand-100);
+  border: 1px solid transparent;
+  border-radius: var(--radius-16);
+  font-size: var(--font-size-h4);
+  font-weight: 500;
+  line-height: var(--line-height-h4);
+  letter-spacing: -0.44px;
+  color: var(--brand-500);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.actionAccent:hover {
+  background: #ddd6ff;
+}
+
+@media (max-width: 960px) {
+  .actionsWrap {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .actions {
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .actionSecondary,
+  .actionGhost,
+  .actionAccent {
+    width: 100%;
+    white-space: normal;
+  }
+}

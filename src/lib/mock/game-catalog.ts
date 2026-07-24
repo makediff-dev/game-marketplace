@@ -21,13 +21,18 @@ export const cs2CatalogMeta = {
   title: "Counter-Strike 2",
   heroImage: "/assets/cs2-hero-bg.png",
   logo: "/assets/cs2-logo.png",
-  totalProducts: 3,
+  totalProducts: 522,
 };
 
-export const cs2SubcategoryToCategory: Record<string, string | undefined> = {
+export const cs2SubcategoryToCategory: Record<string, string> = {
   accounts: "Аккаунты",
   skins: "Скины",
   prime: "Prime Status",
-  faceit: "Аккаунты",
+  faceit: "Аккаунты FACEIT",
+  rent: "Аренда",
+  services: "Услуги",
   boost: "Буст",
+  other: "Другое",
+  design: "Дизайн",
+  pass: "Пропуск",
 };

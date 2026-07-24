@@ -1,10 +1,11 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-8);
+  align-items: flex-start;
+  gap: var(--spacing-12);
   width: 100%;
-  min-height: 366px;
-  padding: var(--spacing-16);
+  height: 100%;
+  padding: 26px var(--spacing-24);
   background: var(--surface-secondary);
   border-radius: var(--radius-24);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -12,40 +13,18 @@
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(109, 93, 247, 0.18);
+  box-shadow: 0 8px 24px rgba(22, 22, 26, 0.12);
 }
 
-.header {
+.main {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-12);
-}
-
-.logo {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-12);
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.gameInfo {
-  display: flex;
+  flex: 1;
   flex-direction: column;
-  min-width: 0;
-}
-
-.gameName {
-  font-size: var(--font-size-body-l);
-  font-weight: 500;
-  line-height: var(--line-height-body-l);
-  color: var(--text-primary);
-}
-
-.category {
-  font-size: var(--font-size-body-m);
-  line-height: var(--line-height-body-m);
-  color: var(--text-primary);
+  gap: var(--spacing-12);
+  width: 100%;
+  min-height: 0;
+  color: inherit;
+  text-decoration: none;
 }
 
 .imageWrapper {
@@ -54,22 +33,43 @@
   height: 174px;
   border-radius: var(--radius-16);
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .image {
   object-fit: cover;
 }
 
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.gameName {
+  min-width: 0;
+  overflow: hidden;
+  padding-block: var(--spacing-2);
+  font-size: var(--font-size-body-l);
+  font-weight: 500;
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .priceRow {
   display: flex;
   align-items: center;
   gap: var(--spacing-8);
+  width: 100%;
 }
 
 .price {
   font-size: var(--font-size-price);
   font-weight: 700;
-  line-height: var(--line-height-price);
+  line-height: 1;
 }
 
 .priceError {
@@ -84,11 +84,18 @@
   color: var(--text-success);
 }
 
+.discountRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
 .discountBadge {
   padding: var(--spacing-2) var(--spacing-4);
   border-radius: var(--radius-full);
   font-size: var(--font-size-body-m);
   font-weight: 700;
+  line-height: var(--line-height-body-m);
   color: var(--text-inverse);
 }
 
@@ -102,47 +109,40 @@
 
 .oldPrice {
   position: relative;
+  display: inline-flex;
+  align-items: center;
   font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
   color: var(--neutral-500);
 }
 
 .oldPriceLine {
   position: absolute;
   left: 0;
-  right: 0;
+  right: -0.2px;
   top: 50%;
   height: 2px;
   background: var(--neutral-400);
   border-radius: var(--radius-full);
+  transform: translateY(-50%);
 }
 
 .title {
+  width: 100%;
   font-size: var(--font-size-body-l);
   line-height: var(--line-height-body-l);
   color: var(--text-primary);
 }
 
-.seller {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-}
-
-.verifiedIcon {
-  width: 12px;
-  height: 12px;
-}
-
-.sellerName {
-  font-size: var(--font-size-body-m);
-  font-weight: 500;
-  color: var(--text-primary);
+.title p {
+  margin: 0;
 }
 
 .ratingRow {
   display: flex;
   align-items: center;
   gap: var(--spacing-4);
+  width: 100%;
 }
 
 .stars {
@@ -156,11 +156,32 @@
 
 .ratingCount {
   font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
   color: var(--text-tertiary);
 }
 
-@media (max-width: 768px) {
-  .card {
-    min-height: auto;
-  }
+.buyButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  margin-top: auto;
+  flex-shrink: 0;
+  border-radius: var(--radius-16);
+  background: var(--gradient-brand);
+  color: var(--text-inverse);
+  font-size: var(--font-size-body-l);
+  font-weight: 500;
+  line-height: var(--line-height-body-l);
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.buyButton:hover {
+  opacity: 0.92;
+}
+
+.buyButton:active {
+  transform: scale(0.98);
 }

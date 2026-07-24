@@ -1,9 +1,14 @@
 import { notFound } from "next/navigation";
-import { Navbar } from "@/components/layout/navbar/navbar";
+import { AppNavbar } from "@/components/layout/app-navbar/app-navbar";
 import { Footer } from "@/components/footer/footer/footer";
+import { CreatedProductPage } from "@/components/products/created-product-page/created-product-page";
 import { ProductDetailHero } from "@/components/products/product-detail-hero/product-detail-hero";
 import { ProductDetailContent } from "@/components/products/product-detail-content/product-detail-content";
-import { getProductDetail, getSimilarProducts } from "@/lib/mock/product-details";
+import {
+  getProductDetail,
+  getSimilarProducts,
+  isUserCreatedProductId,
+} from "@/lib/mock/product-details";
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
@@ -11,6 +16,11 @@ interface ProductPageProps {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params;
+
+  if (isUserCreatedProductId(id)) {
+    return <CreatedProductPage id={id} />;
+  }
+
   const product = getProductDetail(id);
 
   if (!product) {
@@ -22,8 +32,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <div className="container">
       <div className="pageContent">
-        <Navbar />
-        <ProductDetailHero product={product} />
+        <AppNavbar />
+        <div className="contentBlock">
+          <ProductDetailHero product={product} />
+        </div>
         <ProductDetailContent product={product} similarProducts={similarProducts} />
         <Footer />
       </div>

@@ -1,8 +1,30 @@
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button/button";
+import { useAuthStore } from "@/lib/store/auth-store";
 import styles from "./welcome-content.module.css";
 
 export function WelcomeContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const login = useAuthStore((state) => state.login);
+  const returnUrl = searchParams.get("returnUrl");
+
+  useEffect(() => {
+    login();
+  }, [login]);
+
+  useEffect(() => {
+    if (!returnUrl) {
+      return;
+    }
+
+    router.replace(returnUrl);
+  }, [returnUrl, router]);
+
   return (
     <section className={styles.welcome}>
       <span className={styles.emoji} aria-hidden>

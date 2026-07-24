@@ -1,16 +1,30 @@
 .section {
   display: flex;
+  align-items: center;
   gap: var(--spacing-8);
   width: 100%;
-  max-width: var(--content-width);
+}
+
+.platformSide,
+.formSide {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+}
+
+.formSide {
+  flex: 1;
+  min-width: 0;
 }
 
 .platformPanel {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: var(--spacing-2);
   width: 110px;
+  height: 100%;
   padding: var(--spacing-4);
   background: var(--surface-secondary);
   border-radius: var(--radius-20);
@@ -23,16 +37,18 @@
   justify-content: center;
   width: 50px;
   height: 49px;
+  padding: 9px;
   border-radius: var(--radius-16);
   transition: opacity 0.2s ease, background 0.2s ease;
 }
 
 .platformButton:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .platformActive {
   background: var(--neutral-0);
+  opacity: 1;
 }
 
 .platformInactive {
@@ -47,21 +63,28 @@
 
 .newBadge {
   position: absolute;
-  bottom: 4px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: calc(50% + 53.92px);
+  right: 27px;
+  transform: translateY(-50%);
+  width: 54px;
   padding: var(--spacing-2) var(--spacing-8);
   background: var(--brand-500);
   color: var(--text-inverse);
   font-size: var(--font-size-caption);
   font-weight: 700;
+  line-height: var(--line-height-caption);
+  text-align: center;
   border-radius: var(--radius-full);
-  box-shadow: 0 0 0 2px white;
+  box-shadow: 0 0 0 2px var(--neutral-0);
+  white-space: nowrap;
 }
 
 .formPanel {
-  flex: 1;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
   background: var(--surface-secondary);
   border-radius: var(--radius-24);
   padding: var(--spacing-16);
@@ -70,7 +93,8 @@
 .formRow {
   display: flex;
   align-items: center;
-  gap: var(--spacing-16);
+  gap: var(--spacing-24);
+  width: 100%;
   min-width: 0;
 }
 
@@ -105,6 +129,7 @@
   color: var(--text-inverse);
   font-size: var(--font-size-body-m);
   font-weight: 700;
+  line-height: var(--line-height-body-l);
   border-radius: var(--radius-full);
 }
 
@@ -125,73 +150,132 @@
 
 .promoIcon {
   width: 24px;
-  height: 25px;
+  height: 24.7px;
+}
+
+.fieldsContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--spacing-12);
+  min-width: 0;
+}
+
+.fieldWrap {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  min-width: 0;
+}
+
+.loginFieldWrap {
+  flex: 0 0 auto;
+}
+
+.amountFieldWrap {
+  flex: 1 1 auto;
+  min-width: 180px;
 }
 
 .fieldGroup {
+  display: flex;
+  align-items: stretch;
+  gap: var(--spacing-12);
   flex: 1;
   min-width: 0;
-  display: flex;
-  gap: var(--spacing-8);
 }
 
 .field {
-  flex: 1;
-  min-width: 0;
   display: flex;
-  align-items: center;
-  gap: var(--spacing-12);
-  padding: var(--spacing-16);
+  box-sizing: border-box;
+  height: 100%;
   background: var(--neutral-0);
   border-radius: var(--radius-16);
-  min-height: 56px;
 }
 
-.fieldLabel {
-  font-size: var(--font-size-h4);
-  color: #828794;
+.amountFieldWrap .field {
+  width: 100%;
+}
+
+.loginField {
+  align-items: center;
+  gap: var(--spacing-32);
+  width: max-content;
+  max-width: 220px;
+  padding: var(--spacing-24) var(--spacing-20);
 }
 
 .fieldInput {
-  flex: 1;
+  flex: 0 0 auto;
+  width: 112px;
   min-width: 0;
-  width: 100%;
   font-size: var(--font-size-h4);
+  font-weight: 400;
+  line-height: var(--line-height-h4);
   color: var(--text-primary);
 }
 
-.amountField {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.amountBlock {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-.amountLabel {
-  font-size: var(--font-size-h4);
+.fieldInput::placeholder {
   color: #828794;
 }
 
-.amountInput {
+.amountField {
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-32);
   width: 100%;
-  min-width: 0;
+  padding: var(--spacing-16) var(--spacing-20);
+}
+
+.amountBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+  width: fit-content;
   font-size: var(--font-size-h4);
+}
+
+.amountLabel {
+  width: 58px;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: var(--line-height-body-m);
+  color: #828794;
+}
+
+.amountValueGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  height: 20px;
+  width: fit-content;
+}
+
+.amountValue,
+.amountSymbol {
+  font-size: inherit;
   font-weight: 700;
+  line-height: var(--line-height-body-m);
   color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.amountValue {
+  width: auto;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  field-sizing: content;
 }
 
 .currencyGroup {
   display: flex;
   align-items: center;
-  gap: var(--spacing-4);
+  gap: var(--spacing-10);
   flex-shrink: 0;
-  margin-left: var(--spacing-12);
 }
 
 .currencyButton {
@@ -202,16 +286,15 @@
   height: 24px;
   padding: 0;
   border: none;
-  background: transparent;
+  background: var(--surface-secondary);
   cursor: pointer;
   border-radius: var(--radius-full);
   overflow: hidden;
-  opacity: 0.45;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .currencyButton:hover {
-  opacity: 0.75;
+  transform: scale(1.04);
 }
 
 .currencyButton:focus-visible {
@@ -220,7 +303,7 @@
 }
 
 .currencyActive {
-  opacity: 1;
+  background: var(--brand-500);
 }
 
 .currencyIcon {
@@ -228,10 +311,19 @@
   height: 24px;
 }
 
+.currencyIconRubInactive {
+  filter: brightness(0);
+}
+
+.currencyIconActiveDark {
+  filter: brightness(0) invert(1);
+}
+
 .infoButton {
   width: 24px;
   height: 24px;
   position: relative;
+  flex-shrink: 0;
 }
 
 .infoTooltip {
@@ -254,18 +346,62 @@
 }
 
 .paySubmit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 52px;
+  padding: var(--spacing-12) var(--spacing-32);
+  border: none;
+  border-radius: var(--radius-16);
+  background: linear-gradient(89.94deg, var(--brand-500) 0%, var(--brand-300) 99.99%);
+  color: var(--text-inverse);
+  font-family: inherit;
+  font-size: var(--font-size-h4);
+  font-weight: 500;
+  line-height: var(--line-height-h3);
   white-space: nowrap;
-  padding: var(--spacing-12) var(--spacing-24);
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.paySubmit:hover {
+  opacity: 0.9;
+}
+
+.paySubmit:active {
+  transform: scale(0.98);
+}
+
+.paySubmit:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+}
+
+.fieldError {
+  position: absolute;
+  font-size: var(--font-size-body-s);
+  color: var(--text-error);
 }
 
 @media (max-width: 1200px) {
   .section {
     flex-direction: column;
+    align-items: stretch;
+  }
+
+  .platformSide {
+    align-self: auto;
   }
 
   .platformPanel {
     width: 100%;
-    max-width: 220px;
+    max-width: 110px;
+    height: auto;
+  }
+
+  .formPanel {
+    width: 100%;
   }
 
   .formRow {
@@ -273,8 +409,28 @@
     align-items: stretch;
   }
 
+  .fieldsContainer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .fieldGroup {
     flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fieldWrap {
+    width: 100%;
+  }
+
+  .field {
+    width: 100%;
+  }
+
+  .loginField,
+  .amountField {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .payButton {

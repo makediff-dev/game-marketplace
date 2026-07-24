@@ -1,0 +1,139 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+.topRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+}
+
+.imageWrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-12);
+  overflow: hidden;
+  background: var(--surface-secondary);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+  padding-top: var(--spacing-2);
+}
+
+.category {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+}
+
+.removeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+}
+
+.removeButton:hover {
+  opacity: 1;
+}
+
+.removeIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+}
+
+.price {
+  font-size: var(--font-size-body-l);
+  font-weight: 700;
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.quantityControl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-12);
+  height: 32px;
+  padding: 0 var(--spacing-12);
+  background: var(--neutral-0);
+  border-radius: var(--radius-full);
+}
+
+.quantityButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: var(--font-size-body-l);
+  line-height: 1;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.quantityButton:hover {
+  opacity: 0.7;
+}
+
+.quantityButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.quantityValue {
+  min-width: 16px;
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+}

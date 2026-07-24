@@ -1,55 +1,70 @@
 .carousel {
+  --hero-arrow-size: 48px;
+  --hero-slide-inset: calc(var(--hero-arrow-size) / 2);
+
+  width: 100%;
+  overflow: visible;
+}
+
+.frame {
   position: relative;
   width: 100%;
-  max-width: var(--content-width);
+  max-width: var(--hero-width);
+  margin-inline: var(--content-inner-padding-x) auto;
 }
 
 .slideWrapper {
   position: relative;
   width: 100%;
-  height: 404px;
+  aspect-ratio: var(--hero-aspect-ratio);
   border-radius: var(--radius-20);
   overflow: hidden;
 }
 
 .slideImage {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.arrowLeft {
+.arrowLeft,
+.arrowRight {
   position: absolute;
-  left: 0;
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
 }
 
+.arrowLeft {
+  left: calc(-1 * var(--hero-slide-inset));
+}
+
 .arrowRight {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
+  right: calc(-1 * var(--hero-slide-inset));
 }
 
 .dots {
   position: absolute;
-  bottom: 18px;
+  bottom: var(--spacing-16);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: var(--spacing-2);
   align-items: center;
+  max-width: 368px;
+  width: 100%;
+  padding-inline: var(--spacing-16);
   z-index: 2;
 }
 
 .dot {
-  width: 36px;
+  width: 35.55px;
   height: 2px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: background 0.2s ease;
+  flex-shrink: 0;
 }
 
 .dot:hover {
@@ -62,6 +77,14 @@
 
 @media (max-width: 768px) {
   .slideWrapper {
-    height: 220px;
+    min-height: 220px;
+  }
+
+  .arrowLeft {
+    left: 0;
+  }
+
+  .arrowRight {
+    right: 0;
   }
 }

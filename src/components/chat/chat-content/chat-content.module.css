@@ -5,6 +5,8 @@
   width: 100%;
   max-width: var(--content-width);
   min-height: 520px;
+  margin: 0 auto;
+  padding: var(--spacing-24) var(--spacing-32) var(--spacing-48);
 }
 
 .sidebar {
@@ -241,6 +243,118 @@
   font-size: 20px;
   color: var(--text-muted);
   padding: var(--spacing-8);
+}
+
+.threadDealId {
+  margin-top: var(--spacing-2);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  color: var(--text-muted);
+}
+
+.dealChatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  padding: var(--spacing-12) var(--spacing-16);
+  background: var(--surface-secondary);
+  border-bottom: 1px solid var(--neutral-300);
+}
+
+.dealChatHeaderRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-12);
+  min-width: 0;
+}
+
+.dealStatusBadge {
+  flex-shrink: 0;
+  padding: var(--spacing-4) var(--spacing-10);
+  border: 1px solid #bbb;
+  border-radius: var(--radius-full);
+  background: #e8e8e8;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+}
+
+.dealProductTitle {
+  font-size: 13px;
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+}
+
+.dealLink {
+  flex-shrink: 0;
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--brand-500);
+  text-decoration: none;
+}
+
+.dealLink:hover {
+  text-decoration: underline;
+}
+
+.onlineDotStatic {
+  width: 12px;
+  height: 12px;
+  background: #1fa463;
+  border-radius: var(--radius-full);
+}
+
+.systemMessage {
+  padding: var(--spacing-8) var(--spacing-12);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-8);
+  font-size: 13px;
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.messageOwn {
+  composes: message;
+  align-self: flex-end;
+}
+
+.messageBubbleOwn {
+  composes: messageBubble;
+  background: var(--neutral-200);
+}
+
+.sendButton {
+  flex-shrink: 0;
+  min-width: 120px;
+  padding: var(--spacing-10) var(--spacing-20);
+  background: var(--gradient-brand);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-body-l);
+  font-weight: 500;
+  line-height: var(--line-height-body-l);
+  color: var(--text-inverse);
+  cursor: pointer;
+}
+
+.sendButton:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.sendButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.note {
+  padding: 0 var(--spacing-20) var(--spacing-12);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  color: var(--text-muted);
 }
 
 @media (max-width: 900px) {

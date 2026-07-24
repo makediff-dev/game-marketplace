@@ -12,39 +12,47 @@ interface ProductDetailContentProps {
   similarProducts: Product[];
 }
 
-const paymentIcons = [
-  "/assets/card-ru.svg",
-  "/assets/sbp.svg",
-  "/assets/card-by.svg",
-  "/assets/card-kz.svg",
-  "/assets/visa.svg",
-  "/assets/mastercard.svg",
-  "/assets/mir.svg",
-];
-
 export function ProductDetailContent({ product, similarProducts }: ProductDetailContentProps) {
   return (
-    <>
+    <div className="contentBlock">
       <section className={styles.section} aria-label="Описание товара">
         <h2 className={styles.title}>{product.descriptionTitle}</h2>
-        <p className={styles.subtitle}>{product.descriptionSubtitle}</p>
-        <p className={styles.text}>{product.descriptionText}</p>
 
-        <div className={styles.notes}>
-          {product.notes.map((note) => (
-            <p key={note} className={styles.note}>
-              {note}
-            </p>
-          ))}
+        <div className={styles.attributeBlock}>
+          <p className={styles.subtitle}>{product.descriptionSubtitle}</p>
+          <p className={styles.attributeValue}>{product.descriptionText}</p>
         </div>
 
-        <button type="button" className={styles.moreButton}>
-          Ещё
-        </button>
+        <div className={styles.notesWrapper}>
+          <div className={styles.notes}>
+            {product.notes.map((note, index) => {
+              const isLast = index === product.notes.length - 1;
+              const noteClass = `${styles.note} ${index === 0 ? styles.noteWarning : styles.noteBold}`;
+
+              if (isLast) {
+                return (
+                  <div key={note} className={styles.noteRow}>
+                    <p className={noteClass}>{note}</p>
+                    <button type="button" className={styles.moreButton}>
+                      ещё
+                    </button>
+                  </div>
+                );
+              }
+
+              return (
+                <p key={note} className={noteClass}>
+                  {note}
+                </p>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       <section className={styles.sellerSection} aria-label="Информация о продавце">
         <h2 className={styles.title}>Продавец</h2>
+
         <div className={styles.sellerCard}>
           <div className={styles.sellerLogo}>P</div>
           <div>
@@ -56,38 +64,45 @@ export function ProductDetailContent({ product, similarProducts }: ProductDetail
           </div>
         </div>
 
-        <div>
-          <p className={styles.subtitle}>Способы оплаты</p>
-          <div className={styles.paymentRow}>
-            {paymentIcons.map((icon) => (
-              <Icon key={icon} src={icon} width={32} height={32} className={styles.paymentIcon} />
-            ))}
-          </div>
+        <div className={styles.policyList}>
+          {product.refundPolicies.map((policy) => (
+            <div key={policy} className={styles.policy}>
+              <span className={styles.checkBadge} aria-hidden="true">
+                <Icon
+                  src="/assets/check-brand.svg"
+                  width={24}
+                  height={24}
+                  className={styles.checkIcon}
+                />
+              </span>
+              <span className={styles.policyText}>{policy}</span>
+            </div>
+          ))}
         </div>
-
-        {product.refundPolicies.map((policy) => (
-          <div key={policy} className={styles.policy}>
-            <span className={styles.checkBadge} aria-hidden="true" />
-            <span>{policy}</span>
-          </div>
-        ))}
 
         <p className={styles.chatInfo}>{product.sellerChatInfo}</p>
       </section>
 
-      <section className={styles.reviewsSection} aria-label="Отзывы">
-        <div className={styles.reviewsHeader}>
-          <h2 className={styles.reviewsTitle}>Отзывы</h2>
+      <section className={styles.viewedSection} aria-label="Вы смотрели">
+        <div className={styles.viewedHeader}>
+          <h2 className={styles.viewedTitle}>👀 Вы смотрели</h2>
           <button type="button" className={styles.reset}>
             Сбросить
           </button>
         </div>
-        <ProductCard product={product} />
+        <div className={styles.viewedCard}>
+          <ProductCard product={product} />
+        </div>
       </section>
 
       <section className={styles.similarSection} aria-label="Похожие товары">
         <div className={styles.similarHeader}>
-          <Image src="/assets/circles-four.png" alt="" width={24} height={24} />
+          <Icon
+            src="/assets/circles-four.svg"
+            width={24}
+            height={24}
+            className={styles.similarIcon}
+          />
           <h2 className={styles.similarTitle}>Похожие товары</h2>
         </div>
         <div className={styles.similarGrid}>
@@ -99,6 +114,6 @@ export function ProductDetailContent({ product, similarProducts }: ProductDetail
           Показать еще
         </button>
       </section>
-    </>
+    </div>
   );
 }

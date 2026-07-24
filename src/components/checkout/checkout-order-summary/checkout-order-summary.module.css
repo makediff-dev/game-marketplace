@@ -1,0 +1,51 @@
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-20);
+  padding: var(--spacing-24);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-16);
+  height: fit-content;
+}
+
+.title {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-20);
+}
+
+.totalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  padding-top: var(--spacing-12);
+  border-top: 1px solid var(--neutral-300);
+}
+
+.totalLabel {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.totalValue {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.note {
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  color: var(--text-muted);
+}

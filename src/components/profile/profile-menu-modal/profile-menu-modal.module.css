@@ -1,0 +1,291 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(111, 114, 128, 0.5);
+  padding: var(--spacing-10);
+}
+
+.panel {
+  width: 100%;
+  max-width: 600px;
+  max-height: calc(100vh - var(--spacing-20));
+  background: var(--neutral-0);
+  border-radius: var(--radius-24);
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+  padding: var(--spacing-20) var(--spacing-32) 0;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+.closeButton {
+  position: absolute;
+  top: var(--spacing-20);
+  right: var(--spacing-20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.closeButton:hover {
+  opacity: 0.7;
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-16) var(--spacing-32) var(--spacing-24);
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.uploadPhoto {
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--brand-500);
+  cursor: pointer;
+}
+
+.divider {
+  height: 1px;
+  margin: 0 var(--spacing-32);
+  background: var(--surface-secondary);
+}
+
+.menuSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuRow,
+.menuRowLink,
+.actionRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.menuRow {
+  padding: var(--spacing-20) var(--spacing-32);
+  border-top: 1px solid var(--surface-secondary);
+}
+
+.menuRowLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.menuRowLink:hover {
+  background: var(--surface-secondary);
+}
+
+.iconSlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.rowIcon {
+  width: 36px;
+  height: 36px;
+  display: block;
+  object-fit: contain;
+}
+
+.emojiIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.infoIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.infoText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.infoLabel {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.infoValue {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.rowText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  flex: 1;
+  min-width: 0;
+}
+
+.rowTitle {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.rowSubtitle {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.rowControl {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  flex-shrink: 0;
+}
+
+.statePill {
+  min-width: 56px;
+  height: 32px;
+  padding: 0 var(--spacing-12);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.statePillOn {
+  background: var(--brand-500);
+  color: var(--text-inverse);
+}
+
+.statePillOff {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+}
+
+.rowArrow {
+  width: 16px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.rowArrowLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.modeSwitch {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+}
+
+.modeOption {
+  min-width: 96px;
+  height: 32px;
+  padding: 0 var(--spacing-10);
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--surface-secondary);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.modeOptionActive {
+  background: var(--brand-500);
+  color: var(--text-inverse);
+}
+
+.actionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-20);
+  padding: var(--spacing-24) var(--spacing-32) var(--spacing-32);
+  border-top: 1px solid var(--surface-secondary);
+}
+
+.actionRow {
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.supportLink {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--brand-500);
+}
+
+.logoutButton {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: #ff6b84;
+}

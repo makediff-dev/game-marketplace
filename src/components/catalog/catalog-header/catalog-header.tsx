@@ -4,7 +4,7 @@ import styles from "./catalog-header.module.css";
 
 export function CatalogHeader() {
   return (
-    <section className={styles.header} aria-label="Каталог цифровых товаров">
+    <section className={`contentBlock ${styles.header}`} aria-label="Каталог цифровых товаров">
       <div className={styles.textBlock}>
         <h2 className={styles.title}>Каталог цифровых товаров</h2>
         <p className={styles.subtitle}>Аккаунты, валюта, ключ, буст и подписки</p>

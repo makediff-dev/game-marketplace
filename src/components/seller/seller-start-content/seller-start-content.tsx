@@ -50,7 +50,7 @@ export function SellerStartContent() {
             Выбрать категорию
           </Button>
         </Link>
-        <Link href="/terms#sales">
+        <Link href="/terms/sales">
           <Button variant="outline" fullWidth large>
             Условия продажи
           </Button>

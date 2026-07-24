@@ -7,6 +7,11 @@
   padding-left: var(--spacing-32);
 }
 
+.menuModal {
+  max-width: none;
+  padding-left: 0;
+}
+
 .menuItem {
   display: flex;
   align-items: center;

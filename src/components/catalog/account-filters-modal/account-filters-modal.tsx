@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Icon } from "@/components/ui/icon/icon";
 import { Button } from "@/components/ui/button/button";
+import { ModalCloseButton } from "@/components/ui/modal-close-button/modal-close-button";
 import styles from "./account-filters-modal.module.css";
 
 interface AccountFiltersModalProps {
@@ -73,6 +74,7 @@ export function AccountFiltersModal({ isOpen, onClose }: AccountFiltersModalProp
           <h2 id="filters-title" className={styles.title}>
             Аккаунты
           </h2>
+          <ModalCloseButton onClick={onClose} />
         </div>
 
         <p className={styles.sectionLabel}>📦 Способ получения</p>

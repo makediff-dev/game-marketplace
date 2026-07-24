@@ -1,5 +1,5 @@
-import { products, type Product } from "./products";
 import { getGameById } from "./games";
+import { products, type Product } from "./products";
 
 export interface ProductDetail extends Product {
   detailImage: string;
@@ -68,21 +68,20 @@ const gameDetailTemplates: Record<
     detailImage: "/assets/product-detail-telegram.png",
     deliveryMethod: "Подарок",
     deliveryTitle: "Способ получения",
-    deliveryDescription: "Отправка Premium или Stars подарком (без входа в аккаунт)",
+    deliveryDescription: "Отправка Премиума подарком (без входа в аккаунт)",
     descriptionTitle: "Описание",
-    descriptionSubtitle: "Как получить товар",
-    descriptionText:
-      "После оплаты укажите username Telegram. Premium или Stars будут отправлены подарком в течение нескольких минут.",
+    descriptionSubtitle: "Кол-во месяцев",
+    descriptionText: "6 месяцев",
     notes: [
-      "⚠️ Убедитесь, что username указан верно — изменить его после оплаты нельзя.",
-      "⚠️ Premium активируется только на аккаунтах без активной подписки.",
+      "⚠️ Обратите внимание: данная подписка действует только для аккаунтов без активной подписки Telegram Premium.",
+      "Зачисление по @username — быстро и без входа в ваш аккаунт ⚡\nМаксимальная безопасность — не нужны данные для входа или коды подтверждения 🔒",
     ],
     sellerName: "Playnox",
-    sellerStoreInfo: "Официальный магазин Telegram-товаров",
-    sellerChatInfo: "Напишите продавцу в чате заказа, если подарок не пришёл",
+    sellerStoreInfo: "Официальный магазин",
+    sellerChatInfo: "После покупки будет доступен чат с продавцом",
     refundPolicies: [
-      "Возврат, если товар не был доставлен в течение 24 часов",
-      "Возврат невозможен после успешной активации подписки",
+      "Возврат средств, если вы не получили товар",
+      "Возврат средств, если товар не соответствует описанию",
     ],
   },
   "brawl-stars": {
@@ -380,16 +379,15 @@ export function getProductDetail(id: string): ProductDetail | undefined {
   if (!product) return undefined;
 
   const template = getTemplateForProduct(product);
-  const game = getGameById(product.gameId);
 
   return {
     ...template,
     ...product,
     detailImage: product.image,
-    sellerName: product.seller,
-    sellerStoreInfo: game
-      ? `${product.seller} · ${game.productCategories.join(", ")}`
-      : product.seller,
+    sellerName: template.sellerName,
+    sellerStoreInfo: template.sellerStoreInfo,
+    sellerChatInfo: template.sellerChatInfo,
+    refundPolicies: template.refundPolicies,
     reviewCount: product.reviews,
     reviewRating: product.rating,
     ...overrides[id],
@@ -401,4 +399,64 @@ export function getSimilarProducts(id: string): Product[] {
   if (!current) return products.slice(0, 8);
 
   return products.filter((item) => item.id !== id && item.gameId === current.gameId).slice(0, 8);
+}
+
+export interface UserCreatedProductInput {
+  id: string;
+  gameId: string;
+  categoryLabel: string;
+  title: string;
+  price: number;
+  description: string;
+  comment: string;
+  deliveryMethodLabel?: string;
+}
+
+export function buildUserProductDetail(input: UserCreatedProductInput): ProductDetail {
+  const game = getGameById(input.gameId);
+  const sampleProduct = products.find((item) => item.gameId === input.gameId);
+  const template = gameDetailTemplates[input.gameId] ?? defaultTemplate;
+  const fallbackImage = sampleProduct?.image ?? game?.logo ?? "/assets/cs2-hero-bg.png";
+  const descriptionText =
+    input.description.trim() ||
+    input.comment.trim() ||
+    template.descriptionText;
+
+  return {
+    id: input.id,
+    gameId: input.gameId,
+    game: game?.name ?? input.gameId,
+    category: input.categoryLabel,
+    title: input.title,
+    titleLines: [input.title],
+    image: fallbackImage,
+    logo: game?.logo ?? fallbackImage,
+    detailImage: fallbackImage,
+    price: input.price,
+    rating: 0,
+    reviews: 0,
+    seller: "Client",
+    sellerAvatar: "/assets/avatar-placeholder.svg",
+    sellerRating: 1,
+    sellerReviews: 0,
+    sellerSales: 0,
+    sellerOnline: true,
+    deliveryMethod: input.deliveryMethodLabel ?? template.deliveryMethod,
+    deliveryTitle: template.deliveryTitle,
+    deliveryDescription: template.deliveryDescription,
+    descriptionTitle: template.descriptionTitle,
+    descriptionSubtitle: template.descriptionSubtitle,
+    descriptionText,
+    notes: template.notes,
+    sellerName: template.sellerName,
+    sellerStoreInfo: "Ваш опубликованный товар",
+    sellerChatInfo: template.sellerChatInfo,
+    refundPolicies: template.refundPolicies,
+    reviewCount: 0,
+    reviewRating: 0,
+  };
+}
+
+export function isUserCreatedProductId(id: string) {
+  return id.startsWith("created-");
 }

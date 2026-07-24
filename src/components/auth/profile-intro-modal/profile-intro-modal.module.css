@@ -1,0 +1,64 @@
+.avatarBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.avatarCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radius-full);
+  background: var(--surface-secondary);
+  overflow: hidden;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.uploadLink {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--brand-500);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.input {
+  width: 100%;
+  height: 56px;
+  padding: 0 var(--spacing-20);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-12);
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  outline: 2px solid var(--brand-500);
+  background: var(--neutral-0);
+}
+
+.hint {
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  color: var(--text-muted);
+}

@@ -2,9 +2,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--spacing-4);
-  width: 90px;
+  width: 80px;
   transition: transform 0.2s ease;
 }
 
@@ -14,8 +14,8 @@
 
 .iconWrapper {
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   border-radius: var(--radius-24);
   overflow: hidden;
 }
@@ -26,18 +26,11 @@
   object-fit: cover;
 }
 
-.name {
-  font-size: var(--font-size-body-m);
-  line-height: var(--line-height-body-m);
-  color: var(--text-primary);
-  text-align: center;
-}
-
 .badge {
   position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: -8px;
+  left: 18px;
+  z-index: 1;
   padding: 0 var(--spacing-12);
   height: 24px;
   display: flex;
@@ -46,8 +39,9 @@
   border-radius: var(--radius-full);
   font-size: var(--font-size-body-m);
   font-weight: 700;
+  line-height: var(--line-height-body-m);
   white-space: nowrap;
-  box-shadow: 0 0 0 2px white;
+  box-shadow: 0 0 0 2px var(--neutral-0);
 }
 
 .badgeNew {
@@ -56,6 +50,7 @@
 }
 
 .badgeViewed {
+  left: 50px;
   background: var(--surface-secondary);
   color: var(--text-primary);
 }

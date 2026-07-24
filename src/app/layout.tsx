@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter_Tight } from "next/font/google";
+import { AuthHydrator } from "@/components/auth/auth-hydrator/auth-hydrator";
 import { ToastProvider } from "@/components/ui/toast/toast-provider";
 import "@/styles/globals.css";
 
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className={interTight.variable}>
       <body>
+        <AuthHydrator />
         <ToastProvider>{children}</ToastProvider>
       </body>
     </html>

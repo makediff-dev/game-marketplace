@@ -1,53 +1,113 @@
 .seller {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-40);
+  gap: var(--spacing-32);
   width: 100%;
-  max-width: var(--content-width);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 60px;
+  align-items: start;
+  width: 100%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+  min-width: 0;
+}
+
+.sidebar {
+  position: sticky;
+  top: var(--spacing-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
 }
 
 .hero {
   position: relative;
   width: 100%;
-  height: 280px;
-  border-radius: var(--radius-24);
+  height: 404px;
+  border-radius: var(--radius-20);
   overflow: hidden;
 }
 
 .heroImage {
   object-fit: cover;
+  object-position: center center;
 }
 
-.heroOverlay {
+.heroContent {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-16);
-  background: rgba(0, 0, 0, 0.45);
+  gap: var(--spacing-32);
   text-align: center;
-  padding: var(--spacing-24);
+}
+
+.heroTitleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  max-width: 356px;
+}
+
+.heroIcon {
+  width: 24px;
+  height: 24px;
 }
 
 .heroTitle {
-  font-size: 32px;
-  line-height: 1.2;
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
   font-weight: 700;
   color: var(--text-inverse);
 }
 
 .heroSubtitle {
   font-size: var(--font-size-body-l);
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 480px;
+  line-height: var(--line-height-body-l);
+  font-weight: 500;
+  color: var(--surface-secondary);
+}
+
+.heroButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 290px;
+  padding: var(--spacing-12) var(--spacing-24);
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-0);
+  border-radius: var(--radius-12);
+  color: var(--brand-500);
+  font-size: var(--font-size-button);
+  font-weight: 500;
+  line-height: var(--line-height-button);
+  transition: opacity 0.2s ease;
+}
+
+.heroButton:hover {
+  opacity: 0.92;
 }
 
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-20);
+  gap: var(--spacing-12);
+}
+
+.sectionHeading {
+  display: flex;
+  flex-direction: column;
 }
 
 .sectionTitle {
@@ -59,40 +119,76 @@
 
 .sectionSubtitle {
   font-size: var(--font-size-body-l);
-  color: var(--text-muted);
+  line-height: var(--line-height-body-l);
+  color: var(--neutral-500);
 }
 
 .calculator {
   display: flex;
   align-items: center;
-  gap: var(--spacing-24);
-  flex-wrap: wrap;
+  gap: var(--spacing-12);
+  width: 100%;
 }
 
 .calcField {
   flex: 1;
-  min-width: 200px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-8);
-  padding: var(--spacing-20);
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  min-height: 74px;
+  padding: var(--spacing-16) var(--spacing-20);
   background: var(--surface-secondary);
   border-radius: var(--radius-16);
 }
 
 .calcLabel {
   font-size: var(--font-size-body-m);
-  color: var(--text-muted);
+  line-height: var(--line-height-body-m);
+  color: #828794;
 }
 
-.calcValue {
-  font-size: var(--font-size-h2);
+.calcValueRow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: fit-content;
+  max-width: 100%;
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
   font-weight: 700;
   color: var(--text-primary);
 }
 
+.calcInput {
+  width: auto;
+  min-width: 1ch;
+  max-width: 100%;
+  flex: 0 0 auto;
+  field-sizing: content;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+}
+
+.calcOutput {
+  flex: 0 0 auto;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+}
+
 .calcValueAccent {
   color: var(--brand-500);
+}
+
+.calcCurrency {
+  flex-shrink: 0;
 }
 
 .calcArrow {
@@ -102,19 +198,28 @@
 }
 
 .calcHint {
-  font-size: var(--font-size-body-s);
-  color: var(--text-muted);
+  margin: 0;
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--neutral-500);
 }
 
 .payoutIcons {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-16);
+  align-items: center;
+  gap: var(--spacing-20);
+}
+
+.payoutIconWrapper {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
 }
 
 .payoutIcon {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
 }
 
@@ -124,25 +229,40 @@
   overflow-x: auto;
 }
 
+.gamesSection,
+.categoriesSection,
+.statsSection {
+  gap: var(--spacing-20);
+}
+
 .gameGrid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: var(--spacing-16);
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  row-gap: var(--spacing-20);
+  column-gap: 0;
+  width: 100%;
+  padding-top: var(--spacing-8);
 }
 
 .gameItem {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-8);
-  text-align: center;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  width: 90px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
 }
 
 .gameIconWrapper {
   position: relative;
-  width: 80px;
-  height: 80px;
-  border-radius: var(--radius-16);
+  width: 90px;
+  height: 90px;
+  border-radius: var(--radius-24);
   overflow: hidden;
 }
 
@@ -154,62 +274,35 @@
 
 .gameBadge {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  padding: 2px 6px;
+  top: -8px;
+  left: 18px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 var(--spacing-12);
   background: var(--brand-500);
   border-radius: var(--radius-full);
-  font-size: 10px;
   color: var(--text-inverse);
-}
-
-.gameName {
   font-size: var(--font-size-body-m);
-  color: var(--text-primary);
-}
-
-.categoryBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-16);
-  padding-bottom: var(--spacing-12);
-  border-bottom: 1px solid var(--neutral-300);
-  overflow-x: auto;
-}
-
-.categoryLinks {
-  display: flex;
-  gap: var(--spacing-24);
-}
-
-.categoryLink {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-8);
-  font-size: var(--font-size-body-l);
-  color: var(--text-primary);
+  font-weight: 700;
+  line-height: var(--line-height-body-m);
   white-space: nowrap;
-}
-
-.categoryIcon {
-  width: 24px;
-  height: 24px;
+  box-shadow: 0 0 0 2px var(--neutral-0);
 }
 
 .popularGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-16);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px var(--spacing-20);
 }
 
 .popularItem {
   display: flex;
   align-items: center;
   gap: var(--spacing-12);
-  padding: var(--spacing-12);
-  background: var(--surface-secondary);
-  border-radius: var(--radius-12);
+  min-height: 48px;
 }
 
 .popularIcon {
@@ -217,34 +310,42 @@
   height: 40px;
   border-radius: 8px;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .popularInfo {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .popularName {
   font-size: var(--font-size-body-l);
   font-weight: 500;
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
 }
 
 .popularSubtitle {
   font-size: var(--font-size-body-l);
-  color: var(--text-muted);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
 }
 
 .statsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-16);
+  display: flex;
+  gap: var(--spacing-20);
+  width: 100%;
 }
 
 .statCard {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-8);
+  min-width: 0;
   padding: var(--spacing-20);
   background: var(--surface-secondary);
   border-radius: var(--radius-12);
@@ -254,28 +355,77 @@
 .statEmoji {
   font-size: 88px;
   line-height: 1;
+  font-weight: 700;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .statValue {
   font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
   font-weight: 700;
+  color: var(--text-primary);
 }
 
 .statLabel {
   font-size: var(--font-size-body-m);
-  color: var(--text-muted);
+  line-height: var(--line-height-body-m);
+  color: var(--neutral-500);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
   .gameGrid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .popularGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
+    flex-wrap: wrap;
+  }
+
+  .statCard {
+    flex: 1 1 calc(50% - var(--spacing-20));
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 320px;
+  }
+
+  .calculator {
+    flex-direction: column;
+  }
+
+  .gameGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
   }
 
   .popularGrid {
     grid-template-columns: 1fr;
+  }
+
+  .statsGrid {
+    flex-direction: column;
+  }
+
+  .statCard {
+    flex: 1 1 auto;
   }
 }

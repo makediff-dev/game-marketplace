@@ -22,6 +22,7 @@
   --neutral-300: #dfe0e5;
   --neutral-400: #bfc1cc;
   --neutral-500: #9699a6;
+  --border-strong: #dfe0e5;
 
   /* Radius */
   --radius-12: 12px;
@@ -33,6 +34,7 @@
   /* Spacing */
   --spacing-2: 2px;
   --spacing-4: 4px;
+  --spacing-6: 6px;
   --spacing-8: 8px;
   --spacing-10: 10px;
   --spacing-12: 12px;
@@ -49,9 +51,10 @@
   --font-size-body-m: 14px;
   --font-size-body-l: 16px;
   --font-size-button: 14px;
-  --font-size-h4: 18px;
+  --font-size-h3: 20px;
   --font-size-price: 18px;
   --font-size-h2: 24px;
+  --font-size-h1: 32px;
 
   --line-height-caption: 16px;
   --line-height-body-s: 16px;
@@ -61,12 +64,19 @@
   --line-height-h4: 24px;
   --line-height-price: 24px;
   --line-height-h2: 32px;
+  --line-height-h1: 40px;
   --line-height-h3: 28px;
 
   /* Layout */
+  --layout-gutter: 64px;
+  --layout-width: 1200px;
   --content-width: 1136px;
+  --content-max-width: 1400px;
+  --hero-width: var(--content-width);
+  --content-inner-padding-x: 32px;
   --page-padding-x: 120px;
+  --hero-aspect-ratio: 1136 / 404;
 
   /* Gradients */
-  --gradient-brand: linear-gradient(90deg, var(--brand-500) 0%, var(--brand-300) 100%);
+  --gradient-brand: linear-gradient(89.98deg, var(--brand-500) 0%, var(--brand-300) 99.99%);
 }

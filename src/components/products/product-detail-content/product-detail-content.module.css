@@ -1,10 +1,9 @@
 .section {
-  width: 100%;
-  max-width: var(--content-width);
-  align-self: stretch;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-24);
+  gap: var(--spacing-20);
+  width: 100%;
+  max-width: 885px;
 }
 
 .title {
@@ -13,33 +12,65 @@
   line-height: var(--line-height-h2);
 }
 
+.attributeBlock {
+  display: flex;
+  flex-direction: column;
+}
+
 .subtitle {
   font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
   color: var(--text-muted);
 }
 
-.text {
-  font-size: var(--font-size-body-l);
-  line-height: var(--line-height-body-l);
+.attributeValue {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
   color: var(--text-primary);
+}
+
+.notesWrapper {
+  width: 100%;
 }
 
 .notes {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-16);
+  gap: var(--spacing-28, 28px);
+  max-height: 140px;
+  overflow: hidden;
+}
+
+.noteRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--spacing-4);
 }
 
 .note {
-  font-size: var(--font-size-body-l);
-  line-height: var(--line-height-body-l);
+  margin: 0;
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
   color: var(--text-primary);
+  white-space: pre-line;
+}
+
+.noteWarning {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.noteBold {
+  font-weight: 700;
 }
 
 .moreButton {
-  align-self: flex-end;
+  flex-shrink: 0;
+  padding: 0;
   color: var(--brand-500);
-  font-size: var(--font-size-body-l);
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
   background: none;
   border: none;
   cursor: pointer;
@@ -47,105 +78,162 @@
 
 .sellerSection {
   width: 100%;
-  max-width: var(--content-width);
-  align-self: stretch;
-  margin-top: var(--spacing-40);
+  max-width: 885px;
+  margin-top: 51px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-20);
 }
 
 .sellerCard {
   display: flex;
   align-items: center;
-  gap: var(--spacing-12);
-  margin-top: var(--spacing-16);
 }
 
 .sellerLogo {
   width: 56px;
   height: 56px;
-  border-radius: var(--radius-16);
-  background: var(--brand-500);
-  color: var(--text-inverse);
+  border-radius: var(--radius-full);
+  background: var(--brand-100);
+  color: var(--brand-500);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--font-size-h2);
   font-weight: 700;
+  line-height: var(--line-height-h2);
+  flex-shrink: 0;
 }
 
 .sellerName {
   display: flex;
   align-items: center;
-  gap: var(--spacing-8);
-  font-size: var(--font-size-body-l);
+  gap: var(--spacing-4);
+  padding-left: var(--spacing-12);
+  font-size: var(--font-size-h4);
   font-weight: 500;
+  line-height: var(--line-height-h4);
 }
 
 .sellerInfo {
-  font-size: var(--font-size-body-m);
+  padding-left: var(--spacing-12);
+  margin-top: 2px;
+  font-size: 16px;
+  line-height: 22.86px;
   color: var(--text-muted);
 }
 
-.paymentRow {
+.policyList {
   display: flex;
-  gap: var(--spacing-12);
-  margin-top: var(--spacing-12);
-}
-
-.paymentIcon {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
+  flex-direction: column;
+  max-width: 487px;
 }
 
 .policy {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-12);
-  margin-top: var(--spacing-16);
+  position: relative;
+  padding-top: var(--spacing-16);
+  padding-left: 36px;
   font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+}
+
+.policy:first-child {
+  padding-top: 0;
+}
+
+.policy:first-child .checkBadge {
+  top: 0;
 }
 
 .checkBadge {
+  position: absolute;
+  left: 0;
+  top: var(--spacing-16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 24px;
   height: 24px;
-  border-radius: var(--radius-full);
-  background: var(--text-success);
+  border-radius: 6px;
+  background: var(--brand-500);
   flex-shrink: 0;
-  position: relative;
 }
 
-.checkBadge::after {
-  content: "";
-  position: absolute;
-  left: 7px;
-  top: 5px;
-  width: 6px;
-  height: 10px;
-  border-right: 2px solid white;
-  border-bottom: 2px solid white;
-  transform: rotate(45deg);
+.checkIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.policyText {
+  display: block;
+  color: var(--text-primary);
+}
+
+.chatInfo {
+  max-width: 487px;
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.viewedSection {
+  width: 100%;
+  margin-top: var(--spacing-40);
+}
+
+.viewedHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-16);
+}
+
+.viewedTitle {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: var(--line-height-h2);
+}
+
+.reset {
+  color: var(--brand-500);
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.viewedCard {
+  width: 262px;
 }
 
 .similarSection {
   width: 100%;
-  max-width: var(--content-width);
-  align-self: stretch;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-32);
+  margin-top: var(--spacing-40);
 }
 
 .similarHeader {
   display: flex;
   align-items: center;
   gap: var(--spacing-8);
-  padding-bottom: var(--spacing-16);
+  height: 44px;
   border-bottom: 1px solid var(--neutral-300);
+}
+
+.similarIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
 .similarTitle {
   font-size: var(--font-size-body-l);
   line-height: var(--line-height-body-l);
+  font-weight: 400;
+  color: var(--text-primary);
 }
 
 .similarGrid {
@@ -155,14 +243,17 @@
 }
 
 .loadMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: var(--spacing-16);
+  height: 56px;
   background: rgba(22, 22, 26, 0.04);
   border-radius: var(--radius-16);
   font-size: var(--font-size-body-l);
   font-weight: 500;
+  line-height: var(--line-height-body-l);
   color: var(--text-primary);
-  text-align: center;
   border: none;
   cursor: pointer;
 }
@@ -177,46 +268,8 @@
   .similarGrid {
     grid-template-columns: 1fr;
   }
-}
 
-.chatInfo {
-  margin-top: var(--spacing-20);
-  font-size: var(--font-size-body-m);
-  color: var(--text-muted);
-}
-
-.reviewsSection {
-  width: 100%;
-  max-width: var(--content-width);
-  align-self: stretch;
-  margin-top: var(--spacing-40);
-  padding: var(--spacing-24) var(--spacing-32);
-  background: var(--surface-secondary);
-  border-radius: var(--radius-24);
-}
-
-.reviewsHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--spacing-24);
-}
-
-.reviewsTitle {
-  font-size: var(--font-size-h2);
-  font-weight: 700;
-}
-
-.reset {
-  color: var(--brand-500);
-  font-size: var(--font-size-body-l);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .section {
-    padding: 0;
+  .viewedCard {
+    width: 100%;
   }
 }

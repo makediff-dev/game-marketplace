@@ -1,158 +1,214 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Icon } from "@/components/ui/icon/icon";
-import Link from "next/link";
+import { SellerTermsModal } from "@/components/seller/seller-terms-modal/seller-terms-modal";
+import { SellerAppGrid } from "@/components/seller/seller-app-grid/seller-app-grid";
+import { SellerCategoryBar } from "@/components/seller/seller-category-bar/seller-category-bar";
 import { CategoryChip } from "@/components/ui/category-chip/category-chip";
-import { Button } from "@/components/ui/button/button";
-import { ArrowButton } from "@/components/ui/arrow-button/arrow-button";
+import { formatPrice } from "@/lib/mock/products";
+import { useAuthStore } from "@/lib/store/auth-store";
 import {
   SELLER_FEE_PERCENT,
   popularSellerItems,
   sellerCategories,
   sellerCategoryTabs,
-  sellerGameItems,
   sellerPayoutMethods,
   sellerStats,
 } from "@/lib/mock/seller";
+import type { GameGroup } from "@/lib/mock/games";
 import styles from "./seller-content.module.css";
 
-export function SellerContent() {
+interface SellerContentProps {
+  initialTermsOpen?: boolean;
+}
+
+export function SellerContent({ initialTermsOpen = false }: SellerContentProps) {
+  const router = useRouter();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const sellerTermsAccepted = useAuthStore((state) => state.sellerTermsAccepted);
+  const acceptSellerTerms = useAuthStore((state) => state.acceptSellerTerms);
   const [price, setPrice] = useState(1000);
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState<GameGroup>("games");
+  const [isTermsOpen, setIsTermsOpen] = useState(initialTermsOpen);
   const income = Math.round(price * (1 - SELLER_FEE_PERCENT / 100));
+  const showHeroBanner = !isAuthenticated || !sellerTermsAccepted;
+
+  useEffect(() => {
+    if (initialTermsOpen && isAuthenticated && !sellerTermsAccepted) {
+      setIsTermsOpen(true);
+    }
+  }, [initialTermsOpen, isAuthenticated, sellerTermsAccepted]);
+
+  const closeTerms = () => {
+    setIsTermsOpen(false);
+
+    if (initialTermsOpen) {
+      router.replace("/sell");
+    }
+  };
+
+  const handleAcceptTerms = () => {
+    acceptSellerTerms();
+    setIsTermsOpen(false);
+
+    if (initialTermsOpen) {
+      router.replace("/sell");
+    }
+  };
+
+  const handleHeroClick = () => {
+    if (!isAuthenticated) {
+      router.push("/register?returnUrl=/sell");
+      return;
+    }
+
+    setIsTermsOpen(true);
+  };
+
+  const handleGameSelect = (gameId: string) => {
+    router.push(`/sell/create?game=${gameId}`);
+  };
 
   return (
     <div className={styles.seller}>
-      <section className={styles.hero}>
-        <Image
-          src="/assets/seller-hero.png"
-          alt=""
-          fill
-          className={styles.heroImage}
-          priority
-        />
-        <div className={styles.heroOverlay}>
-          <h1 className={styles.heroTitle}>Стать продавцом</h1>
-          <p className={styles.heroSubtitle}>Зарабатывайте на продаже товаров и услуг</p>
-          <Link href="/sell/start">
-            <Button variant="ghost" large>
-              Начать продажу
-            </Button>
-          </Link>
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Платеж ниже в 2 раза</h2>
-        <p className={styles.sectionSubtitle}>Калькулятор цены</p>
-        <div className={styles.calculator}>
-          <div className={styles.calcField}>
-            <span className={styles.calcLabel}>Цена товара</span>
-            <input
-              type="number"
-              className={styles.calcValue}
-              value={price}
-              onChange={(e) => setPrice(Number(e.target.value) || 0)}
-              aria-label="Цена товара"
-              style={{ background: "transparent", border: "none", outline: "none" }}
-            />
-            <span className={styles.calcHint}>💳 Платеж {SELLER_FEE_PERCENT}%</span>
-          </div>
-          <Icon
-            src="/assets/arrows-down-up-seller.svg"
-            width={32}
-            height={32}
-            className={styles.calcArrow}
+      {showHeroBanner ? (
+        <section className={styles.hero} aria-label="Стать продавцом">
+          <Image
+            src="/assets/seller-hero.jpg"
+            alt=""
+            fill
+            className={styles.heroImage}
+            priority
+            sizes="1136px"
           />
-          <div className={styles.calcField}>
-            <span className={styles.calcLabel}>Доход</span>
-            <span className={`${styles.calcValue} ${styles.calcValueAccent}`}>{income} ₽</span>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Способы выплаты</h2>
-        <p className={styles.sectionSubtitle}>Выводите средства удобным вам способом</p>
-        <div className={styles.payoutIcons}>
-          {sellerPayoutMethods.map((icon) => (
-            <Icon key={icon} src={icon} width={40} height={40} className={styles.payoutIcon} />
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Игры и приложения</h2>
-        <div className={styles.tabsRow}>
-          {sellerCategoryTabs.map((tab, index) => (
-            <CategoryChip
-              key={tab.id}
-              label={tab.label}
-              count={tab.count}
-              active={activeTab === index}
-              onClick={() => setActiveTab(index)}
-            />
-          ))}
-        </div>
-        <div className={styles.gameGrid}>
-          {sellerGameItems.map((item) => (
-            <div key={item.id} className={styles.gameItem}>
-              <div className={styles.gameIconWrapper}>
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  width={80}
-                  height={80}
-                  className={styles.gameIcon}
-                />
-                {item.badge ? <span className={styles.gameBadge}>{item.badge}</span> : null}
-              </div>
-              <span className={styles.gameName}>{item.name}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Популярные категории</h2>
-        <div className={styles.categoryBar}>
-          <div className={styles.categoryLinks}>
-            {sellerCategories.map((cat) => (
-              <span key={cat.id} className={styles.categoryLink}>
-                <Icon
-                  src={cat.icon}
-                  width={24}
-                  height={24}
-                  className={styles.categoryIcon}
-                />
-                {cat.label}
-              </span>
-            ))}
-          </div>
-          <ArrowButton ariaLabel="Следующие категории" />
-        </div>
-        <div className={styles.popularGrid}>
-          {popularSellerItems.map((item) => (
-            <div key={item.id} className={styles.popularItem}>
-              <Image
-                src={item.image}
-                alt={item.name}
-                width={40}
-                height={40}
-                className={styles.popularIcon}
+          <div className={styles.heroContent}>
+            <div className={styles.heroTitleBlock}>
+              <Icon
+                src="/assets/shopping-bag.svg"
+                width={24}
+                height={24}
+                className={styles.heroIcon}
               />
-              <div className={styles.popularInfo}>
-                <span className={styles.popularName}>{item.name}</span>
-                <span className={styles.popularSubtitle}>{item.subtitle}</span>
+              <h1 className={styles.heroTitle}>Стать продавцом</h1>
+              <p className={styles.heroSubtitle}>Зарабатывайте на продаже товаров и услуг</p>
+            </div>
+            <button type="button" className={styles.heroButton} onClick={handleHeroClick}>
+              Начать продажу
+            </button>
+          </div>
+        </section>
+      ) : null}
+
+      <div className={styles.body}>
+        <div className={styles.main}>
+          <section className={`${styles.section} ${styles.gamesSection}`} aria-label="Игры и приложения">
+            <h2 className={styles.sectionTitle}>Игры и приложения</h2>
+            <div className={styles.tabsRow}>
+              {sellerCategoryTabs.map((tab) => (
+                <CategoryChip
+                  key={tab.id}
+                  label={tab.label}
+                  count={tab.count}
+                  active={activeTab === tab.id}
+                  onClick={() => setActiveTab(tab.id as GameGroup)}
+                />
+              ))}
+            </div>
+            <SellerAppGrid key={activeTab} group={activeTab} onSelect={handleGameSelect} />
+          </section>
+
+          <section
+            className={`${styles.section} ${styles.categoriesSection}`}
+            aria-label="Популярные категории"
+          >
+            <h2 className={styles.sectionTitle}>Популярные категории</h2>
+            <SellerCategoryBar categories={sellerCategories} />
+            <div className={styles.popularGrid}>
+              {popularSellerItems.map((item) => (
+                <div key={item.id} className={styles.popularItem}>
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    width={40}
+                    height={40}
+                    className={styles.popularIcon}
+                  />
+                  <div className={styles.popularInfo}>
+                    <span className={styles.popularName}>{item.name}</span>
+                    <span className={styles.popularSubtitle}>{item.subtitle}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        <aside className={styles.sidebar}>
+          <section className={styles.section} aria-label="Калькулятор цены">
+            <div className={styles.sectionHeading}>
+              <h2 className={styles.sectionTitle}>Платеж снизился в 2 раза</h2>
+              <p className={styles.sectionSubtitle}>Калькулятор цены</p>
+            </div>
+
+            <div className={styles.calculator}>
+              <div className={styles.calcField}>
+                <span className={styles.calcLabel}>Цена товара</span>
+                <div className={styles.calcValueRow}>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    className={styles.calcInput}
+                    size={Math.max(formatPrice(price).length, 1)}
+                    value={formatPrice(price)}
+                    onChange={(event) => {
+                      const raw = event.target.value.replace(/\s/g, "");
+                      setPrice(Number(raw) || 0);
+                    }}
+                    aria-label="Цена товара"
+                  />
+                  <span className={styles.calcCurrency}>₽</span>
+                </div>
+              </div>
+
+              <Icon
+                src="/assets/arrows-down-up-seller.svg"
+                width={32}
+                height={32}
+                className={styles.calcArrow}
+              />
+
+              <div className={styles.calcField}>
+                <span className={styles.calcLabel}>Доход</span>
+                <div className={`${styles.calcValueRow} ${styles.calcValueAccent}`}>
+                  <span className={styles.calcOutput}>{formatPrice(income)}</span>
+                  <span className={styles.calcCurrency}>₽</span>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      <section className={styles.section}>
+            <p className={styles.calcHint}>💳 Платеж {SELLER_FEE_PERCENT}%</p>
+          </section>
+
+          <section className={styles.section} aria-label="Способы выплаты">
+            <div className={styles.sectionHeading}>
+              <h2 className={styles.sectionTitle}>Способы выплаты</h2>
+              <p className={styles.sectionSubtitle}>Выводите средства удобным вам способом</p>
+            </div>
+            <div className={styles.payoutIcons}>
+              {sellerPayoutMethods.map((icon) => (
+                <div key={icon} className={styles.payoutIconWrapper}>
+                  <Icon src={icon} width={36} height={36} className={styles.payoutIcon} />
+                </div>
+              ))}
+            </div>
+          </section>
+        </aside>
+      </div>
+
+      <section className={`${styles.section} ${styles.statsSection}`} aria-label="Статистика">
         <h2 className={styles.sectionTitle}>Статистика</h2>
         <div className={styles.statsGrid}>
           {sellerStats.map((stat) => (
@@ -160,12 +216,20 @@ export function SellerContent() {
               <span className={styles.statEmoji} aria-hidden>
                 {stat.emoji}
               </span>
-              <span className={styles.statValue}>{stat.value}</span>
-              <span className={styles.statLabel}>{stat.label}</span>
+              <div className={styles.statInfo}>
+                <span className={styles.statValue}>{stat.value}</span>
+                <span className={styles.statLabel}>{stat.label}</span>
+              </div>
             </div>
           ))}
         </div>
       </section>
+
+      <SellerTermsModal
+        isOpen={isTermsOpen}
+        onClose={closeTerms}
+        onAccept={handleAcceptTerms}
+      />
     </div>
   );
 }

@@ -1,25 +1,20 @@
 .section {
-  width: 100%;
-  max-width: var(--content-width);
+  padding-top: var(--spacing-8);
 }
 
 .chips {
   display: flex;
+  align-items: flex-start;
   gap: var(--spacing-12);
-  overflow-x: auto;
-  scrollbar-width: none;
+  flex-wrap: wrap;
   margin-bottom: var(--spacing-32);
-}
-
-.chips::-webkit-scrollbar {
-  display: none;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(10, 90px);
+  grid-template-columns: repeat(10, 80px);
   justify-content: space-between;
-  gap: var(--spacing-24) 0;
+  row-gap: var(--spacing-24);
   margin-bottom: var(--spacing-32);
 }
 
@@ -41,14 +36,14 @@
 
 @media (max-width: 1200px) {
   .grid {
-    grid-template-columns: repeat(6, 90px);
-    justify-content: center;
-    gap: var(--spacing-24);
+    grid-template-columns: repeat(6, 80px);
+    justify-content: space-between;
+    row-gap: var(--spacing-24);
   }
 }
 
 @media (max-width: 768px) {
   .grid {
-    grid-template-columns: repeat(4, 90px);
+    grid-template-columns: repeat(4, 80px);
   }
 }

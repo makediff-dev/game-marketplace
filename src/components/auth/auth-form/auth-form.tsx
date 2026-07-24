@@ -4,45 +4,83 @@ import { useState } from "react";
 import { Icon } from "@/components/ui/icon/icon";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
+import { useAuthStore } from "@/lib/store/auth-store";
+import { getEmailValidationError } from "@/lib/validation/email";
 import styles from "./auth-form.module.css";
-
-const emailSchema = z.object({
-  email: z.string().email("Введите корректный email"),
-});
-
-type EmailFormData = z.infer<typeof emailSchema>;
 
 interface AuthFormProps {
   title?: string;
+  returnUrl?: string;
+  onEmailSubmit?: (email: string) => void;
+  onVkSubmit?: () => void;
 }
 
-export function AuthForm({ title = "Вход или регистрация" }: AuthFormProps) {
+export function AuthForm({
+  title = "Вход или регистрация",
+  returnUrl,
+  onEmailSubmit,
+  onVkSubmit,
+}: AuthFormProps) {
   const router = useRouter();
+  const login = useAuthStore((state) => state.login);
   const [focused, setFocused] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<EmailFormData>({
-    resolver: zodResolver(emailSchema),
-    defaultValues: { email: "" },
-  });
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState<string | null>(null);
 
-  const emailField = register("email");
+  const handleEmailChange = (value: string) => {
+    setEmail(value);
 
-  const onSubmit = () => {
-    router.push("/register/verify");
+    if (emailError) {
+      setEmailError(getEmailValidationError(value));
+    }
   };
+
+  const handleEmailSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const validationError = getEmailValidationError(email);
+    if (validationError) {
+      setEmailError(validationError);
+      return;
+    }
+
+    const normalizedEmail = email.trim();
+
+    if (onEmailSubmit) {
+      onEmailSubmit(normalizedEmail);
+      return;
+    }
+
+    login();
+    router.push(returnUrl || "/register/verify");
+  };
+
+  const handleVkLogin = () => {
+    setEmailError(null);
+
+    if (onVkSubmit) {
+      onVkSubmit();
+      return;
+    }
+
+    login();
+    router.push(returnUrl || "/welcome");
+  };
+
+  const emailFieldClassName = [
+    styles.emailField,
+    focused ? styles.emailFieldFocused : "",
+    emailError ? styles.emailFieldError : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className={styles.page}>
-      <h2 className={styles.title}>{title}</h2>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
-        <button type="button" className={styles.vkButton} onClick={() => router.push("/welcome")}>
+      {title ? <h2 className={styles.title}>{title}</h2> : null}
+      <form className={styles.form} onSubmit={handleEmailSubmit} noValidate>
+        <button type="button" className={styles.vkButton} onClick={handleVkLogin}>
           <Icon src="/assets/vk-icon.svg" width={32} height={32} className={styles.vkIcon} />
           <span className={styles.vkLabel}>Войти с VK ID</span>
           <Icon
@@ -53,30 +91,29 @@ export function AuthForm({ title = "Вход или регистрация" }: A
           />
         </button>
 
-        <div className={`${styles.emailField} ${focused ? styles.emailFieldFocused : ""}`}>
-          <input
-            type="email"
-            className={styles.emailInput}
-            placeholder="Адрес электронной почты"
-            aria-label="Адрес электронной почты"
-            aria-invalid={!!errors.email}
-            onFocus={() => setFocused(true)}
-            name={emailField.name}
-            ref={emailField.ref}
-            onChange={emailField.onChange}
-            onBlur={(e) => {
-              setFocused(false);
-              emailField.onBlur(e);
-            }}
-          />
+        <div className={styles.emailFieldGroup}>
+          <div className={emailFieldClassName}>
+            <input
+              type="email"
+              className={styles.emailInput}
+              placeholder="Адрес электронной почты"
+              aria-label="Адрес электронной почты"
+              aria-invalid={Boolean(emailError)}
+              aria-describedby={emailError ? "email-error" : undefined}
+              value={email}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              onChange={(event) => handleEmailChange(event.target.value)}
+            />
+          </div>
+          {emailError ? (
+            <p id="email-error" className={styles.fieldError} role="alert">
+              {emailError}
+            </p>
+          ) : null}
         </div>
-        {errors.email ? (
-          <span role="alert" style={{ color: "var(--text-error)", fontSize: "14px" }}>
-            {errors.email.message}
-          </span>
-        ) : null}
 
-        <Button variant="primary" fullWidth large className={styles.submitButton}>
+        <Button type="submit" variant="gradient" fullWidth large className={styles.submitButton}>
           Получить код
         </Button>
 

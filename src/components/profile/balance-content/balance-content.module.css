@@ -3,21 +3,101 @@
   flex-direction: column;
   gap: var(--spacing-24);
   width: 100%;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  width: 100%;
   max-width: 507px;
-  padding-left: var(--spacing-32);
 }
 
 .amount {
-  font-size: 48px;
+  font-size: 64px;
   line-height: 1.1;
   font-weight: 700;
   color: var(--text-primary);
 }
 
-.amountLabel {
-  font-size: var(--font-size-body-l);
+.amountField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.amountInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-10);
+  width: 100%;
+}
+
+.amountFieldLabel {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
   color: var(--text-muted);
-  margin-top: var(--spacing-8);
+}
+
+.presetRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+.presetPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 var(--spacing-12);
+  background: var(--surface-secondary);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.presetPill:hover {
+  background: var(--neutral-200);
+}
+
+.presetPillActive {
+  background: var(--brand-500);
+  color: var(--text-inverse);
+}
+
+.presetPillActive:hover {
+  background: var(--brand-600);
+}
+
+.amountInput {
+  width: 100%;
+  height: 56px;
+  padding: 0 var(--spacing-20);
+  background: var(--surface-secondary);
+  border: none;
+  border-radius: var(--radius-12);
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: var(--line-height-h2);
+  color: var(--text-primary);
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.amountInput::-webkit-outer-spin-button,
+.amountInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.amountInput:focus {
+  outline: 2px solid var(--brand-500);
+  background: var(--neutral-0);
 }
 
 .actions {
@@ -26,51 +106,21 @@
   gap: var(--spacing-12);
 }
 
-.actionCard {
+.withdrawButton {
   display: flex;
   align-items: center;
-  gap: var(--spacing-12);
+  justify-content: center;
   width: 100%;
-  height: 72px;
-  padding: var(--spacing-20);
+  height: 56px;
+  padding: 5px 26px;
   background: var(--surface-secondary);
-  border-radius: var(--radius-20);
+  border-radius: 14px;
+  font-size: 18px;
+  line-height: 40px;
+  color: var(--text-primary);
   transition: background 0.15s ease;
 }
 
-.actionCard:hover {
+.withdrawButton:hover {
   background: var(--neutral-200);
-}
-
-.actionLabel {
-  flex: 1;
-  font-size: var(--font-size-h4);
-  line-height: var(--line-height-h4);
-  color: var(--text-primary);
-}
-
-.arrowIcon {
-  width: 16px;
-  height: 13px;
-}
-
-.history {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-16);
-  margin-top: var(--spacing-16);
-}
-
-.historyTitle {
-  font-size: var(--font-size-h4);
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.emptyHistory {
-  padding: var(--spacing-32);
-  text-align: center;
-  color: var(--text-muted);
-  background: var(--surface-secondary);
-  border-radius: var(--radius-16);
 }

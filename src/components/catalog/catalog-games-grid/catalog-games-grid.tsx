@@ -31,7 +31,7 @@ export function CatalogGamesGrid() {
   };
 
   return (
-    <section className={styles.section} aria-label="Каталог игр">
+    <section className={`contentBlock ${styles.section}`} aria-label="Каталог игр">
       <div className={styles.chips}>
         {catalogCategories.map((category) => (
           <CategoryChip

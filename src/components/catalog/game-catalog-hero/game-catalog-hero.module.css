@@ -1,7 +1,6 @@
 .hero {
   position: relative;
   width: 100%;
-  max-width: var(--content-width);
   height: 240px;
   border-radius: var(--radius-16);
   overflow: hidden;

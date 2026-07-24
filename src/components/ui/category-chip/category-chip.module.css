@@ -2,6 +2,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: 40px;
   padding: var(--spacing-10) var(--spacing-20);
   border-radius: var(--radius-full);
   background: var(--surface-secondary);
@@ -32,6 +33,7 @@
 
 .label {
   font-size: var(--font-size-body-m);
+  font-weight: 400;
   line-height: var(--line-height-body-m);
   color: var(--text-primary);
 }
@@ -42,10 +44,11 @@
 
 .count {
   font-size: var(--font-size-caption);
+  font-weight: 400;
   line-height: var(--line-height-caption);
   color: var(--text-muted);
 }
 
 .countActive {
-  color: var(--text-disabled, #bfc1cc);
+  color: var(--text-disabled);
 }

@@ -1,0 +1,40 @@
+.badge {
+  flex-shrink: 0;
+  padding: var(--spacing-4) var(--spacing-10);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.brand {
+  background: var(--brand-100);
+  border-color: var(--brand-500);
+  color: var(--brand-600);
+}
+
+.success {
+  background: #e8f8ef;
+  border-color: var(--text-success);
+  color: var(--text-success);
+}
+
+.archived {
+  background: var(--neutral-200);
+  border-color: transparent;
+  color: var(--text-tertiary);
+}
+
+.dispute {
+  background: #fff0f3;
+  border-color: var(--text-error);
+  color: var(--text-error);
+}
+
+.warning {
+  background: #fff4e5;
+  border-color: #e6a020;
+  color: #b36b00;
+}

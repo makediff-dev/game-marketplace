@@ -1,0 +1,8 @@
+.pageContent {
+  min-height: calc(100vh - var(--spacing-24) * 2);
+}
+
+.panel {
+  position: relative;
+  z-index: 1;
+}

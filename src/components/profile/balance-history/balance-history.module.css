@@ -1,0 +1,76 @@
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  width: 100%;
+}
+
+.title {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.headerRow,
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--spacing-12);
+  align-items: center;
+  padding: var(--spacing-12) var(--spacing-16);
+}
+
+.headerRow {
+  padding-top: 0;
+  padding-bottom: var(--spacing-8);
+}
+
+.headerCell {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.row {
+  border-radius: var(--radius-12);
+}
+
+.rowAlt {
+  background: var(--surface-secondary);
+}
+
+.cell {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+  min-width: 0;
+}
+
+.amountCell {
+  font-weight: 700;
+}
+
+.amountPositive {
+  color: var(--text-success);
+}
+
+.amountNegative {
+  color: var(--text-primary);
+}
+
+.statusCell {
+  color: var(--text-muted);
+}

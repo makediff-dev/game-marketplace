@@ -1,23 +1,30 @@
 .navbar {
+  align-self: stretch;
   width: 100%;
-  max-width: calc(var(--content-width) + 64px);
-  padding: var(--spacing-20) var(--spacing-32);
+  padding: var(--spacing-20) var(--content-inner-padding-x);
   background: rgba(255, 255, 255, 0.85);
 }
 
 .inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: var(--spacing-24);
 }
 
 .left {
   display: flex;
   align-items: center;
-  gap: var(--spacing-24);
-  flex: 1;
+  justify-self: start;
   min-width: 0;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  width: 100%;
+  max-width: 376px;
 }
 
 .logo {
@@ -28,50 +35,45 @@
   white-space: nowrap;
 }
 
-.search {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex: 1;
-  max-width: 520px;
-  height: 42px;
-  padding: var(--spacing-6) var(--spacing-4);
-  background: var(--surface-secondary);
-  border-radius: var(--radius-12);
-}
-
-.searchInput {
-  flex: 1;
-  padding-left: var(--spacing-4);
-  font-size: var(--font-size-body-s);
-  line-height: var(--line-height-body-s);
-  color: var(--text-primary);
-}
-
-.searchInput::placeholder {
-  color: var(--text-muted);
-}
-
-.searchButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 31px;
-  height: 29px;
-  background: var(--neutral-200);
-  border-radius: 9px;
-}
-
-.searchIcon {
-  width: 20px;
-  height: 20px;
-}
-
 .navLinks {
   display: flex;
   align-items: center;
+  justify-self: end;
   gap: 29px;
-  padding: 9px 0;
+  padding: 0;
+}
+
+.balanceLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  height: 48px;
+  padding: 0;
+  background: none;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease;
+}
+
+.balanceLink:hover {
+  opacity: 0.85;
+}
+
+.balanceLinkActive .balanceAmount {
+  color: var(--brand-500);
+}
+
+.balanceIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.balanceAmount {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
 }
 
 .navLink {
@@ -82,17 +84,50 @@
   transition: color 0.15s ease;
 }
 
-.navLink:hover,
-.navLinkActive {
+.navLink:hover {
   color: var(--text-primary);
 }
 
+.navLinkActive {
+  color: var(--brand-500);
+}
+
+.navLinkButton {
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
 @media (max-width: 900px) {
-  .search {
-    display: none;
+  .left {
+    flex-wrap: wrap;
   }
 
   .navLinks {
     gap: var(--spacing-16);
+  }
+}
+
+@media (max-width: 768px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+
+  .left,
+  .center,
+  .navLinks {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .center {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navLinks {
+    justify-content: flex-end;
   }
 }

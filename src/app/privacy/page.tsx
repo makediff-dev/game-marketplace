@@ -1,21 +1,15 @@
-import { Navbar } from "@/components/layout/navbar/navbar";
-import { PageHeader } from "@/components/layout/page-header/page-header";
-import { LegalContent } from "@/components/legal/legal-content/legal-content";
+import { AppNavbar } from "@/components/layout/app-navbar/app-navbar";
+import { PrivacyContent } from "@/components/legal/privacy-content/privacy-content";
 import { Footer } from "@/components/footer/footer/footer";
-import { privacySections } from "@/lib/mock/legal";
 
 export default function PrivacyPage() {
   return (
     <div className="container">
       <div className="pageContent">
-        <Navbar />
+        <AppNavbar />
         <div className="contentBlock">
-          <PageHeader title="Политика конфиденциальности" backHref="/" />
+          <PrivacyContent />
         </div>
-        <LegalContent
-          intro="Playnox заботится о защите ваших персональных данных."
-          sections={privacySections}
-        />
         <Footer />
       </div>
     </div>

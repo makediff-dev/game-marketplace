@@ -16,7 +16,7 @@ export function ProductGrid() {
   const hasMore = visibleCount < products.length;
 
   return (
-    <section className={styles.section} aria-label="Самые популярные товары">
+    <section className={`contentBlock ${styles.section}`} aria-label="Самые популярные товары">
       <div className={styles.header}>
         <Icon
           src="/assets/heart.svg"

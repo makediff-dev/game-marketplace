@@ -1,0 +1,26 @@
+.security {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  width: 100%;
+  max-width: var(--content-width);
+  padding-left: var(--spacing-32);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  list-style: disc;
+  padding-left: var(--spacing-24);
+}
+
+.item {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.muted {
+  color: var(--text-muted);
+}

@@ -1,10 +1,8 @@
 .bar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--spacing-16);
   width: 100%;
-  max-width: var(--content-width);
-  height: 40px;
 }
 
 .chips {
@@ -12,7 +10,7 @@
   gap: var(--spacing-12);
   overflow-x: auto;
   scrollbar-width: none;
-  flex: 1;
+  width: 100%;
 }
 
 .chips::-webkit-scrollbar {
@@ -24,8 +22,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: var(--content-width);
-  height: 40px;
+  min-height: 40px;
 }
 
 .filterGroup {
@@ -41,7 +38,7 @@
   height: 40px;
   padding: var(--spacing-10) var(--spacing-20);
   background: var(--surface-secondary);
-  border-radius: var(--radius-8, 8px);
+  border-radius: var(--radius-12);
   border: none;
   cursor: pointer;
   transition: opacity 0.2s ease;
@@ -78,4 +75,17 @@
   font-size: var(--font-size-body-l);
   line-height: var(--line-height-body-l);
   color: var(--text-muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-12);
+  }
+
+  .total {
+    align-self: flex-end;
+  }
 }

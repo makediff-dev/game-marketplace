@@ -1,8 +1,6 @@
-import { Navbar } from "@/components/layout/navbar/navbar";
+import { AppNavbar } from "@/components/layout/app-navbar/app-navbar";
 import { HeroCarousel } from "@/components/hero/hero-carousel/hero-carousel";
-import { CatalogHeader } from "@/components/catalog/catalog-header/catalog-header";
-import { AppIconGrid } from "@/components/catalog/app-icon-grid/app-icon-grid";
-import { SteamTopupForm } from "@/components/steam/steam-topup-form/steam-topup-form";
+import { HomeSections } from "@/components/home/home-sections/home-sections";
 import { ProductGrid } from "@/components/products/product-grid/product-grid";
 import { Footer } from "@/components/footer/footer/footer";
 
@@ -10,11 +8,9 @@ export default function HomePage() {
   return (
     <div className="container">
       <div className="pageContent">
-        <Navbar />
+        <AppNavbar />
         <HeroCarousel />
-        <CatalogHeader />
-        <AppIconGrid />
-        <SteamTopupForm />
+        <HomeSections />
         <ProductGrid />
         <Footer />
       </div>

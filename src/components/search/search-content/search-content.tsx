@@ -1,80 +1,138 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
-import { Icon } from "@/components/ui/icon/icon";
 import Link from "next/link";
 import { CategoryChip } from "@/components/ui/category-chip/category-chip";
-import { products } from "@/lib/mock/products";
-import { searchGameFilters } from "@/lib/mock/games";
+import { Icon } from "@/components/ui/icon/icon";
+import { catalogGroupFilters, getGameById, type GameGroup } from "@/lib/mock/games";
+import {
+  searchPopularItems,
+  searchViewedItems,
+  type SearchSuggestionItem,
+} from "@/lib/mock/search";
 import styles from "./search-content.module.css";
 
-export function SearchContent() {
-  const [query, setQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState(0);
+function filterByGroup(items: SearchSuggestionItem[], group: GameGroup | null) {
+  if (!group) {
+    return items;
+  }
 
-  const filtered = products.filter((product) => {
-    const matchesQuery =
-      !query ||
-      product.title.toLowerCase().includes(query.toLowerCase()) ||
-      product.game.toLowerCase().includes(query.toLowerCase()) ||
-      product.category.toLowerCase().includes(query.toLowerCase());
-    const filter = searchGameFilters[activeFilter];
-    const matchesFilter = filter === "Все" || product.game === filter;
-    return matchesQuery && matchesFilter;
-  });
+  return items.filter((item) => getGameById(item.gameId)?.group === group);
+}
+
+interface SearchSuggestionListProps {
+  items: SearchSuggestionItem[];
+  removable?: boolean;
+  onRemove?: (id: string) => void;
+}
+
+function SearchSuggestionList({ items, removable = false, onRemove }: SearchSuggestionListProps) {
+  return (
+    <ul className={styles.list}>
+      {items.map((item) => {
+        const game = getGameById(item.gameId);
+
+        return (
+          <li key={item.id} className={styles.row}>
+            <Link href={item.href} className={styles.rowLink}>
+              <span className={styles.iconWrap}>
+                {game ? (
+                  <Image
+                    src={game.catalogIcon}
+                    alt=""
+                    width={48}
+                    height={48}
+                    className={styles.icon}
+                  />
+                ) : null}
+              </span>
+              <span className={styles.rowText}>{item.categories}</span>
+            </Link>
+            {removable ? (
+              <button
+                type="button"
+                className={styles.removeButton}
+                aria-label="Удалить из истории"
+                onClick={() => onRemove?.(item.id)}
+              >
+                <Icon
+                  src="/assets/modal-close.svg"
+                  width={24}
+                  height={24}
+                  className={styles.removeIcon}
+                />
+              </button>
+            ) : null}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+export function SearchContent() {
+  const [activeGroup, setActiveGroup] = useState<GameGroup | null>(null);
+  const [viewedItems, setViewedItems] = useState(searchViewedItems);
+
+  const filteredViewedItems = useMemo(
+    () => filterByGroup(viewedItems, activeGroup),
+    [viewedItems, activeGroup],
+  );
+
+  const filteredPopularItems = useMemo(
+    () => filterByGroup(searchPopularItems, activeGroup),
+    [activeGroup],
+  );
+
+  const handleRemoveViewedItem = (id: string) => {
+    setViewedItems((items) => items.filter((item) => item.id !== id));
+  };
+
+  const handleResetViewed = () => {
+    setViewedItems([]);
+  };
 
   return (
-    <div className={styles.search}>
-      <div className={styles.searchBar}>
-        <Icon src="/assets/magnifying-glass.svg" alt="" width={20} height={20} />
-        <input
-          type="search"
-          className={styles.searchInput}
-          placeholder="Поиск товаров..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          aria-label="Поиск товаров"
-          autoFocus
-        />
-      </div>
-
-      <div className={styles.filters}>
-        {searchGameFilters.map((chip, index) => (
+    <div className={styles.page}>
+      <div className={styles.chips}>
+        {catalogGroupFilters.map((filter) => (
           <CategoryChip
-            key={chip}
-            label={chip}
-            active={activeFilter === index}
-            onClick={() => setActiveFilter(index)}
+            key={filter.id}
+            label={filter.label}
+            count={filter.count}
+            active={activeGroup === filter.id}
+            onClick={() =>
+              setActiveGroup((current) => (current === filter.id ? null : filter.id))
+            }
           />
         ))}
       </div>
 
-      <h2 className={styles.resultsTitle}>
-        {filtered.length > 0 ? `Найдено: ${filtered.length}` : "Ничего не найдено"}
-      </h2>
+      {filteredViewedItems.length > 0 ? (
+        <section className={styles.section} aria-label="Вы смотрели">
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>👀 Вы смотрели</h2>
+            <button type="button" className={styles.resetButton} onClick={handleResetViewed}>
+              Сбросить
+            </button>
+          </div>
+          <SearchSuggestionList
+            items={filteredViewedItems}
+            removable
+            onRemove={handleRemoveViewedItem}
+          />
+        </section>
+      ) : null}
 
-      {filtered.length > 0 ? (
-        <div className={styles.grid}>
-          {filtered.map((product) => (
-            <Link key={product.id} href={`/product/${product.id}`}>
-              <article style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  width={260}
-                  height={160}
-                  style={{ borderRadius: "12px", objectFit: "cover", width: "100%", height: "auto" }}
-                />
-                <span style={{ fontSize: "14px", fontWeight: 600 }}>{product.title}</span>
-                <span style={{ fontSize: "14px", color: "var(--brand-500)" }}>{product.price} ₽</span>
-              </article>
-            </Link>
-          ))}
+      <section className={styles.section} aria-label="Популярные">
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>🔥 Популярные</h2>
         </div>
-      ) : (
-        <p className={styles.empty}>Попробуйте изменить запрос или фильтр</p>
-      )}
+        <SearchSuggestionList items={filteredPopularItems} />
+      </section>
+
+      <div className={styles.loader} aria-hidden />
     </div>
   );
 }

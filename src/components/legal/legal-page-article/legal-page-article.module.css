@@ -1,0 +1,20 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--spacing-48);
+}
+
+.title {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.text {
+  padding-top: var(--spacing-16);
+  padding-bottom: var(--spacing-24);
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-muted);
+}

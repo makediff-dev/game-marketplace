@@ -1,0 +1,114 @@
+.page {
+  padding-bottom: var(--spacing-48);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-32);
+  background: var(--neutral-0);
+  border-radius: var(--radius-24);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-24);
+  padding-bottom: var(--spacing-16);
+  text-align: center;
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--brand-500);
+}
+
+.checkIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.statusBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  align-items: center;
+}
+
+.statusTitle {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+.statusText {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-muted);
+  max-width: 420px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.amount {
+  font-size: var(--font-size-h1);
+  font-weight: 700;
+  line-height: var(--line-height-h1);
+  color: var(--text-primary);
+}
+
+.detailMuted {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-muted);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+  max-width: 480px;
+}
+
+.actionLink {
+  display: block;
+  width: 100%;
+}
+
+.secondaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: 14px;
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 40px;
+  transition: background 0.2s ease;
+}
+
+.secondaryButton:hover {
+  background: var(--neutral-200);
+}
+
+@media (max-width: 768px) {
+  .panel {
+    padding: var(--spacing-24);
+  }
+}

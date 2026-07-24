@@ -35,38 +35,40 @@ export function HeroCarousel() {
 
   return (
     <section
-      className={styles.carousel}
+      className={`layoutBlock ${styles.carousel}`}
       aria-label="Рекламный баннер"
       aria-roledescription="carousel"
     >
-      <div className={styles.slideWrapper}>
-        <Image
-          src={current.image}
-          alt={current.alt}
-          fill
-          priority
-          className={styles.slideImage}
-          sizes="(max-width: 768px) 100vw, 1136px"
-        />
-      </div>
-      <div className={styles.arrowLeft}>
-        <ArrowButton direction="left" onClick={goPrev} ariaLabel="Предыдущий слайд" />
-      </div>
-      <div className={styles.arrowRight}>
-        <ArrowButton direction="right" onClick={goNext} ariaLabel="Следующий слайд" />
-      </div>
-      <div className={styles.dots} role="tablist" aria-label="Выбор слайда">
-        {banners.map((banner, index) => (
-          <button
-            key={banner.id}
-            type="button"
-            role="tab"
-            aria-selected={index === activeIndex}
-            aria-label={`Слайд ${index + 1}`}
-            className={`${styles.dot} ${index === activeIndex ? styles.dotActive : ""}`}
-            onClick={() => goTo(index)}
+      <div className={styles.frame}>
+        <div className={styles.slideWrapper}>
+          <Image
+            src={current.image}
+            alt={current.alt}
+            fill
+            priority
+            className={styles.slideImage}
+            sizes="(max-width: 768px) 100vw, (max-width: 1440px) 1136px, 100vw"
           />
-        ))}
+          <div className={styles.dots} role="tablist" aria-label="Выбор слайда">
+            {banners.map((banner, index) => (
+              <button
+                key={banner.id}
+                type="button"
+                role="tab"
+                aria-selected={index === activeIndex}
+                aria-label={`Слайд ${index + 1}`}
+                className={`${styles.dot} ${index === activeIndex ? styles.dotActive : ""}`}
+                onClick={() => goTo(index)}
+              />
+            ))}
+          </div>
+        </div>
+        <div className={styles.arrowLeft}>
+          <ArrowButton direction="left" onClick={goPrev} ariaLabel="Предыдущий слайд" />
+        </div>
+        <div className={styles.arrowRight}>
+          <ArrowButton direction="right" onClick={goNext} ariaLabel="Следующий слайд" />
+        </div>
       </div>
     </section>
   );

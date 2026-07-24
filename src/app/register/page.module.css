@@ -1,0 +1,4 @@
+.pageContent {
+  flex: 1;
+  min-height: calc(100vh - var(--spacing-24) * 2);
+}

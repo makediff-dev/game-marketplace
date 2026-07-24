@@ -1,28 +1,32 @@
 .footer {
   width: 100%;
-  max-width: var(--content-width);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-64);
-  padding: var(--spacing-16) 0;
+  padding-top: var(--spacing-16);
 }
 
 .top {
   display: flex;
+  width: 100%;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--spacing-32);
+  align-items: stretch;
 }
 
 .paymentColumn {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-24);
+  gap: var(--spacing-16);
   width: 432px;
+  flex-shrink: 0;
+}
+
+.paymentOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
 }
 
 .columnTitle {
   font-size: var(--font-size-h2);
+  font-weight: 400;
   line-height: var(--line-height-h2);
   color: var(--text-primary);
 }
@@ -37,26 +41,42 @@
   width: 40px;
   height: 40px;
   object-fit: contain;
-}
-
-.supportLink {
-  display: block;
+  flex-shrink: 0;
 }
 
 .column {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-16);
+  flex-shrink: 0;
+}
+
+.infoColumn {
+  width: 210px;
+}
+
+.socialColumn {
+  width: 197px;
 }
 
 .links {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-8);
+  width: 100%;
+}
+
+.infoColumn .links {
+  margin-top: auto;
+}
+
+.socialLinks {
+  gap: var(--spacing-10);
 }
 
 .link {
   font-size: var(--font-size-body-m);
+  font-weight: 400;
   line-height: var(--line-height-body-m);
   color: var(--text-tertiary);
   transition: color 0.2s ease;
@@ -66,15 +86,10 @@
   color: var(--brand-500);
 }
 
-.divider {
-  width: 100%;
-  height: 1px;
-  background: var(--neutral-300);
-}
-
 .copyright {
-  text-align: center;
+  margin-top: auto;
   font-size: var(--font-size-body-s);
+  font-weight: 400;
   line-height: var(--line-height-body-s);
   color: var(--text-tertiary);
 }
@@ -82,15 +97,18 @@
 @media (max-width: 1200px) {
   .top {
     flex-direction: column;
+    gap: var(--spacing-32);
+    align-items: flex-start;
   }
 
-  .paymentColumn {
+  .paymentColumn,
+  .infoColumn,
+  .socialColumn {
     width: 100%;
   }
-}
 
-@media (max-width: 768px) {
-  .footer {
-    gap: var(--spacing-32);
+  .copyright,
+  .infoColumn .links {
+    margin-top: 0;
   }
 }

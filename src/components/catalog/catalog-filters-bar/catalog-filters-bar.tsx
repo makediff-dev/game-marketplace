@@ -20,7 +20,7 @@ export function CatalogFiltersBar({
   onOpenFilters,
 }: CatalogFiltersBarProps) {
   return (
-    <>
+    <section className={`contentBlock ${styles.bar}`} aria-label="Фильтры каталога">
       <div className={styles.chips}>
         {subcategories.map((item) => (
           <CategoryChip
@@ -61,6 +61,6 @@ export function CatalogFiltersBar({
         </div>
         <span className={styles.total}>Всего {totalProducts} товара</span>
       </div>
-    </>
+    </section>
   );
 }

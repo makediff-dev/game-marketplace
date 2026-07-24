@@ -199,17 +199,17 @@ export const catalogGroupFilters = [
   {
     id: "games" as const,
     label: "🎮 Игры",
-    count: marketplaceGames.filter((game) => game.group === "games").length,
+    count: 820,
   },
   {
     id: "mobile" as const,
     label: "📱 Мобильные игры",
-    count: marketplaceGames.filter((game) => game.group === "mobile").length,
+    count: 278,
   },
   {
     id: "apps" as const,
     label: "🌐 Приложения",
-    count: marketplaceGames.filter((game) => game.group === "apps").length,
+    count: 114,
   },
 ];
 

@@ -1,0 +1,31 @@
+.detailsList {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: var(--spacing-8) var(--spacing-12);
+  width: 100%;
+  margin: 0;
+}
+
+.label {
+  font-size: var(--font-size-button);
+  font-weight: 400;
+  line-height: var(--line-height-body-m);
+  letter-spacing: -0.15px;
+  color: var(--text-muted);
+}
+
+.value {
+  margin: 0;
+  font-size: var(--font-size-button);
+  font-weight: 600;
+  line-height: var(--line-height-body-m);
+  letter-spacing: -0.15px;
+  color: var(--text-primary);
+}
+
+@media (max-width: 640px) {
+  .detailsList {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+  }
+}

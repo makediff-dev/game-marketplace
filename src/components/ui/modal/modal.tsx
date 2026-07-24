@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button/button";
+import { ModalCloseButton } from "@/components/ui/modal-close-button/modal-close-button";
 import styles from "./modal.module.css";
 
 interface ModalProps {
@@ -50,10 +51,13 @@ export function Modal({
         if (event.target === overlayRef.current) onClose();
       }}
     >
-      <div className={styles.modal}>
-        <h2 id="modal-title" className={styles.title}>
-          {title}
-        </h2>
+      <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
+        <div className={styles.header}>
+          <h2 id="modal-title" className={styles.title}>
+            {title}
+          </h2>
+          <ModalCloseButton onClick={onClose} />
+        </div>
         <div className={styles.content}>{children}</div>
         {actions ?? (
           <div className={styles.actions}>

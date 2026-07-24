@@ -3,7 +3,6 @@
   align-items: center;
   gap: var(--spacing-8);
   width: 100%;
-  max-width: var(--content-width);
   padding: var(--spacing-10) 0;
 }
 
@@ -17,6 +16,7 @@
 .backIcon {
   width: 16px;
   height: 16px;
+  transform: scaleX(-1);
 }
 
 .title {

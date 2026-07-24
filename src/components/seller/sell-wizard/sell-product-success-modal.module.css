@@ -1,0 +1,52 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(111, 114, 128, 0.5);
+  padding: var(--spacing-10);
+}
+
+.panel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  background: var(--neutral-0);
+  border-radius: var(--radius-24);
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-32) var(--spacing-32) var(--spacing-16);
+  text-align: center;
+}
+
+.emoji {
+  font-size: 56px;
+  line-height: 1;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-muted);
+}
+
+.footer {
+  padding: 0 var(--spacing-32) var(--spacing-32);
+}

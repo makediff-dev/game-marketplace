@@ -1,0 +1,30 @@
+.nameWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.name {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+  text-align: center;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.nameFade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    var(--neutral-0) 100%
+  );
+  pointer-events: none;
+}

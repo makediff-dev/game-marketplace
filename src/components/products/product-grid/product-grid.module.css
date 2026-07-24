@@ -1,9 +1,7 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-40);
   width: 100%;
-  max-width: var(--content-width);
 }
 
 .header {
@@ -29,10 +27,12 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--spacing-24);
+  margin-top: var(--spacing-24);
 }
 
 .loadMore {
   width: 100%;
+  margin-top: var(--spacing-40);
   padding: var(--spacing-16);
   background: rgba(22, 22, 26, 0.04);
   border-radius: var(--radius-16);

@@ -1,0 +1,679 @@
+.wizard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  width: 100%;
+}
+
+.progress {
+  display: flex;
+  width: 100%;
+  height: 6px;
+  background: var(--neutral-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--brand-500);
+  border-radius: var(--radius-full);
+  transition: width 0.25s ease;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.backIcon {
+  width: 16px;
+  height: 13px;
+  transform: rotate(180deg);
+}
+
+.title {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  width: 50%;
+  max-width: 50%;
+}
+
+.controlsRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.searchField {
+  width: 100%;
+}
+
+.paymentToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin-left: auto;
+  font-size: var(--font-size-body-m);
+  color: var(--text-primary);
+}
+
+.toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--neutral-300);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.toggleActive {
+  background: var(--brand-500);
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background: var(--neutral-0);
+  transition: transform 0.2s ease;
+}
+
+.toggleActive .toggleThumb {
+  transform: translateX(20px);
+}
+
+.textGames {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-8) var(--spacing-4);
+}
+
+.textGameButton {
+  padding: var(--spacing-8) var(--spacing-12);
+  background: none;
+  border: none;
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.textGameButton:hover {
+  color: var(--brand-500);
+}
+
+.textGameDivider {
+  width: 1px;
+  height: 16px;
+  background: var(--neutral-300);
+}
+
+.gameGrid {
+  display: grid;
+  grid-template-columns: repeat(10, 80px);
+  justify-content: space-between;
+  row-gap: var(--spacing-24);
+  width: 100%;
+}
+
+.gameCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  width: 80px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.gameIconWrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-24);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.gameIcon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gameBadge {
+  position: absolute;
+  top: -8px;
+  left: 18px;
+  z-index: 1;
+  height: 24px;
+  padding: 0 var(--spacing-12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-500);
+  color: var(--text-inverse);
+  font-size: var(--font-size-body-m);
+  font-weight: 700;
+  line-height: var(--line-height-body-m);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  box-shadow: 0 0 0 2px var(--neutral-0);
+}
+
+.gameBadgeEmoji {
+  left: 50px;
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+}
+
+.gameName {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.loadMore {
+  width: 100%;
+  padding: var(--spacing-12) var(--spacing-20);
+  background: var(--surface-secondary);
+  border: none;
+  border-radius: var(--radius-12);
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.contextHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.contextIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-12);
+  object-fit: cover;
+}
+
+.contextInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.contextGame {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+}
+
+.contextCategory {
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  color: var(--text-muted);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  width: 100%;
+  padding: var(--spacing-16) 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--neutral-200);
+  text-align: left;
+  cursor: pointer;
+}
+
+.listItem:last-child {
+  border-bottom: none;
+}
+
+.listItemContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
+.listItemTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.listItemTitle {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+.listItemDescription {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.discountBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 var(--spacing-6);
+  background: var(--brand-100);
+  border-radius: var(--radius-8, 8px);
+  font-size: var(--font-size-body-s);
+  font-weight: 700;
+  color: var(--brand-500);
+}
+
+.listItemIndicator {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-16);
+  background: var(--neutral-300);
+  flex-shrink: 0;
+}
+
+.listItemIndicatorActive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-500);
+}
+
+.checkIcon {
+  width: 14px;
+  height: 10px;
+}
+
+.footerAction {
+  padding-top: var(--spacing-8);
+}
+
+.formMain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-40);
+}
+
+.uploadBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.formLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 875fr) minmax(0, 441fr);
+  gap: var(--spacing-64);
+  width: 100%;
+  max-width: none;
+}
+
+.uploadArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  width: 100%;
+  min-height: 656px;
+  background: var(--surface-secondary);
+  border: 2px dashed var(--neutral-300);
+  border-radius: var(--radius-20);
+  cursor: pointer;
+}
+
+.uploadIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.uploadLabel {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+.uploadHint {
+  margin: var(--spacing-12) 0 0;
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-muted);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
+.calculatorBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+.calculator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.calcField {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-16) var(--spacing-20);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-16);
+}
+
+.calcLabel {
+  display: block;
+  margin-bottom: var(--spacing-4);
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  color: var(--text-muted);
+}
+
+.calcValueRow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.calcInput {
+  width: auto;
+  min-width: 1ch;
+  max-width: 100%;
+  flex: 0 0 auto;
+  field-sizing: content;
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.calcOutput {
+  flex: 0 0 auto;
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--brand-500);
+}
+
+.calcCurrency {
+  flex-shrink: 0;
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  color: var(--text-muted);
+}
+
+.calcArrow {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.feeHint {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-muted);
+}
+
+.fieldInput {
+  width: 100%;
+  padding: var(--spacing-14, 14px) var(--spacing-20);
+  background: var(--surface-secondary);
+  border: none;
+  border-radius: var(--radius-16);
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.fieldInput::placeholder {
+  color: var(--text-muted);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  line-height: var(--line-height-h3);
+  color: var(--text-primary);
+}
+
+.fieldLabel {
+  display: block;
+  margin: 0;
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.chipsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-12);
+}
+
+.characteristicsSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.characteristicsGroups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.characteristicGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.characteristicLabel {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.characteristicChip,
+.serverChip {
+  padding: var(--spacing-10, 10px) var(--spacing-20);
+  background: var(--surface-secondary);
+  border: 2px solid transparent;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.characteristicChipActive,
+.serverChipActive {
+  border-color: var(--brand-500);
+  background: rgb(109 93 247 / 0.08);
+}
+
+.textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: var(--spacing-16) var(--spacing-20);
+  background: var(--surface-secondary);
+  border: none;
+  border-radius: var(--radius-16);
+  resize: vertical;
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.infoBlocks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-40);
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+.infoBlockHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.infoBlockEmoji {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.infoBlockTitle {
+  margin: 0;
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  line-height: var(--line-height-h3);
+  color: var(--text-primary);
+}
+
+.infoBlockSubtitle {
+  margin: 0;
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-muted);
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.infoListItem {
+  position: relative;
+  padding-left: var(--spacing-20);
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.infoListItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: #4f8ef7;
+}
+
+.infoListTerm {
+  font-weight: 700;
+}
+
+@media (max-width: 1200px) {
+  .gameGrid {
+    grid-template-columns: repeat(6, 80px);
+    justify-content: flex-start;
+    gap: var(--spacing-16) var(--spacing-12);
+  }
+
+  .formLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .uploadArea {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .gameGrid {
+    grid-template-columns: repeat(4, 80px);
+    justify-content: flex-start;
+    gap: var(--spacing-12);
+  }
+
+  .paymentToggle {
+    margin-left: 0;
+  }
+}

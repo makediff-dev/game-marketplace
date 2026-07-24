@@ -1,0 +1,12 @@
+.page {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  width: 100%;
+  padding: var(--spacing-48) 0 var(--spacing-64);
+}
+
+.inner {
+  width: 100%;
+  max-width: 507px;
+}

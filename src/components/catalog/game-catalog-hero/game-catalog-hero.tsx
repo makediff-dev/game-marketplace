@@ -9,7 +9,7 @@ interface GameCatalogHeroProps {
 
 export function GameCatalogHero({ title, heroImage, logo }: GameCatalogHeroProps) {
   return (
-    <section className={styles.hero} aria-label={title}>
+    <section className={`contentBlock ${styles.hero}`} aria-label={title}>
       <Image src={heroImage} alt="" fill className={styles.background} sizes="1136px" priority />
       <div className={styles.overlay} />
       <div className={styles.content}>
