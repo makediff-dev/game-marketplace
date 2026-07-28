@@ -224,7 +224,6 @@ export function SellStepProductForm() {
               </div>
             </div>
           </div>
-          <p className={styles.feeHint}>💳 Платеж {SELL_WIZARD_FEE_PERCENT}%</p>
         </div>
 
         <input

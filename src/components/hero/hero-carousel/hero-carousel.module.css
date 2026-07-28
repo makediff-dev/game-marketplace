@@ -61,14 +61,14 @@
   width: 35.55px;
   height: 2px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--hero-dot);
   cursor: pointer;
   transition: background 0.2s ease;
   flex-shrink: 0;
 }
 
 .dot:hover {
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--hero-dot-active);
 }
 
 .dotActive {

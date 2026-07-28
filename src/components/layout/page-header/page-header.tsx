@@ -1,3 +1,5 @@
+"use client";
+
 import { Icon } from "@/components/ui/icon/icon";
 import Link from "next/link";
 import styles from "./page-header.module.css";
@@ -6,12 +8,27 @@ interface PageHeaderProps {
   title: string;
   backHref?: string;
   menuHref?: string;
+  onMenuClick?: () => void;
 }
 
-export function PageHeader({ title, backHref, menuHref }: PageHeaderProps) {
+export function PageHeader({ title, backHref, menuHref, onMenuClick }: PageHeaderProps) {
   return (
     <header className={styles.header}>
-      {menuHref ? (
+      {onMenuClick ? (
+        <button
+          type="button"
+          className={styles.menuButton}
+          onClick={onMenuClick}
+          aria-label="Меню профиля"
+        >
+          <Icon
+            src="/assets/list-icon.svg"
+            width={24}
+            height={24}
+            className={styles.menuIcon}
+          />
+        </button>
+      ) : menuHref ? (
         <Link href={menuHref} className={styles.menuButton} aria-label="Меню профиля">
           <Icon
             src="/assets/list-icon.svg"
@@ -26,6 +43,7 @@ export function PageHeader({ title, backHref, menuHref }: PageHeaderProps) {
             src="/assets/arrow-small.svg"
             width={16}
             height={13}
+            tone="muted"
             className={styles.backIcon}
           />
         </Link>

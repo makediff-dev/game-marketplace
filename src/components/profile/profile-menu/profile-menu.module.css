@@ -20,7 +20,9 @@
   height: 72px;
   padding: var(--spacing-20);
   background: var(--surface-secondary);
+  border: none;
   border-radius: var(--radius-20);
+  cursor: pointer;
   transition: background 0.15s ease;
 }
 

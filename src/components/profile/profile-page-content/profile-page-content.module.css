@@ -1,0 +1,51 @@
+.balanceLink {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  width: 100%;
+  max-width: 507px;
+  min-height: 72px;
+  margin-top: var(--spacing-16);
+  padding: var(--spacing-20);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-20);
+  box-sizing: border-box;
+  transition: background 0.15s ease;
+}
+
+.balanceLink:hover {
+  background: var(--neutral-200);
+}
+
+.balanceAmount {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  min-width: 0;
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.balanceIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.balanceText {
+  line-height: var(--line-height-h4);
+}
+
+.balanceArrow {
+  width: 16px;
+  height: 13px;
+  flex-shrink: 0;
+}

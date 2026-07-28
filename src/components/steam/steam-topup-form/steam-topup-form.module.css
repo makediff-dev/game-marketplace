@@ -216,7 +216,7 @@
 }
 
 .fieldInput::placeholder {
-  color: #828794;
+  color: var(--text-subtle);
 }
 
 .amountField {
@@ -242,7 +242,7 @@
   font-size: inherit;
   font-weight: 400;
   line-height: var(--line-height-body-m);
-  color: #828794;
+  color: var(--text-subtle);
 }
 
 .amountValueGroup {

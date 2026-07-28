@@ -1,5 +1,8 @@
 import type { ProfileItemStatus } from "@/lib/mock/profile-items";
-import { formatPrice } from "@/lib/mock/products";
+import { mockProfileItems } from "@/lib/mock/profile-items";
+import { buildProductDetailFromProduct } from "@/lib/mock/product-details";
+import type { ProductDetail } from "@/lib/mock/product-details";
+import { formatPrice, products, type Product } from "@/lib/mock/products";
 
 export type DealProgressStepId =
   | "created"
@@ -443,6 +446,76 @@ export function buildCreatedSaleOrder(input: CreatedSaleOrderInput): OrderDetail
 
 export function formatOrderPrice(price: number): string {
   return `${formatPrice(price)} ₽`;
+}
+
+export function getProductForOrder(order: Pick<OrderDetail, "id" | "title" | "price">): Product {
+  const linkedProduct = mockProfileItems.find(
+    (item) => item.tab === "products" && item.title === order.title,
+  );
+
+  if (linkedProduct?.href?.startsWith("/product/")) {
+    const productId = linkedProduct.href.replace("/product/", "");
+    const product = products.find((item) => item.id === productId);
+
+    if (product) {
+      return {
+        ...product,
+        title: order.title,
+        price: order.price,
+      };
+    }
+  }
+
+  const matchedProduct = products.find((item) => item.title === order.title);
+
+  if (matchedProduct) {
+    return {
+      ...matchedProduct,
+      price: order.price,
+    };
+  }
+
+  return {
+    id: order.id,
+    gameId: "order",
+    game: "Playnox",
+    category: "Товар",
+    title: order.title,
+    image: "/assets/cs2-hero-bg.png",
+    logo: "/assets/cs2-logo.png",
+    price: order.price,
+    rating: 0,
+    reviews: 0,
+    seller: "",
+    sellerAvatar: "/assets/seller-avatar.png",
+    sellerRating: 0,
+    sellerReviews: 0,
+    sellerSales: 0,
+    sellerOnline: false,
+  };
+}
+
+export function getProductDetailForOrder(
+  order: Pick<OrderDetail, "id" | "title" | "price">,
+): ProductDetail {
+  const product = getProductForOrder(order);
+  const detail = products.some((item) => item.id === product.id)
+    ? buildProductDetailFromProduct(product, {
+        title: order.title,
+        price: order.price,
+      })
+    : buildProductDetailFromProduct(
+        {
+          ...product,
+          gameId: "cs2",
+        },
+        {
+          title: order.title,
+          price: order.price,
+        },
+      );
+
+  return detail;
 }
 
 export function getDealProgressIndex(stepId: DealProgressStepId): number {

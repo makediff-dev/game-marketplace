@@ -52,6 +52,7 @@ export function SearchField({
             src="/assets/magnifying-glass.svg"
             width={20}
             height={20}
+            tone="muted"
             className={styles.icon}
           />
         </span>
@@ -66,6 +67,7 @@ export function SearchField({
             src="/assets/magnifying-glass.svg"
             width={20}
             height={20}
+            tone="muted"
             className={styles.icon}
           />
         </button>

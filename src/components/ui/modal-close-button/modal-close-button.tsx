@@ -18,6 +18,7 @@ export function ModalCloseButton({ onClick, className }: ModalCloseButtonProps) 
         src="/assets/modal-close.svg"
         width={24}
         height={24}
+        tone="muted"
         className={styles.closeIcon}
       />
     </button>

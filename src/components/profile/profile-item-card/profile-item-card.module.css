@@ -19,11 +19,11 @@
 
 .cardHighlighted {
   border: 2px solid var(--brand-500);
-  background: rgb(109 93 247 / 0.08);
+  background: var(--surface-brand-muted);
 }
 
 .cardHighlighted:hover {
-  background: rgb(109 93 247 / 0.12);
+  background: var(--surface-brand-muted-strong);
 }
 
 .title {

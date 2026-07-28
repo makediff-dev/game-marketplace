@@ -374,10 +374,10 @@ function getTemplateForProduct(product: Product) {
   return gameDetailTemplates[product.gameId] ?? defaultTemplate;
 }
 
-export function getProductDetail(id: string): ProductDetail | undefined {
-  const product = products.find((item) => item.id === id);
-  if (!product) return undefined;
-
+export function buildProductDetailFromProduct(
+  product: Product,
+  overrides?: Partial<ProductDetail>,
+): ProductDetail {
   const template = getTemplateForProduct(product);
 
   return {
@@ -390,6 +390,16 @@ export function getProductDetail(id: string): ProductDetail | undefined {
     refundPolicies: template.refundPolicies,
     reviewCount: product.reviews,
     reviewRating: product.rating,
+    ...overrides,
+  };
+}
+
+export function getProductDetail(id: string): ProductDetail | undefined {
+  const product = products.find((item) => item.id === id);
+  if (!product) return undefined;
+
+  return {
+    ...buildProductDetailFromProduct(product),
     ...overrides[id],
   };
 }

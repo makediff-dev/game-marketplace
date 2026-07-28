@@ -50,5 +50,5 @@
 }
 
 .countActive {
-  color: var(--text-disabled);
+  color: var(--text-on-brand-muted);
 }

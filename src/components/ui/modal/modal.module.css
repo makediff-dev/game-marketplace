@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(22, 22, 26, 0.5);
+  background: var(--surface-overlay);
   padding: var(--spacing-24);
 }
 

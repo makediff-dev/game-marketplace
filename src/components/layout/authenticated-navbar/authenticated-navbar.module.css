@@ -2,7 +2,7 @@
   align-self: stretch;
   width: 100%;
   padding: var(--spacing-20) var(--content-inner-padding-x);
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--surface-navbar);
 }
 
 .inner {
@@ -15,6 +15,7 @@
 .left {
   display: flex;
   align-items: center;
+  gap: var(--spacing-16);
   justify-self: start;
   min-width: 0;
 }

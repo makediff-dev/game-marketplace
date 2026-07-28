@@ -174,7 +174,7 @@
 }
 
 .payButton {
-  background: linear-gradient(90deg, #6d5df7 0%, #ada5ef 100%);
+  background: var(--gradient-brand);
   border-radius: 14px;
 }
 

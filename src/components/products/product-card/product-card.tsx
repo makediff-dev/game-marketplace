@@ -6,9 +6,10 @@ import styles from "./product-card.module.css";
 
 interface ProductCardProps {
   product: Product;
+  hideBuyButton?: boolean;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, hideBuyButton = false }: ProductCardProps) {
   const priceClass =
     product.priceColor === "error"
       ? styles.priceError
@@ -88,9 +89,11 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </Link>
 
-      <Link href={`/product/${product.id}/checkout`} className={styles.buyButton}>
-        Купить
-      </Link>
+      {hideBuyButton ? null : (
+        <Link href={`/product/${product.id}/checkout`} className={styles.buyButton}>
+          Купить
+        </Link>
+      )}
     </article>
   );
 }

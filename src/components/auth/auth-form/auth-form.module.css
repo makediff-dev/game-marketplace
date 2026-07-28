@@ -47,7 +47,7 @@
   flex: 1;
   font-size: var(--font-size-h4);
   line-height: var(--line-height-h4);
-  color: #2f80ed;
+  color: var(--color-link);
   text-align: left;
 }
 
@@ -102,7 +102,7 @@
 .submitButton {
   width: 100%;
   height: 56px;
-  background: linear-gradient(90deg, #6d5df7 0%, #ada5ef 100%);
+  background: var(--gradient-brand);
   border-radius: 14px;
 }
 

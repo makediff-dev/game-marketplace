@@ -60,7 +60,7 @@
   right: 0;
   width: 12px;
   height: 12px;
-  background: #1fa463;
+  background: var(--color-chat-own);
   border: 2px solid var(--neutral-0);
   border-radius: var(--radius-full);
 }
@@ -112,7 +112,7 @@
   min-width: 20px;
   height: 20px;
   padding: 0 6px;
-  background: #2f80ed;
+  background: var(--color-chat-system);
   border-radius: var(--radius-full);
   font-size: var(--font-size-body-s);
   color: var(--text-inverse);
@@ -273,9 +273,9 @@
 .dealStatusBadge {
   flex-shrink: 0;
   padding: var(--spacing-4) var(--spacing-10);
-  border: 1px solid #bbb;
+  border: 1px solid var(--border-badge);
   border-radius: var(--radius-full);
-  background: #e8e8e8;
+  background: var(--surface-badge);
   font-size: 11px;
   font-weight: 600;
   line-height: var(--line-height-body-m);
@@ -303,7 +303,7 @@
 .onlineDotStatic {
   width: 12px;
   height: 12px;
-  background: #1fa463;
+  background: var(--color-chat-own);
   border-radius: var(--radius-full);
 }
 

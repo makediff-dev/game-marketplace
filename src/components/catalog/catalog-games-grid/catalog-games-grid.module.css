@@ -21,7 +21,7 @@
 .loadMore {
   width: 100%;
   padding: var(--spacing-16);
-  background: rgba(22, 22, 26, 0.04);
+  background: var(--surface-interactive);
   border-radius: var(--radius-16);
   font-size: var(--font-size-body-l);
   font-weight: 500;
@@ -31,7 +31,7 @@
 }
 
 .loadMore:hover {
-  background: rgba(22, 22, 26, 0.08);
+  background: var(--surface-interactive-strong);
 }
 
 @media (max-width: 1200px) {

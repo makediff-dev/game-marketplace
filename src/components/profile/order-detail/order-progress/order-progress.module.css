@@ -27,35 +27,69 @@
   color: var(--text-primary);
 }
 
-.list {
+.root {
+  position: relative;
   display: flex;
+  flex: 1;
   flex-direction: column;
   width: 100%;
+  min-height: 0;
+  height: 100%;
+  padding: var(--spacing-12) var(--spacing-8);
+  box-sizing: border-box;
+}
+
+.rail {
+  position: absolute;
+  top: calc(var(--spacing-12) + 8px);
+  bottom: calc(var(--spacing-12) + 8px);
+  left: calc(var(--spacing-8) + 7px);
+  width: 2px;
+  pointer-events: none;
+}
+
+.railLine {
+  position: absolute;
+  inset: 0;
+  border-radius: 1px;
+  background: var(--neutral-300);
+}
+
+.railLineFilled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 1px;
+  background: var(--text-success);
+}
+
+.list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 calc(16px + var(--spacing-12));
   list-style: none;
+  min-height: 0;
 }
 
 .item {
-  display: grid;
-  grid-template-columns: 16px minmax(0, 1fr);
-  grid-template-rows: auto auto;
-  column-gap: var(--spacing-12);
-  row-gap: var(--spacing-4);
-  align-items: center;
-  padding-bottom: var(--spacing-20);
-}
-
-.item:last-child {
-  padding-bottom: 0;
-}
-
-.track {
   position: relative;
-  grid-row: 1 / -1;
-  grid-column: 1;
-  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.marker {
+  position: absolute;
+  top: 0;
+  left: calc(-16px - var(--spacing-12));
+  z-index: 1;
+  flex-shrink: 0;
   width: 16px;
+  height: 16px;
 }
 
 .dot {
@@ -94,55 +128,26 @@
   box-sizing: border-box;
 }
 
-.line {
-  position: absolute;
-  top: 16px;
-  left: 7px;
-  bottom: calc(-1 * var(--spacing-20));
-  width: 2px;
-  background: var(--text-success);
-}
-
-.linePending {
-  position: absolute;
-  top: 16px;
-  left: 7px;
-  bottom: calc(-1 * var(--spacing-20));
-  width: 2px;
-  background: var(--neutral-300);
-}
-
-.item:last-child .line,
-.item:last-child .linePending {
-  display: none;
-}
-
-.labelRow {
-  grid-column: 2;
-  grid-row: 1;
+.content {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-16);
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing-2);
   min-width: 0;
-  min-height: 16px;
+  padding-top: 0;
 }
 
 .stepDescription {
-  grid-column: 2;
-  grid-row: 2;
-  margin: 0;
+  margin: var(--spacing-4) 0 0;
   font-size: var(--font-size-body-m);
   line-height: var(--line-height-body-m);
   color: var(--text-tertiary);
 }
 
 .stepDate {
-  flex-shrink: 0;
-  font-size: var(--font-size-body-m);
-  line-height: var(--line-height-body-m);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
   color: var(--text-muted);
-  white-space: nowrap;
 }
 
 .labelCompleted {
@@ -150,6 +155,14 @@
   line-height: 16px;
   letter-spacing: -0.08px;
   font-weight: 500;
+  color: var(--text-success);
+}
+
+.labelCompletedFinal {
+  font-size: var(--font-size-price);
+  line-height: 18px;
+  letter-spacing: -0.08px;
+  font-weight: 700;
   color: var(--text-success);
 }
 
@@ -168,10 +181,6 @@
   color: var(--brand-600);
 }
 
-.itemCurrent .labelRow {
-  min-height: 18px;
-}
-
-.itemCurrent .dotCurrent {
-  transform: translateY(1px);
+.itemCurrent .content {
+  gap: var(--spacing-4);
 }

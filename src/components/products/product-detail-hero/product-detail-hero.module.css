@@ -154,7 +154,7 @@
   border: none;
   border-radius: var(--radius-16);
   cursor: pointer;
-  background: rgb(109 93 247 / 0.12);
+  background: var(--surface-brand-muted-strong);
   transition:
     background 0.2s ease,
     opacity 0.2s ease,

@@ -13,10 +13,66 @@
   gap: var(--spacing-16);
 }
 
+.productSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  width: 100%;
+}
+
+.bottomRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--spacing-24);
+  align-items: stretch;
+  width: 100%;
+}
+
+.bottomColumn {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.bottomPanel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 480px;
+}
+
+.progressPanel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--spacing-20);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-20);
+  box-sizing: border-box;
+}
+
+.chatPanel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 480px;
+}
+
 .headerRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+  width: 100%;
+}
+
+.headerMain {
   display: flex;
   align-items: center;
   gap: var(--spacing-16);
+  min-width: 0;
 }
 
 .title {
@@ -29,22 +85,14 @@
 .dealBadge {
   flex-shrink: 0;
   padding: 5px 11px;
-  border: 1px solid #bbb;
+  border: 1px solid var(--border-badge);
   border-radius: var(--radius-full);
-  background: #e8e8e8;
+  background: var(--surface-badge);
   font-size: 11px;
   font-weight: 600;
   line-height: var(--line-height-body-m);
   letter-spacing: 0.06px;
   color: var(--text-primary);
-}
-
-.section {
-  width: 100%;
-}
-
-.sectionSpaced {
-  composes: section;
 }
 
 .sectionTitle {
@@ -60,20 +108,17 @@
   margin-bottom: var(--spacing-16);
 }
 
-.topRow {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--spacing-24);
-  align-items: start;
-  width: 100%;
-}
-
-.detailsColumn {
-  min-width: 0;
-}
-
 @media (max-width: 960px) {
-  .topRow {
+  .headerRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .bottomRow {
     grid-template-columns: 1fr;
+  }
+
+  .bottomPanel {
+    min-height: auto;
   }
 }

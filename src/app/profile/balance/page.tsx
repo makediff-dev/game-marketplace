@@ -11,7 +11,7 @@ export default function BalancePage() {
         <AppNavbar />
         <div className="contentBlock">
           <div className={styles.stack}>
-            <PageHeader title="Баланс" />
+            <PageHeader title="Баланс" backHref="/profile" />
             <BalanceContent />
           </div>
         </div>

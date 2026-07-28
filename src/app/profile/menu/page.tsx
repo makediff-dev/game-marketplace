@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function ProfileMenuPage() {
-  redirect("/profile");
+  redirect("/profile?menu=1");
 }

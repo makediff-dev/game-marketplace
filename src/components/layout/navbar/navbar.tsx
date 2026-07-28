@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { RefObject } from "react";
+import { ThemeToggle } from "@/components/theme/theme-toggle/theme-toggle";
 import { SearchField } from "@/components/ui/search-field/search-field";
 import styles from "./navbar.module.css";
 
@@ -33,6 +34,7 @@ export function Navbar({
           <Link href="/" className={styles.logo}>
             Playnox
           </Link>
+          <ThemeToggle />
         </div>
         <div className={styles.center}>
           <div ref={searchAnchorRef} className={styles.searchAnchor}>

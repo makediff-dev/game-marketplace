@@ -47,7 +47,7 @@ export function HeroCarousel() {
             fill
             priority
             className={styles.slideImage}
-            sizes="(max-width: 768px) 100vw, (max-width: 1440px) 1136px, 100vw"
+            sizes="(max-width: 768px) 100vw, 1136px"
           />
           <div className={styles.dots} role="tablist" aria-label="Выбор слайда">
             {banners.map((banner, index) => (

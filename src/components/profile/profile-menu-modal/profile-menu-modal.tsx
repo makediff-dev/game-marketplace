@@ -14,20 +14,12 @@ interface ProfileMenuModalProps {
   onClose: () => void;
 }
 
-type UserMode = "buyer" | "seller";
-
-const userModeLabels: Record<UserMode, string> = {
-  buyer: "Покупатель",
-  seller: "Продавец",
-};
-
 export function ProfileMenuModal({ isOpen, onClose }: ProfileMenuModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const logout = useAuthStore((state) => state.logout);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [securityEnabled, setSecurityEnabled] = useState(false);
-  const [userMode, setUserMode] = useState<UserMode>("buyer");
 
   useEffect(() => {
     if (!isOpen) {
@@ -104,28 +96,6 @@ export function ProfileMenuModal({ isOpen, onClose }: ProfileMenuModalProps) {
           <div className={styles.divider} />
 
           <div className={styles.menuSection}>
-            <Link href="/profile" className={`${styles.menuRow} ${styles.menuRowLink}`} onClick={onClose}>
-              <div className={styles.iconSlot}>
-                <Icon
-                  src="/assets/menu-orders.svg"
-                  width={36}
-                  height={36}
-                  className={styles.rowIcon}
-                />
-              </div>
-              <div className={styles.rowText}>
-                <span className={styles.rowTitle}>Мои заказы</span>
-              </div>
-              <div className={styles.rowControl}>
-                <Icon
-                  src="/assets/arrow-small.svg"
-                  width={16}
-                  height={13}
-                  className={styles.rowArrow}
-                />
-              </div>
-            </Link>
-
             <Link href="/favorites" className={`${styles.menuRow} ${styles.menuRowLink}`} onClick={onClose}>
               <div className={styles.iconSlot}>
                 <span className={styles.emojiIcon} aria-hidden="true">
@@ -144,31 +114,6 @@ export function ProfileMenuModal({ isOpen, onClose }: ProfileMenuModalProps) {
                 />
               </div>
             </Link>
-
-            <div className={styles.menuRow}>
-              <div className={styles.iconSlot}>
-                <span className={styles.emojiIcon} aria-hidden="true">
-                  🔄
-                </span>
-              </div>
-              <div className={styles.rowText}>
-                <span className={styles.rowSubtitle}>Режим</span>
-                <span className={styles.rowTitle}>{userModeLabels[userMode]}</span>
-              </div>
-              <div className={styles.modeSwitch} role="group" aria-label="Режим">
-                {(Object.keys(userModeLabels) as UserMode[]).map((mode) => (
-                  <button
-                    key={mode}
-                    type="button"
-                    className={`${styles.modeOption} ${userMode === mode ? styles.modeOptionActive : ""}`}
-                    onClick={() => setUserMode(mode)}
-                    aria-pressed={userMode === mode}
-                  >
-                    {userModeLabels[mode]}
-                  </button>
-                ))}
-              </div>
-            </div>
 
             <div className={styles.menuRow}>
               <div className={styles.iconSlot}>

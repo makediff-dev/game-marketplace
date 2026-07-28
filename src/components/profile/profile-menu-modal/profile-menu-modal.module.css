@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(111, 114, 128, 0.5);
+  background: var(--surface-scrim);
   padding: var(--spacing-10);
 }
 
@@ -287,5 +287,5 @@
 .logoutButton {
   font-size: var(--font-size-body-l);
   line-height: var(--line-height-body-l);
-  color: #ff6b84;
+  color: var(--color-danger-soft);
 }

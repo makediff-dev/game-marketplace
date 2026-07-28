@@ -16,7 +16,7 @@
 }
 
 .success {
-  background: #e8f8ef;
+  background: var(--status-success-bg);
   border-color: var(--text-success);
   color: var(--text-success);
 }
@@ -28,13 +28,13 @@
 }
 
 .dispute {
-  background: #fff0f3;
+  background: var(--status-error-bg);
   border-color: var(--text-error);
   color: var(--text-error);
 }
 
 .warning {
-  background: #fff4e5;
-  border-color: #e6a020;
-  color: #b36b00;
+  background: var(--status-warning-bg);
+  border-color: var(--status-warning-border);
+  color: var(--status-warning-text);
 }

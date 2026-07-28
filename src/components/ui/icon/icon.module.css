@@ -2,3 +2,24 @@
   display: block;
   flex-shrink: 0;
 }
+
+.adaptive {
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.tonePrimary {
+  background-color: var(--icon-color);
+}
+
+.toneMuted {
+  background-color: var(--icon-color-muted);
+}
+
+.toneInverse {
+  background-color: var(--icon-color-inverse);
+}
