@@ -21,6 +21,9 @@
   --icon-color-muted: var(--text-muted);
   --icon-color-inverse: var(--text-inverse);
 
+  --surface-hero-cta: #ffffff;
+  --text-hero-cta: #6d5df7;
+
   /* Surface & neutral */
   --surface-primary: #ffffff;
   --surface-secondary: #f6f6f6;
@@ -138,6 +141,9 @@
   --icon-color: var(--text-primary);
   --icon-color-muted: var(--text-tertiary);
   --icon-color-inverse: var(--text-inverse);
+
+  --surface-hero-cta: #ffffff;
+  --text-hero-cta: #6d5df7;
 
   --surface-primary: #121218;
   --surface-secondary: #1c1c24;

@@ -89,19 +89,8 @@ function TopupFormPanel({ platformId }: TopupFormPanelProps) {
     return digits ? Number(digits) : 0;
   };
 
-  const getCurrencyIconClassName = (key: Currency) => {
-    const classNames = [styles.currencyIcon];
-
-    if (currency === key) {
-      if (key !== "rub") {
-        classNames.push(styles.currencyIconActiveDark);
-      }
-    } else if (key === "rub") {
-      classNames.push(styles.currencyIconRubInactive);
-    }
-
-    return classNames.join(" ");
-  };
+  const getCurrencyIconTone = (key: Currency): "primary" | "inverse" =>
+    currency === key ? "inverse" : "primary";
 
   return (
     <>
@@ -193,7 +182,9 @@ function TopupFormPanel({ platformId }: TopupFormPanelProps) {
                         src={currencyIcons[key]}
                         width={24}
                         height={24}
-                        className={getCurrencyIconClassName(key)}
+                        adaptive
+                        tone={getCurrencyIconTone(key)}
+                        className={styles.currencyIcon}
                       />
                     </button>
                   ))}
