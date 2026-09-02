@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-8);
-  width: 376px;
+  width: 100%;
+  max-width: var(--search-field-width);
   height: 48px;
   padding: 0 var(--spacing-16);
   background: var(--surface-secondary);
@@ -20,7 +21,8 @@
 
 .flexible {
   flex: 1;
-  max-width: 376px;
+  width: 100%;
+  max-width: var(--search-field-width);
   min-width: 0;
 }
 
@@ -60,16 +62,6 @@
 .icon {
   width: 20px;
   height: 20px;
-}
-
-@media (max-width: 1200px) {
-  .field {
-    width: 280px;
-  }
-
-  .flexible {
-    max-width: 280px;
-  }
 }
 
 @media (max-width: 768px) {

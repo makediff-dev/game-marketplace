@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/ui/icon/icon";
+import { ProductFulfillmentTime } from "@/components/products/product-fulfillment-time/product-fulfillment-time";
 import { SafePaymentBlock } from "@/components/products/safe-payment-block/safe-payment-block";
 import type { ProductDetail } from "@/lib/mock/product-details";
-import { formatPrice } from "@/lib/mock/products";
+import { formatProductPrice, resolveProductOfferType } from "@/lib/mock/checkout";
 import { useToastStore } from "@/lib/store/toast-store";
 import styles from "./product-purchase-panel.module.css";
 
@@ -21,6 +22,7 @@ export function ProductPurchasePanel({ product, showActions = true }: ProductPur
   const router = useRouter();
   const showToast = useToastStore((state) => state.show);
   const [isFavorite, setIsFavorite] = useState(false);
+  const offerType = resolveProductOfferType(product);
 
   const handleFavoriteToggle = () => {
     setIsFavorite((current) => {
@@ -36,19 +38,21 @@ export function ProductPurchasePanel({ product, showActions = true }: ProductPur
         <h1 className={styles.title}>{product.title}</h1>
 
         <div className={styles.priceRow}>
-          <span className={styles.price}>{formatPrice(product.price)} ₽</span>
+          <span className={styles.price}>{formatProductPrice(product.price, offerType)}</span>
           {product.discount ? (
             <div className={styles.discountRow}>
               <span className={styles.discountBadge}>-{product.discount}%</span>
               {product.oldPrice ? (
                 <span className={styles.oldPrice}>
-                  {formatPrice(product.oldPrice)}
+                  {formatProductPrice(product.oldPrice, offerType)}
                   <span className={styles.oldPriceLine} />
                 </span>
               ) : null}
             </div>
           ) : null}
         </div>
+
+        <ProductFulfillmentTime product={product} variant="detail" />
       </div>
 
       {product.verified ? (

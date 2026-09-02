@@ -1,7 +1,15 @@
 .grid {
+  --slider-arrow-size: 48px;
+  --slider-arrow-inset: calc(var(--slider-arrow-size) / 2);
+
   position: relative;
   width: 100%;
   overflow: visible;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
 }
 
 .viewport {
@@ -9,10 +17,12 @@
   overflow: hidden;
   width: 100%;
   padding-top: var(--spacing-8);
+  touch-action: pan-y pinch-zoom;
 }
 
 .track {
   display: flex;
+  gap: 12px;
   width: max-content;
   transition: transform 0.25s ease;
 }
@@ -75,6 +85,32 @@
 .arrowLeft,
 .arrowRight {
   position: absolute;
-  top: calc(var(--spacing-8) + (80px - 48px) / 2);
+  top: calc(var(--spacing-8) + (80px - var(--slider-arrow-size)) / 2);
   z-index: 2;
+}
+
+.arrowLeft {
+  left: calc(-1 * var(--slider-arrow-inset));
+}
+
+.arrowRight {
+  right: calc(-1 * var(--slider-arrow-inset));
+}
+
+@media (max-width: 768px) {
+  .grid {
+    --slider-arrow-inset: 0px;
+  }
+
+  .arrowLeft {
+    left: 0;
+  }
+
+  .arrowRight {
+    right: 0;
+  }
+
+  .item:hover {
+    transform: none;
+  }
 }

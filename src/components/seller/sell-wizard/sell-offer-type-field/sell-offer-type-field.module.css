@@ -1,0 +1,74 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.label {
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 3px;
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-12);
+}
+
+.option {
+  min-height: 40px;
+  padding: var(--spacing-8) var(--spacing-12);
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius-12) - 3px);
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.option:hover:not(.optionActive) {
+  background: var(--surface-secondary);
+}
+
+.optionActive {
+  background: var(--surface-brand-muted);
+  color: var(--brand-500);
+  box-shadow: inset 0 0 0 1px var(--brand-500);
+}
+
+.unitPriceRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16);
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-12);
+}
+
+.unitPriceLabel {
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  color: var(--text-muted);
+}
+
+.unitPriceValue {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}

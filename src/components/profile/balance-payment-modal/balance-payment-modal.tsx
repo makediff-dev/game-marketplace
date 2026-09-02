@@ -16,7 +16,7 @@ interface BalancePaymentModalProps {
   onClose: () => void;
   amount: string;
   operation: BalanceOperation;
-  onProceed?: () => void;
+  onProceed?: (methodId: string) => void;
 }
 
 function formatAmount(value: string): string {
@@ -60,7 +60,7 @@ export function BalancePaymentModal({
 
   const handleProceed = () => {
     if (onProceed) {
-      onProceed();
+      onProceed(selectedMethod);
       return;
     }
 

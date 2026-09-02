@@ -87,7 +87,17 @@
 
 .sellerCard {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.sellerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  min-width: 0;
+  padding-left: var(--spacing-12);
 }
 
 .sellerLogo {
@@ -109,15 +119,15 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-4);
-  padding-left: var(--spacing-12);
+  padding-left: 0;
   font-size: var(--font-size-h4);
   font-weight: 500;
   line-height: var(--line-height-h4);
 }
 
 .sellerInfo {
-  padding-left: var(--spacing-12);
-  margin-top: 2px;
+  padding-left: 0;
+  margin-top: 0;
   font-size: 16px;
   line-height: 22.86px;
   color: var(--text-muted);
@@ -237,9 +247,7 @@
 }
 
 .similarGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--spacing-24);
+  composes: productGrid from global;
 }
 
 .loadMore {
@@ -258,17 +266,14 @@
   cursor: pointer;
 }
 
-@media (max-width: 1200px) {
-  .similarGrid {
-    grid-template-columns: repeat(2, 1fr);
+@media (min-width: 1600px) {
+  .section,
+  .sellerSection {
+    max-width: none;
   }
 }
 
 @media (max-width: 768px) {
-  .similarGrid {
-    grid-template-columns: 1fr;
-  }
-
   .viewedCard {
     width: 100%;
   }

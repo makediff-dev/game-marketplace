@@ -76,8 +76,13 @@
 }
 
 @media (max-width: 768px) {
+  .frame {
+    margin-inline: 0;
+  }
+
   .slideWrapper {
     min-height: 220px;
+    border-radius: var(--radius-16);
   }
 
   .arrowLeft {

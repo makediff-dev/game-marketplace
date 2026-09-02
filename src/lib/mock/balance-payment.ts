@@ -1,4 +1,4 @@
-export type BalanceOperation = "deposit" | "withdraw";
+export type BalanceOperation = "deposit" | "withdraw" | "purchase";
 
 export interface BalancePaymentMethod {
   id: string;
@@ -15,5 +15,13 @@ export const balancePaymentMethods: BalancePaymentMethod[] = [
 ];
 
 export function getBalanceOperationLabel(operation: BalanceOperation): string {
-  return operation === "deposit" ? "💳 Пополнение" : "Вывод";
+  if (operation === "deposit") {
+    return "💳 Пополнение";
+  }
+
+  if (operation === "purchase") {
+    return "🛒 Покупка";
+  }
+
+  return "Вывод";
 }

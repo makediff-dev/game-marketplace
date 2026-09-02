@@ -19,9 +19,8 @@
 
 .platformPanel {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-2);
   width: 110px;
   height: 100%;
@@ -29,6 +28,22 @@
   background: var(--surface-secondary);
   border-radius: var(--radius-20);
   flex-shrink: 0;
+}
+
+.platformList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-2);
+  flex: 1;
+  min-height: 0;
+}
+
+.platformItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .platformButton {
@@ -63,10 +78,10 @@
 
 .newBadge {
   position: absolute;
-  top: calc(50% + 53.92px);
-  right: 27px;
-  transform: translateY(-50%);
-  width: 54px;
+  top: -6px;
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%);
   padding: var(--spacing-2) var(--spacing-8);
   background: var(--brand-500);
   color: var(--text-inverse);
@@ -96,6 +111,17 @@
   gap: var(--spacing-24);
   width: 100%;
   min-width: 0;
+}
+
+.formHeader {
+  display: contents;
+}
+
+.headerCurrencyGroup {
+  display: none;
+  align-items: center;
+  gap: var(--spacing-10);
+  flex-shrink: 0;
 }
 
 .headerBlock {
@@ -142,6 +168,49 @@
   font-weight: 500;
   cursor: pointer;
   transition: opacity 0.2s ease;
+}
+
+.promoLinkDesktop {
+  display: flex;
+}
+
+.promoLinkMobile {
+  display: none;
+}
+
+.metaRow {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+.commissionRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.commissionLabel {
+  color: var(--text-subtle);
+  font-size: var(--font-size-body-m);
+  font-weight: 400;
+  line-height: var(--line-height-body-m);
+}
+
+.commissionBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-8);
+  height: 24px;
+  background: var(--gradient-brand);
+  color: var(--text-inverse);
+  font-size: var(--font-size-body-m);
+  font-weight: 700;
+  line-height: var(--line-height-body-l);
+  border-radius: var(--radius-full);
 }
 
 .promoLink:hover {
@@ -199,15 +268,15 @@
 
 .loginField {
   align-items: center;
-  gap: var(--spacing-32);
-  width: max-content;
+  gap: var(--spacing-16);
+  width: 100%;
   max-width: 220px;
   padding: var(--spacing-24) var(--spacing-20);
 }
 
 .fieldInput {
-  flex: 0 0 auto;
-  width: 112px;
+  flex: 1;
+  width: 100%;
   min-width: 0;
   font-size: var(--font-size-h4);
   font-weight: 400;
@@ -385,49 +454,141 @@
   .section {
     flex-direction: column;
     align-items: stretch;
+    gap: var(--spacing-12);
   }
 
   .platformSide {
     align-self: auto;
+    width: 100%;
   }
 
   .platformPanel {
     width: 100%;
-    max-width: 110px;
+    max-width: none;
     height: auto;
+    padding: var(--spacing-12) var(--spacing-12) var(--spacing-4);
+    overflow: visible;
+  }
+
+  .platformList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    width: 100%;
+    min-width: 0;
+    overflow: visible;
+  }
+
+  .platformItem {
+    flex: 0 0 auto;
+  }
+
+  .platformButton {
+    flex-shrink: 0;
+  }
+
+  .platformInactive {
+    opacity: 1;
+    background: transparent;
+  }
+
+  .platformActive {
+    box-shadow: var(--shadow-toggle);
   }
 
   .formPanel {
     width: 100%;
+    padding: var(--spacing-16);
   }
 
   .formRow {
     flex-direction: column;
     align-items: stretch;
+    gap: var(--spacing-16);
+  }
+
+  .formHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--spacing-12);
+    width: 100%;
+  }
+
+  .headerBlock {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .headerCurrencyGroup {
+    display: flex;
+  }
+
+  .discountBadge {
+    display: none;
+  }
+
+  .promoLinkDesktop {
+    display: none;
+  }
+
+  .promoLinkMobile {
+    display: flex;
+  }
+
+  .metaRow {
+    display: flex;
   }
 
   .fieldsContainer {
     flex-direction: column;
     align-items: stretch;
+    gap: var(--spacing-12);
   }
 
   .fieldGroup {
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
+    gap: var(--spacing-12);
   }
 
   .fieldWrap {
-    width: 100%;
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+  }
+
+  .loginFieldWrap {
+    flex: 1 1 0;
+  }
+
+  .amountFieldWrap {
+    flex: 1 1 0;
+    min-width: 0;
   }
 
   .field {
     width: 100%;
+    min-height: 72px;
   }
 
-  .loginField,
+  .loginField {
+    width: 100%;
+    max-width: none;
+    padding: var(--spacing-16) var(--spacing-20);
+  }
+
   .amountField {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
+    padding: var(--spacing-16) var(--spacing-20);
+  }
+
+  .amountField .currencyGroup {
+    display: none;
   }
 
   .payButton {
@@ -439,9 +600,72 @@
   }
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+  .platformPanel {
+    padding-left: var(--spacing-40);
+    padding-right: var(--spacing-40);
+  }
+}
+
 @media (max-width: 768px) {
+  .platformPanel {
+    padding: var(--spacing-10) var(--spacing-8) var(--spacing-4);
+  }
+
+  .formPanel {
+    padding: var(--spacing-12);
+    border-radius: var(--radius-20);
+  }
+
+  .title {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    white-space: normal;
+  }
+
+  .titleRow {
+    flex-wrap: wrap;
+    gap: var(--spacing-8);
+  }
+
+  .formHeader {
+    align-items: center;
+  }
+
+  .fieldGroup {
+    gap: var(--spacing-8);
+  }
+
+  .loginField {
+    gap: var(--spacing-8);
+    padding: var(--spacing-16);
+    border-radius: var(--radius-12);
+  }
+
+  .fieldInput {
+    font-size: var(--font-size-body-l);
+    line-height: var(--line-height-body-l);
+  }
+
+  .amountField {
+    padding: var(--spacing-16);
+  }
+
+  .amountBlock {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+  }
+
   .payButton,
   .paySubmit {
     width: 100%;
+  }
+
+  .infoTooltip {
+    left: auto;
+    right: 0;
+    transform: none;
+    width: min(240px, 70vw);
   }
 }

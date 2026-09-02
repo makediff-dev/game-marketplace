@@ -1,3 +1,5 @@
+import type { VariableUnitPricing } from "./variable-pricing";
+
 export interface Product {
   id: string;
   gameId: string;
@@ -19,7 +21,10 @@ export interface Product {
   sellerReviews: number;
   sellerSales: number;
   sellerOnline: boolean;
+  fulfillmentTime?: string;
   verified?: boolean;
+  unitLabel?: string;
+  variablePricing?: VariableUnitPricing;
 }
 
 export const INITIAL_VISIBLE_COUNT = 12;
@@ -1024,6 +1029,14 @@ export const products: Product[] = [
     sellerReviews: 420,
     sellerSales: 2100,
     sellerOnline: true,
+    variablePricing: {
+      unitSize: 1000,
+      unitName: "голды",
+      pricePerUnit: 178,
+      minAmount: 100000,
+      maxAmount: 150000,
+      step: 1000,
+    },
   },
   {
     id: "standoff-2",

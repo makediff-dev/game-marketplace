@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { AppNavbar } from "@/components/layout/app-navbar/app-navbar";
 import { Footer } from "@/components/footer/footer/footer";
 import { CheckoutAuthPrompt } from "@/components/checkout/checkout-auth-prompt/checkout-auth-prompt";
@@ -30,7 +30,9 @@ export function CheckoutPageContent({ product }: CheckoutPageContentProps) {
         <AppNavbar />
         {hydrated && isAuthenticated ? (
           <div className={`layoutBlock ${styles.content}`}>
-            <CheckoutForm product={product} viewedProducts={viewedProducts} />
+            <Suspense fallback={null}>
+              <CheckoutForm product={product} viewedProducts={viewedProducts} />
+            </Suspense>
           </div>
         ) : hydrated ? (
           <CheckoutAuthPrompt productId={product.id} />

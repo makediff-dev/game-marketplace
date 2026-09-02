@@ -3,10 +3,10 @@
   grid-template-columns: 320px 1fr;
   gap: var(--spacing-24);
   width: 100%;
-  max-width: var(--content-width);
+  max-width: 100%;
   min-height: 520px;
-  margin: 0 auto;
-  padding: var(--spacing-24) var(--spacing-32) var(--spacing-48);
+  margin: 0;
+  padding: var(--spacing-24) 0 var(--spacing-48);
 }
 
 .sidebar {
@@ -221,15 +221,18 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-12);
+  min-width: 0;
   padding: var(--spacing-16) var(--spacing-20);
   border-top: 1px solid var(--neutral-300);
 }
 
 .chatInput {
   flex: 1;
+  min-width: 0;
   height: 44px;
   padding: 0 var(--spacing-16);
   background: var(--surface-secondary);
+  border: none;
   border-radius: var(--radius-12);
   font-size: var(--font-size-body-m);
   color: var(--text-primary);
@@ -328,17 +331,22 @@
 }
 
 .sendButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  height: 44px;
   min-width: 120px;
-  padding: var(--spacing-10) var(--spacing-20);
+  padding: 0 var(--spacing-20);
   background: var(--gradient-brand);
   border: none;
   border-radius: var(--radius-full);
   font-size: var(--font-size-body-l);
   font-weight: 500;
-  line-height: var(--line-height-body-l);
+  line-height: 1;
   color: var(--text-inverse);
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .sendButton:hover:not(:disabled) {
@@ -364,5 +372,26 @@
 
   .sidebar {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .chatLayout {
+    padding: var(--spacing-16) var(--content-inner-padding-x) var(--spacing-32);
+  }
+
+  .inputRow {
+    gap: var(--spacing-8);
+    padding: var(--spacing-12) var(--spacing-16);
+  }
+
+  .sendButton {
+    min-width: auto;
+    padding: 0 var(--spacing-16);
+    font-size: var(--font-size-body-m);
+  }
+
+  .note {
+    padding-inline: var(--spacing-16);
   }
 }

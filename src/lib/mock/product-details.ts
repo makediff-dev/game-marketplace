@@ -1,8 +1,15 @@
+import type { CheckoutOfferType } from "./checkout";
 import { getGameById } from "./games";
 import { products, type Product } from "./products";
+import type { SellListingType } from "./sell-wizard";
+import {
+  calculateVariableUnitTotal,
+  type VariableUnitPricing,
+} from "./variable-pricing";
 
 export interface ProductDetail extends Product {
   detailImage: string;
+  offerType?: CheckoutOfferType;
   deliveryMethod: string;
   deliveryTitle: string;
   deliveryDescription: string;
@@ -420,6 +427,9 @@ export interface UserCreatedProductInput {
   description: string;
   comment: string;
   deliveryMethodLabel?: string;
+  listingType?: SellListingType;
+  offerType?: CheckoutOfferType;
+  variablePricing?: VariableUnitPricing;
 }
 
 export function buildUserProductDetail(input: UserCreatedProductInput): ProductDetail {
@@ -431,6 +441,17 @@ export function buildUserProductDetail(input: UserCreatedProductInput): ProductD
     input.description.trim() ||
     input.comment.trim() ||
     template.descriptionText;
+  const listingTypeLabel =
+    input.listingType === "one-time"
+      ? "Разовое объявление"
+      : input.listingType === "permanent"
+        ? "Постоянное объявление"
+        : "Ваш опубликованный товар";
+  const variablePricing = input.variablePricing;
+  const cardPrice =
+    variablePricing && input.offerType === "variable-unit"
+      ? calculateVariableUnitTotal(variablePricing.minAmount, variablePricing)
+      : input.price;
 
   return {
     id: input.id,
@@ -442,7 +463,9 @@ export function buildUserProductDetail(input: UserCreatedProductInput): ProductD
     image: fallbackImage,
     logo: game?.logo ?? fallbackImage,
     detailImage: fallbackImage,
-    price: input.price,
+    price: cardPrice,
+    offerType: input.offerType,
+    variablePricing,
     rating: 0,
     reviews: 0,
     seller: "Client",
@@ -451,6 +474,7 @@ export function buildUserProductDetail(input: UserCreatedProductInput): ProductD
     sellerReviews: 0,
     sellerSales: 0,
     sellerOnline: true,
+    fulfillmentTime: "до 30 мин",
     deliveryMethod: input.deliveryMethodLabel ?? template.deliveryMethod,
     deliveryTitle: template.deliveryTitle,
     deliveryDescription: template.deliveryDescription,
@@ -459,7 +483,7 @@ export function buildUserProductDetail(input: UserCreatedProductInput): ProductD
     descriptionText,
     notes: template.notes,
     sellerName: template.sellerName,
-    sellerStoreInfo: "Ваш опубликованный товар",
+    sellerStoreInfo: listingTypeLabel,
     sellerChatInfo: template.sellerChatInfo,
     refundPolicies: template.refundPolicies,
     reviewCount: 0,

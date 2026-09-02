@@ -15,7 +15,8 @@
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
+  grid-template-columns: minmax(0, 1fr) var(--checkout-summary-width);
+  grid-template-areas: "form summary";
   gap: var(--spacing-24);
   width: 100%;
   padding-block: var(--spacing-8);
@@ -24,9 +25,14 @@
 }
 
 .form {
+  grid-area: form;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-24);
+}
+
+.orderSummary {
+  grid-area: summary;
 }
 
 .section {
@@ -206,36 +212,47 @@
 }
 
 .viewedGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--spacing-24);
+  composes: productGrid from global;
   margin-top: var(--spacing-24);
 }
 
 @media (max-width: 1024px) {
+  .page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title {
+    order: 2;
+  }
+
   .layout {
+    order: 1;
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "summary"
+      "form";
+    padding: var(--spacing-16);
+    gap: var(--spacing-20);
+  }
+
+  .viewedSection {
+    order: 3;
+    margin-top: 0;
   }
 
   .methodGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-
-  .viewedGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 640px) {
   .layout {
-    padding-block: 0;
+    padding: var(--spacing-16);
+    border-radius: var(--radius-20);
   }
 
   .methodGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .viewedGrid {
-    grid-template-columns: 1fr;
   }
 }

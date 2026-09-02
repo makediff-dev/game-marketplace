@@ -10,8 +10,8 @@ export default function FavoritesPage() {
         <AppNavbar />
         <div className="contentBlock">
           <PageHeader title="Понравившиеся товары" backHref="/profile" />
+          <FavoritesContent />
         </div>
-        <FavoritesContent />
         <Footer />
       </div>
     </div>

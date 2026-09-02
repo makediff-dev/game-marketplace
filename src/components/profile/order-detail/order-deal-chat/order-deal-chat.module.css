@@ -104,7 +104,9 @@
 
 .inputRow {
   display: flex;
+  align-items: center;
   gap: var(--spacing-8);
+  min-width: 0;
   padding: var(--spacing-12) var(--spacing-16);
   border-top: 1px solid var(--border-strong);
 }
@@ -112,13 +114,15 @@
 .input {
   flex: 1;
   min-width: 0;
-  padding: var(--spacing-10) var(--spacing-16);
+  height: 44px;
+  padding: 0 var(--spacing-16);
   background: var(--surface-secondary);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-full);
   font-size: var(--font-size-body-l);
   line-height: var(--line-height-body-l);
   color: var(--text-primary);
+  box-sizing: border-box;
 }
 
 .input::placeholder {
@@ -131,17 +135,22 @@
 }
 
 .sendButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  height: 44px;
   min-width: 120px;
-  padding: var(--spacing-10) var(--spacing-20);
+  padding: 0 var(--spacing-20);
   background: var(--gradient-brand);
   border: none;
   border-radius: var(--radius-full);
   font-size: var(--font-size-body-l);
   font-weight: 500;
-  line-height: var(--line-height-body-l);
+  line-height: 1;
   color: var(--text-inverse);
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .sendButton:hover {

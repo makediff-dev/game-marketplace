@@ -115,6 +115,30 @@ export function ProfileMenuModal({ isOpen, onClose }: ProfileMenuModalProps) {
               </div>
             </Link>
 
+            <Link
+              href="/profile/sales-stats"
+              className={`${styles.menuRow} ${styles.menuRowLink}`}
+              onClick={onClose}
+            >
+              <div className={styles.iconSlot}>
+                <span className={styles.emojiIcon} aria-hidden="true">
+                  📊
+                </span>
+              </div>
+              <div className={styles.rowText}>
+                <span className={styles.rowTitle}>Статистика продаж</span>
+                <span className={styles.rowSubtitle}>Выручка и популярные товары</span>
+              </div>
+              <div className={styles.rowControl}>
+                <Icon
+                  src="/assets/arrow-small.svg"
+                  width={16}
+                  height={13}
+                  className={styles.rowArrow}
+                />
+              </div>
+            </Link>
+
             <div className={styles.menuRow}>
               <div className={styles.iconSlot}>
                 <Icon

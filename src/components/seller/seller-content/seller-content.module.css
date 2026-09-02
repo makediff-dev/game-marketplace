@@ -124,14 +124,14 @@
 }
 
 .calculator {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
   align-items: center;
   gap: var(--spacing-12);
   width: 100%;
 }
 
 .calcField {
-  flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -142,6 +142,7 @@
   background: var(--surface-secondary);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-16);
+  box-sizing: border-box;
 }
 
 .calcLabel {
@@ -193,9 +194,17 @@
 }
 
 .calcArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 32px;
   height: 32px;
   flex-shrink: 0;
+}
+
+.calcArrowIcon {
+  width: 32px;
+  height: 32px;
 }
 
 .calcHint {
@@ -206,16 +215,18 @@
 }
 
 .payoutIcons {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--spacing-20);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-12);
+  width: 100%;
 }
 
 .payoutIconWrapper {
-  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   height: 36px;
-  flex-shrink: 0;
 }
 
 .payoutIcon {
@@ -228,6 +239,12 @@
   display: flex;
   gap: var(--spacing-12);
   overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabsRow::-webkit-scrollbar {
+  display: none;
 }
 
 .gamesSection,
@@ -303,6 +320,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-12);
+  min-width: 0;
   min-height: 48px;
 }
 
@@ -325,12 +343,18 @@
   font-weight: 500;
   line-height: var(--line-height-body-l);
   color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .popularSubtitle {
   font-size: var(--font-size-body-l);
   line-height: var(--line-height-body-l);
   color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .statsGrid {
@@ -381,18 +405,28 @@
 @media (max-width: 1200px) {
   .body {
     grid-template-columns: 1fr;
+    gap: var(--spacing-32);
   }
 
   .sidebar {
+    order: -1;
     position: static;
+    top: auto;
+    width: 100%;
+    gap: var(--spacing-16);
   }
 
-  .gameGrid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+  .sidebar .section {
+    gap: var(--spacing-16);
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
   }
 
   .popularGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-12) var(--spacing-16);
   }
 
   .statsGrid {
@@ -409,8 +443,40 @@
     height: 320px;
   }
 
+  .sectionTitle {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+  }
+
+  .gamesSection,
+  .categoriesSection,
+  .statsSection {
+    gap: var(--spacing-16);
+  }
+
   .calculator {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
+    gap: var(--spacing-8);
+  }
+
+  .calcField {
+    min-height: 72px;
+    padding: var(--spacing-16);
+  }
+
+  .calcArrow,
+  .calcArrowIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .sidebar .sectionSubtitle {
+    font-size: var(--font-size-body-m);
+    line-height: var(--line-height-body-m);
+  }
+
+  .payoutIcons {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .gameGrid {
@@ -419,7 +485,14 @@
   }
 
   .popularGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-12);
+  }
+
+  .popularName,
+  .popularSubtitle {
+    font-size: var(--font-size-body-m);
+    line-height: var(--line-height-body-m);
   }
 
   .statsGrid {

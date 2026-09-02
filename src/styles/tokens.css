@@ -82,9 +82,11 @@
   --spacing-16: 16px;
   --spacing-20: 20px;
   --spacing-24: 24px;
+  --spacing-30: 30px;
   --spacing-32: 32px;
   --spacing-40: 40px;
   --spacing-64: 64px;
+  --spacing-80: 80px;
 
   /* Typography */
   --font-size-caption: 12px;
@@ -112,10 +114,14 @@
   --layout-gutter: 64px;
   --layout-width: 1200px;
   --content-width: 1136px;
+  --content-max-width: 1400px;
   --hero-width: var(--content-width);
   --content-inner-padding-x: 32px;
   --page-padding-x: 120px;
   --hero-aspect-ratio: 1136 / 404;
+  --product-grid-columns: 4;
+  --checkout-summary-width: 360px;
+  --search-field-width: 900px;
 
   /* Gradients */
   --gradient-brand: linear-gradient(89.98deg, var(--brand-500) 0%, var(--brand-300) 99.99%);

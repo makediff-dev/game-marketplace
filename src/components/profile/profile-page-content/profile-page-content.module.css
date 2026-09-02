@@ -49,3 +49,16 @@
   height: 13px;
   flex-shrink: 0;
 }
+
+@media (max-width: 768px) {
+  .balanceLink {
+    max-width: none;
+    min-height: 64px;
+    padding: var(--spacing-16);
+  }
+
+  .balanceAmount {
+    font-size: var(--font-size-body-l);
+    line-height: var(--line-height-body-l);
+  }
+}

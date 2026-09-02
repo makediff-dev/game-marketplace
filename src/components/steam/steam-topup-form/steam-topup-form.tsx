@@ -92,30 +92,60 @@ function TopupFormPanel({ platformId }: TopupFormPanelProps) {
   const getCurrencyIconTone = (key: Currency): "primary" | "inverse" =>
     currency === key ? "inverse" : "primary";
 
+  const renderCurrencyGroup = (className: string) => (
+    <div className={className} role="radiogroup" aria-label="Валюта">
+      {config.currencies.map((key) => (
+        <button
+          key={key}
+          type="button"
+          className={`${styles.currencyButton} ${
+            currency === key ? styles.currencyActive : ""
+          }`}
+          onClick={() => setCurrency(key)}
+          aria-pressed={currency === key}
+          aria-label={key.toUpperCase()}
+        >
+          <Icon
+            src={currencyIcons[key]}
+            width={24}
+            height={24}
+            adaptive
+            tone={getCurrencyIconTone(key)}
+            className={styles.currencyIcon}
+          />
+        </button>
+      ))}
+    </div>
+  );
+
   return (
     <>
       <form className={styles.formPanel} onSubmit={(event) => event.preventDefault()}>
         <div className={styles.formRow}>
-          <div className={styles.headerBlock}>
-            <div className={styles.titleRow}>
-              <h2 className={styles.title}>{config.title}</h2>
-              <span className={styles.discountBadge}>{config.feePercent}%</span>
+          <div className={styles.formHeader}>
+            <div className={styles.headerBlock}>
+              <div className={styles.titleRow}>
+                <h2 className={styles.title}>{config.title}</h2>
+                <span className={styles.discountBadge}>{config.feePercent}%</span>
+              </div>
+              {config.showPromo ? (
+                <button
+                  type="button"
+                  className={`${styles.promoLink} ${styles.promoLinkDesktop}`}
+                  onClick={() => setPromoOpen(true)}
+                >
+                  Ввести промокод
+                  <Icon
+                    src="/assets/promo-arrow.svg"
+                    width={24}
+                    height={25}
+                    className={styles.promoIcon}
+                  />
+                </button>
+              ) : null}
             </div>
-            {config.showPromo ? (
-              <button
-                type="button"
-                className={styles.promoLink}
-                onClick={() => setPromoOpen(true)}
-              >
-                Ввести промокод
-                <Icon
-                  src="/assets/promo-arrow.svg"
-                  width={24}
-                  height={25}
-                  className={styles.promoIcon}
-                />
-              </button>
-            ) : null}
+
+            {renderCurrencyGroup(styles.headerCurrencyGroup)}
           </div>
 
           <div className={styles.fieldsContainer}>
@@ -166,31 +196,31 @@ function TopupFormPanel({ platformId }: TopupFormPanelProps) {
                       <span className={styles.amountSymbol}>{currencySymbols[currency]}</span>
                     </div>
                   </div>
-                  <div className={styles.currencyGroup} role="radiogroup" aria-label="Валюта">
-                  {config.currencies.map((key) => (
-                    <button
-                      key={key}
-                      type="button"
-                      className={`${styles.currencyButton} ${
-                        currency === key ? styles.currencyActive : ""
-                      }`}
-                      onClick={() => setCurrency(key)}
-                      aria-pressed={currency === key}
-                      aria-label={key.toUpperCase()}
-                    >
-                      <Icon
-                        src={currencyIcons[key]}
-                        width={24}
-                        height={24}
-                        adaptive
-                        tone={getCurrencyIconTone(key)}
-                        className={styles.currencyIcon}
-                      />
-                    </button>
-                  ))}
-                </div>
+                  {renderCurrencyGroup(styles.currencyGroup)}
                 </div>
               </div>
+            </div>
+
+            <div className={styles.metaRow}>
+              <div className={styles.commissionRow}>
+                <span className={styles.commissionLabel}>Комиссия</span>
+                <span className={styles.commissionBadge}>{config.feePercent}%</span>
+              </div>
+              {config.showPromo ? (
+                <button
+                  type="button"
+                  className={`${styles.promoLink} ${styles.promoLinkMobile}`}
+                  onClick={() => setPromoOpen(true)}
+                >
+                  Ввести промокод
+                  <Icon
+                    src="/assets/promo-arrow.svg"
+                    width={24}
+                    height={25}
+                    className={styles.promoIcon}
+                  />
+                </button>
+              ) : null}
             </div>
 
             <div className={styles.payButton}>
@@ -236,29 +266,34 @@ export function SteamTopupForm() {
     >
       <div className={styles.platformSide}>
         <div className={styles.platformPanel}>
-          {platforms.map((platform) => (
-            <button
-              key={platform.id}
-              type="button"
-              className={`${styles.platformButton} ${
-                activePlatform === platform.id
-                  ? styles.platformActive
-                  : styles.platformInactive
-              }`}
-              onClick={() => setActivePlatform(platform.id)}
-              aria-label={platform.name}
-              aria-pressed={activePlatform === platform.id}
-            >
-              <Image
-                src={platform.image}
-                alt=""
-                width={32}
-                height={32}
-                className={styles.platformIcon}
-              />
-            </button>
-          ))}
-          <span className={styles.newBadge}>Новое</span>
+          <div className={styles.platformList}>
+            {platforms.map((platform) => (
+              <div key={platform.id} className={styles.platformItem}>
+                {platform.id === "xbox" ? (
+                  <span className={styles.newBadge}>Новое</span>
+                ) : null}
+                <button
+                  type="button"
+                  className={`${styles.platformButton} ${
+                    activePlatform === platform.id
+                      ? styles.platformActive
+                      : styles.platformInactive
+                  }`}
+                  onClick={() => setActivePlatform(platform.id)}
+                  aria-label={platform.name}
+                  aria-pressed={activePlatform === platform.id}
+                >
+                  <Image
+                    src={platform.image}
+                    alt=""
+                    width={32}
+                    height={32}
+                    className={styles.platformIcon}
+                  />
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

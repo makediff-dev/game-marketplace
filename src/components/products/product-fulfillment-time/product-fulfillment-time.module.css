@@ -1,0 +1,31 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  min-width: 0;
+}
+
+.card {
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+}
+
+.detail {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+}
+
+.label {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.value {
+  color: var(--text-primary);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.detail .value {
+  color: var(--brand-500);
+}

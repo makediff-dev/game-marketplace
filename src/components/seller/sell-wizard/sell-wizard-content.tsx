@@ -10,12 +10,14 @@ import { SellWizardProgress } from "./sell-wizard-progress";
 import { SellWizardTermsModal } from "./sell-wizard-terms-modal";
 import { SellStepCategorySelect } from "./steps/sell-step-category-select";
 import { SellStepDeliveryMethod } from "./steps/sell-step-delivery-method";
+import { SellStepListingType } from "./steps/sell-step-listing-type";
 import { SellStepProductForm } from "./steps/sell-step-product-form";
 import styles from "./sell-wizard.module.css";
 
 const STEP_TITLES = {
   2: "Выберите категорию",
   4: "Способ передачи",
+  5: "Тип объявления",
   6: "Страница товара",
 } as const;
 
@@ -76,12 +78,17 @@ export function SellWizardContent() {
 
   return (
     <div className={styles.wizard}>
-      <SellWizardHeader title={STEP_TITLES[step]} showBack onBack={handleBack} />
+      <SellWizardHeader
+        title={step === 6 ? undefined : STEP_TITLES[step]}
+        showBack
+        onBack={handleBack}
+      />
 
       <SellWizardProgress currentStep={progressStep} />
 
       {step === 2 ? <SellStepCategorySelect /> : null}
       {step === 4 ? <SellStepDeliveryMethod /> : null}
+      {step === 5 ? <SellStepListingType /> : null}
       {step === 6 ? <SellStepProductForm /> : null}
 
       {categoryTerms ? (

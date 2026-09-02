@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import {
   DEAL_PROGRESS_STEPS,
   getDealProgressIndex,
@@ -10,6 +9,14 @@ import styles from "./order-progress.module.css";
 
 interface OrderProgressProps {
   order: OrderDetail;
+}
+
+function isStepCompleted(
+  index: number,
+  currentIndex: number,
+  isDealCompleted: boolean,
+): boolean {
+  return isDealCompleted ? index <= currentIndex : index < currentIndex;
 }
 
 export function OrderProgress({ order }: OrderProgressProps) {
@@ -27,77 +34,62 @@ export function OrderProgress({ order }: OrderProgressProps) {
 
   const currentIndex = getDealProgressIndex(order.currentStep);
   const isDealCompleted = order.currentStep === "completed";
-  const lastStepIndex = Math.max(DEAL_PROGRESS_STEPS.length - 1, 1);
-  const fillPercent = isDealCompleted ? 100 : (currentIndex / lastStepIndex) * 100;
 
   return (
-    <div
-      className={styles.root}
-      style={
-        {
-          "--fill-percent": fillPercent,
-        } as CSSProperties
-      }
-    >
-      <div className={styles.rail} aria-hidden>
-        <span className={styles.railLine} />
-        <span
-          className={styles.railLineFilled}
-          style={{ height: `${fillPercent}%` }}
-        />
-      </div>
+    <ol className={styles.list}>
+      {DEAL_PROGRESS_STEPS.map((step, index) => {
+        const completed = isStepCompleted(index, currentIndex, isDealCompleted);
+        const isCurrent = !isDealCompleted && index === currentIndex;
+        const isFinalCompletedStep = isDealCompleted && step.id === "completed";
+        const isLast = index === DEAL_PROGRESS_STEPS.length - 1;
+        const stepDate = getDealStepDate(order, step.id);
 
-      <ol className={styles.list}>
-        {DEAL_PROGRESS_STEPS.map((step, index) => {
-          const isCompleted = isDealCompleted
-            ? index <= currentIndex
-            : index < currentIndex;
-          const isCurrent = !isDealCompleted && index === currentIndex;
-          const isFinalCompletedStep = isDealCompleted && step.id === "completed";
-          const stepDate = getDealStepDate(order, step.id);
+        let dotClass = styles.dotPending;
+        if (isFinalCompletedStep || completed) {
+          dotClass = styles.dotCompleted;
+        } else if (isCurrent) {
+          dotClass = styles.dotCurrent;
+        }
 
-          let dotClass = styles.dot;
-          if (isFinalCompletedStep || isCompleted) {
-            dotClass = styles.dotCompleted;
-          } else if (isCurrent) {
-            dotClass = styles.dotCurrent;
-          }
+        let labelClass = styles.labelPending;
+        if (isFinalCompletedStep) {
+          labelClass = styles.labelCompletedFinal;
+        } else if (isCurrent) {
+          labelClass = styles.labelCurrent;
+        } else if (completed) {
+          labelClass = styles.labelCompleted;
+        }
 
-          let labelClass = styles.labelMuted;
-          if (isFinalCompletedStep) {
-            labelClass = styles.labelCompletedFinal;
-          } else if (isCurrent) {
-            labelClass = styles.labelCurrent;
-          } else if (isCompleted) {
-            labelClass = styles.labelCompleted;
-          }
+        const connectorClass = completed
+          ? `${styles.connector} ${styles.connectorCompleted}`
+          : styles.connector;
 
-          return (
-            <li
-              key={step.id}
-              className={`${styles.item} ${isCurrent ? styles.itemCurrent : ""}`}
-            >
-              <span className={styles.marker} aria-hidden>
-                <span className={dotClass} />
-              </span>
+        return (
+          <li
+            key={step.id}
+            className={`${styles.item} ${isCurrent ? styles.itemCurrent : ""}`}
+          >
+            <div className={styles.track}>
+              <span className={dotClass} aria-hidden />
+              {!isLast ? <span className={connectorClass} aria-hidden /> : null}
+            </div>
 
-              <div className={styles.content}>
-                <span className={labelClass}>{step.label}</span>
-                {stepDate && !isFinalCompletedStep ? (
-                  <time className={styles.stepDate} dateTime={stepDate}>
-                    {stepDate}
-                  </time>
-                ) : null}
-                {isCurrent ? (
-                  <p className={styles.stepDescription}>
-                    {getDealStepDescription(step.id, order)}
-                  </p>
-                ) : null}
-              </div>
-            </li>
-          );
-        })}
-      </ol>
-    </div>
+            <div className={styles.content}>
+              <span className={labelClass}>{step.label}</span>
+              {stepDate && !isFinalCompletedStep ? (
+                <time className={styles.stepDate} dateTime={stepDate}>
+                  {stepDate}
+                </time>
+              ) : null}
+              {isCurrent ? (
+                <p className={styles.stepDescription}>
+                  {getDealStepDescription(step.id, order)}
+                </p>
+              ) : null}
+            </div>
+          </li>
+        );
+      })}
+    </ol>
   );
 }

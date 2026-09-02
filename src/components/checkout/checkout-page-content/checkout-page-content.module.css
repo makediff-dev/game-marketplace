@@ -11,3 +11,10 @@
   padding-inline: var(--content-inner-padding-x);
   box-sizing: border-box;
 }
+
+@media (max-width: 768px) {
+  .content {
+    gap: var(--spacing-16);
+    padding-inline: 0;
+  }
+}

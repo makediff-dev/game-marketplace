@@ -1,0 +1,62 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-scrim);
+  padding: var(--spacing-10);
+}
+
+.panel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  background: var(--neutral-0);
+  border-radius: var(--radius-24);
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-32) var(--spacing-32) var(--spacing-16);
+}
+
+.title {
+  margin: 0;
+  padding-inline: var(--spacing-32);
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.body {
+  margin: 0;
+  padding: 0 var(--spacing-32) var(--spacing-24);
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-12);
+  padding: 0 var(--spacing-32) var(--spacing-32);
+}
+
+.actionButton {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-12);
+  font-size: var(--font-size-body-l);
+  font-weight: 500;
+  line-height: var(--line-height-body-l);
+  white-space: nowrap;
+}

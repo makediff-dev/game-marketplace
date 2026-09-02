@@ -11,21 +11,23 @@ interface CatalogGameCardProps {
 export function CatalogGameCard({ game }: CatalogGameCardProps) {
   return (
     <Link href={game.href} className={styles.card}>
-      <div className={styles.iconWrapper}>
-        <Image
-          src={game.image}
-          alt={game.name}
-          width={80}
-          height={80}
-          className={styles.icon}
-        />
+      <div className={styles.iconBlock}>
+        <div className={styles.iconWrapper}>
+          <Image
+            src={game.image}
+            alt={game.name}
+            width={80}
+            height={80}
+            className={styles.icon}
+          />
+        </div>
+        {game.badge === "new" ? (
+          <span className={`${styles.badge} ${styles.badgeNew}`}>Новое</span>
+        ) : null}
+        {game.badge === "viewed" ? (
+          <span className={`${styles.badge} ${styles.badgeViewed}`}>👀</span>
+        ) : null}
       </div>
-      {game.badge === "new" ? (
-        <span className={`${styles.badge} ${styles.badgeNew}`}>Новое</span>
-      ) : null}
-      {game.badge === "viewed" ? (
-        <span className={`${styles.badge} ${styles.badgeViewed}`}>👀</span>
-      ) : null}
       <AppIconLabel name={game.name} />
     </Link>
   );

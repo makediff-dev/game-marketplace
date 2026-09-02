@@ -357,6 +357,48 @@
   max-width: none;
 }
 
+.formActions {
+  display: none;
+  width: 100%;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  align-self: start;
+}
+
+.sidebarTitle,
+.mobileFormTitle {
+  margin: 0;
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+.mobileFormTitle {
+  display: none;
+}
+
+.sidebarFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+.sidebarFooter .fieldInput {
+  margin: 0;
+}
+
+.calculatorBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
 .uploadArea {
   display: flex;
   flex-direction: column;
@@ -389,22 +431,18 @@
   color: var(--text-muted);
 }
 
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-32);
-}
-
-.calculatorBlock {
-  display: flex;
+.productMetaBlock {
+  display: none;
   flex-direction: column;
   gap: var(--spacing-12);
+  width: 100%;
 }
 
 .calculator {
   display: flex;
   align-items: center;
   gap: var(--spacing-12);
+  width: 100%;
 }
 
 .calcField {
@@ -414,6 +452,7 @@
   background: var(--surface-secondary);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-16);
+  box-sizing: border-box;
 }
 
 .calcLabel {
@@ -470,13 +509,15 @@
 
 .fieldInput {
   width: 100%;
-  padding: var(--spacing-14, 14px) var(--spacing-20);
-  background: var(--surface-secondary);
-  border: none;
-  border-radius: var(--radius-16);
-  font-size: var(--font-size-body-l);
-  line-height: var(--line-height-body-l);
+  min-height: 48px;
+  padding: var(--spacing-12);
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-12);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
   color: var(--text-primary);
+  box-sizing: border-box;
 }
 
 .fieldInput::placeholder {
@@ -648,7 +689,23 @@
   }
 
   .formLayout {
-    grid-template-columns: 1fr;
+    display: block;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .mobileFormTitle {
+    display: block;
+  }
+
+  .productMetaBlock {
+    display: flex;
+  }
+
+  .formActions {
+    display: block;
   }
 
   .uploadArea {
@@ -663,12 +720,64 @@
   }
 
   .gameGrid {
-    grid-template-columns: repeat(4, 80px);
-    justify-content: flex-start;
-    gap: var(--spacing-12);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    justify-content: stretch;
+    gap: var(--spacing-8);
   }
 
   .paymentToggle {
     margin-left: 0;
+  }
+
+  .formMain {
+    gap: var(--spacing-24);
+  }
+
+  .uploadArea {
+    min-height: 240px;
+  }
+}
+
+.variablePricingSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.variablePricingHint,
+.variablePricingPreview {
+  margin: 0;
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.variablePricingGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-16);
+}
+
+.variableField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.unitNameInput {
+  min-width: 120px;
+  height: 48px;
+  padding: 0 var(--spacing-12);
+  background: var(--neutral-0);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-12);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .variablePricingGrid {
+    grid-template-columns: 1fr;
   }
 }

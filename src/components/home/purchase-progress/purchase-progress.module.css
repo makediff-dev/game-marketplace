@@ -1,0 +1,161 @@
+.section {
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  width: 100%;
+  padding: var(--spacing-24) var(--spacing-32);
+  background: var(--surface-secondary);
+  border: none;
+  border-radius: var(--radius-24);
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  line-height: var(--line-height-h3);
+  color: var(--text-primary);
+}
+
+.progressBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.markersTop,
+.markersBottom,
+.segmentsRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-8);
+  width: 100%;
+}
+
+.markerCell {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.stagePercent {
+  display: block;
+  width: 100%;
+  font-size: var(--font-size-body-l);
+  font-weight: 700;
+  line-height: var(--line-height-body-l);
+  text-align: right;
+  background: var(--gradient-brand);
+  background-size: calc(var(--segments-count) * 100%) 100%;
+  background-position: calc(var(--segment-index) * -100%) 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.stageAmount {
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  text-align: right;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.stageAmountCompact {
+  display: none;
+}
+
+.segment {
+  min-width: 0;
+}
+
+.segmentTrack {
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+  background: var(--surface-brand-muted);
+  border-radius: var(--radius-full);
+}
+
+.segmentFillMask {
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-full);
+}
+
+.segmentFill {
+  height: 100%;
+  width: calc(100% / var(--fill-fraction, 1));
+  border-radius: var(--radius-full);
+  background: var(--gradient-brand);
+  background-size: calc(var(--segments-count) * 100%) 100%;
+  background-position: calc(var(--segment-index) * -100%) 0;
+  transition: width 0.4s ease;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: var(--spacing-20);
+  }
+
+  .markersTop,
+  .markersBottom,
+  .segmentsRow {
+    gap: var(--spacing-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    gap: var(--spacing-12);
+    padding: var(--spacing-16);
+    border-radius: var(--radius-20);
+  }
+
+  .title {
+    font-size: var(--font-size-body-l);
+    line-height: var(--line-height-body-l);
+  }
+
+  .progressBlock {
+    gap: var(--spacing-6);
+  }
+
+  .markersTop,
+  .markersBottom,
+  .segmentsRow {
+    gap: var(--spacing-4);
+  }
+
+  .markerCell {
+    justify-content: center;
+  }
+
+  .stagePercent {
+    font-size: var(--font-size-body-s);
+    line-height: var(--line-height-body-s);
+    text-align: center;
+  }
+
+  .stageAmount {
+    display: none;
+  }
+
+  .stageAmountCompact {
+    display: block;
+    font-size: 10px;
+    line-height: 12px;
+    text-align: center;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .segmentTrack {
+    height: 4px;
+  }
+}

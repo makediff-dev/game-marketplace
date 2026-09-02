@@ -1,8 +1,29 @@
 import { catalogGroupFilters, getGameById, marketplaceGames, type GameGroup } from "./games";
 import type { SellerTermItem } from "./seller";
 
-export const SELL_WIZARD_TOTAL_STEPS = 5;
+export const SELL_WIZARD_TOTAL_STEPS = 6;
 export const SELL_WIZARD_FEE_PERCENT = 10;
+
+export type SellListingType = "one-time" | "permanent";
+
+export interface SellListingTypeOption {
+  id: SellListingType;
+  label: string;
+  description: string;
+}
+
+export const sellListingTypes: SellListingTypeOption[] = [
+  {
+    id: "one-time",
+    label: "Разовое объявление",
+    description: "Товар снимается с продажи после одной успешной сделки",
+  },
+  {
+    id: "permanent",
+    label: "Постоянное объявление",
+    description: "Товар остаётся в каталоге и доступен для повторных покупок",
+  },
+];
 
 export interface SellCategory {
   id: string;

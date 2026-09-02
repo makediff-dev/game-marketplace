@@ -6,7 +6,7 @@ import { ArrowButton } from "@/components/ui/arrow-button/arrow-button";
 import { banners } from "@/lib/mock/banners";
 import styles from "./hero-carousel.module.css";
 
-export function HeroCarousel() {
+export function HeroCarousel({ className }: { className?: string }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const goTo = useCallback((index: number) => {
@@ -35,7 +35,7 @@ export function HeroCarousel() {
 
   return (
     <section
-      className={`layoutBlock ${styles.carousel}`}
+      className={[`layoutBlock`, styles.carousel, className].filter(Boolean).join(" ")}
       aria-label="Рекламный баннер"
       aria-roledescription="carousel"
     >
@@ -47,7 +47,7 @@ export function HeroCarousel() {
             fill
             priority
             className={styles.slideImage}
-            sizes="(max-width: 768px) 100vw, 1136px"
+            sizes="(max-width: 768px) 100vw, (max-width: 1599px) 1136px, 1680px"
           />
           <div className={styles.dots} role="tablist" aria-label="Выбор слайда">
             {banners.map((banner, index) => (

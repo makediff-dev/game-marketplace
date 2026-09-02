@@ -1,6 +1,5 @@
 .footer {
   width: 100%;
-  padding-top: var(--spacing-16);
 }
 
 .top {
@@ -110,5 +109,30 @@
   .copyright,
   .infoColumn .links {
     margin-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .top {
+    gap: var(--spacing-24);
+  }
+
+  .columnTitle {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+  }
+
+  .paymentIcons {
+    gap: var(--spacing-12);
+  }
+
+  .infoColumn,
+  .socialColumn {
+    width: 100%;
+  }
+
+  .socialLinks {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }

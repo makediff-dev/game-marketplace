@@ -38,22 +38,24 @@ export function SellerAppGrid({ group, onSelect }: SellerAppGridProps) {
             className={styles.item}
             onClick={() => onSelect(item.gameId)}
           >
-            <div className={styles.iconWrapper}>
-              <Image
-                src={item.image}
-                alt={item.name}
-                width={80}
-                height={80}
-                className={styles.icon}
-              />
+            <div className={styles.iconBlock}>
+              <div className={styles.iconWrapper}>
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  width={80}
+                  height={80}
+                  className={styles.icon}
+                />
+              </div>
+              {item.badge ? (
+                <span
+                  className={`${styles.badge} ${item.badge === "👀" ? styles.badgeEmoji : ""}`}
+                >
+                  {item.badge}
+                </span>
+              ) : null}
             </div>
-            {item.badge ? (
-              <span
-                className={`${styles.badge} ${item.badge === "👀" ? styles.badgeEmoji : ""}`}
-              >
-                {item.badge}
-              </span>
-            ) : null}
             <AppIconLabel name={item.name} />
           </button>
         ))}

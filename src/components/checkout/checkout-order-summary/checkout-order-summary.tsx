@@ -8,18 +8,25 @@ import styles from "./checkout-order-summary.module.css";
 interface CheckoutOrderSummaryProps {
   items: CheckoutCartItem[];
   totalPrice: number;
+  className?: string;
   onQuantityChange: (itemId: string, delta: number) => void;
+  onPurchaseAmountChange?: (itemId: string, purchaseAmount: number) => void;
   onRemove: (itemId: string) => void;
 }
 
 export function CheckoutOrderSummary({
   items,
   totalPrice,
+  className,
   onQuantityChange,
+  onPurchaseAmountChange,
   onRemove,
 }: CheckoutOrderSummaryProps) {
   return (
-    <aside className={styles.summary} aria-label="Ваш заказ">
+    <aside
+      className={`${styles.summary} ${className ?? ""}`.trim()}
+      aria-label="Ваш заказ"
+    >
       <h2 className={styles.title}>Ваш заказ</h2>
 
       <div className={styles.items}>
@@ -29,6 +36,11 @@ export function CheckoutOrderSummary({
             item={item}
             onIncrease={() => onQuantityChange(item.id, 1)}
             onDecrease={() => onQuantityChange(item.id, -1)}
+            onPurchaseAmountChange={
+              onPurchaseAmountChange
+                ? (purchaseAmount) => onPurchaseAmountChange(item.id, purchaseAmount)
+                : undefined
+            }
             onRemove={() => onRemove(item.id)}
           />
         ))}

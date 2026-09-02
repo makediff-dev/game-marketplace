@@ -1,0 +1,285 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  width: 100%;
+  max-width: var(--layout-width);
+  padding: 0 var(--content-inner-padding-x) var(--spacing-32);
+  box-sizing: border-box;
+}
+
+.periodRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+.periodPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 var(--spacing-16);
+  background: var(--surface-secondary);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.periodPill:hover {
+  background: var(--neutral-200);
+}
+
+.periodPillActive {
+  background: var(--brand-500);
+  color: var(--text-inverse);
+}
+
+.periodPillActive:hover {
+  background: var(--brand-600);
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-12);
+}
+
+.kpiCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  min-height: 132px;
+  padding: var(--spacing-20);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-16);
+}
+
+.kpiLabel {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.kpiValue {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.kpiChange,
+.kpiHint {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+}
+
+.kpiChangePositive {
+  color: var(--text-success);
+}
+
+.kpiChangeNegative {
+  color: var(--text-error);
+}
+
+.kpiHint {
+  color: var(--text-subtle);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-20);
+  padding: var(--spacing-24);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-16);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+}
+
+.panelTitle {
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.panelCaption {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.chart {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: var(--spacing-12);
+  align-items: end;
+  min-height: 220px;
+}
+
+.chartColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.chartValue {
+  font-size: var(--font-size-caption);
+  line-height: 1.2;
+  color: var(--text-subtle);
+  text-align: center;
+}
+
+.chartBarTrack {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  max-width: 56px;
+  height: 140px;
+  background: var(--neutral-0);
+  border-radius: var(--radius-12);
+  overflow: hidden;
+}
+
+.chartBarFill {
+  width: 100%;
+  min-height: 8px;
+  background: linear-gradient(180deg, var(--brand-300) 0%, var(--brand-500) 100%);
+  border-radius: var(--radius-12) var(--radius-12) 0 0;
+  transition: height 0.25s ease;
+}
+
+.chartLabel {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+}
+
+.splitGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: var(--spacing-12);
+}
+
+.topProductsList,
+.insightsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topProductRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  padding: var(--spacing-16);
+  background: var(--neutral-0);
+  border-radius: var(--radius-12);
+}
+
+.topProductRank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background: var(--surface-brand-muted);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  font-weight: 700;
+  color: var(--brand-500);
+}
+
+.topProductInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
+.topProductTitle {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-primary);
+}
+
+.topProductMeta {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.insightRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  padding: var(--spacing-16);
+  background: var(--neutral-0);
+  border-radius: var(--radius-12);
+}
+
+.insightLabel {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.insightValue {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  .kpiGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .splitGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding-inline: 0;
+  }
+
+  .kpiGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .panelHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chartValue {
+    display: none;
+  }
+
+  .chartBarTrack {
+    max-width: none;
+  }
+}

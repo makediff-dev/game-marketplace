@@ -1,0 +1,161 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+}
+
+.sectionSidebar {
+  gap: var(--spacing-8);
+}
+
+.ratePreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 var(--spacing-16);
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-12);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  font-weight: 700;
+  color: var(--text-primary);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.fieldsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
+  column-gap: var(--spacing-12);
+  row-gap: var(--spacing-12);
+  width: 100%;
+  align-items: end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  min-width: 0;
+}
+
+.fieldLabel {
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  color: var(--text-muted);
+}
+
+.inputWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  width: 100%;
+  min-height: 48px;
+  padding: var(--spacing-12) var(--spacing-12);
+  background: var(--neutral-0);
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-12);
+  box-sizing: border-box;
+}
+
+.input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  height: var(--line-height-body-m);
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-body-m);
+  font-weight: 700;
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.input::-webkit-scrollbar {
+  display: none;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.suffix {
+  flex: 0 0 auto;
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  color: var(--text-muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.iconCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 48px;
+  justify-self: center;
+}
+
+.preview {
+  margin: 0;
+  width: 100%;
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  color: var(--text-muted);
+}
+
+.incomeCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  width: 100%;
+  padding: var(--spacing-12);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-16);
+  box-sizing: border-box;
+}
+
+.incomeLabel {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  color: var(--text-tertiary);
+}
+
+.incomeValueRow {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--spacing-4);
+}
+
+.incomeValue {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-accent);
+}
+
+.incomeCurrency {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .fieldsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .iconCell {
+    display: none;
+  }
+}

@@ -46,6 +46,7 @@ export const useProfileProductsStore = create<ProfileProductsState>((set, get) =
     const productItem: ProfileListItem = {
       id: productId,
       tab: "products",
+      filter: "active",
       status: "active",
       title: input.title,
       price: input.price,
@@ -55,6 +56,7 @@ export const useProfileProductsStore = create<ProfileProductsState>((set, get) =
     const saleItem: ProfileListItem = {
       id: saleOrderId,
       tab: "sales",
+      filter: "active",
       status: "pending",
       title: input.title,
       price: input.price,

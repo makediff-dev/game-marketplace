@@ -1,6 +1,7 @@
 import { formatPrice } from "@/lib/mock/products";
 
 export type ProfileTabType = "products" | "purchases" | "sales";
+export type ProfileFilterType = "active" | "completed" | "disputed";
 
 export type ProfileItemStatus =
   | "active"
@@ -23,6 +24,7 @@ export interface ProfileStatusConfig {
 export interface ProfileListItem {
   id: string;
   tab: ProfileTabType;
+  filter: ProfileFilterType;
   title: string;
   price: number;
   status: ProfileItemStatus;
@@ -45,6 +47,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "prod-1",
     tab: "products",
+    filter: "active",
     title: "Cyberpunk 2077: Ultimate Edition — ключ Steam",
     price: 1290,
     status: "active",
@@ -53,6 +56,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "prod-2",
     tab: "products",
+    filter: "active",
     title: "EA SPORTS FC 25 — ключ Xbox Series X|S",
     price: 1890,
     status: "active",
@@ -61,6 +65,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "prod-3",
     tab: "products",
+    filter: "active",
     title: "Minecraft: Java & Bedrock Edition — ключ",
     price: 3990,
     status: "active",
@@ -69,6 +74,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "prod-4",
     tab: "products",
+    filter: "active",
     title: "Пополнение Steam 1 000 ₽",
     price: 1050,
     status: "active",
@@ -77,6 +83,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "prod-5",
     tab: "products",
+    filter: "completed",
     title: "Forza Horizon 5 — ключ Steam",
     price: 2490,
     status: "archived",
@@ -85,6 +92,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "prod-6",
     tab: "products",
+    filter: "disputed",
     title: "GTA V Premium — ключ Rockstar",
     price: 890,
     status: "dispute",
@@ -93,6 +101,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "buy-1",
     tab: "purchases",
+    filter: "active",
     title: "Cyberpunk 2077: Ultimate Edition — ключ Steam",
     price: 1290,
     status: "funds_frozen",
@@ -101,6 +110,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "buy-2",
     tab: "purchases",
+    filter: "active",
     title: "World of Warcraft — золото 100 000 (Gordunni, Horde)",
     price: 650,
     status: "object_confirmed",
@@ -109,6 +119,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "buy-3",
     tab: "purchases",
+    filter: "active",
     title: "Minecraft: Java & Bedrock Edition — ключ",
     price: 3990,
     status: "pending",
@@ -117,6 +128,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "buy-4",
     tab: "purchases",
+    filter: "active",
     title: "Forza Horizon 5 — ключ Steam",
     price: 2490,
     status: "awaiting_confirm",
@@ -125,6 +137,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "buy-5",
     tab: "purchases",
+    filter: "completed",
     title: "GTA V Premium — ключ Rockstar",
     price: 890,
     status: "cancelled",
@@ -133,6 +146,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "buy-6",
     tab: "purchases",
+    filter: "disputed",
     title: "Пополнение Steam 1 000 ₽",
     price: 1050,
     status: "dispute",
@@ -141,14 +155,16 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "sell-1",
     tab: "sales",
+    filter: "active",
     title: "EA SPORTS FC 25 — ключ Xbox Series X|S",
     price: 1890,
-    status: "pending",
-    href: "/product/cs2-2",
+    status: "funds_frozen",
+    href: "/profile/orders/sell-1",
   },
   {
     id: "sell-2",
     tab: "sales",
+    filter: "completed",
     title: "Cyberpunk 2077: Ultimate Edition — ключ Steam",
     price: 1290,
     status: "sale_paid_out",
@@ -157,6 +173,7 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "sell-3",
     tab: "sales",
+    filter: "completed",
     title: "Пополнение Steam 1 000 ₽",
     price: 1050,
     status: "cancelled",
@@ -165,22 +182,30 @@ export const mockProfileItems: ProfileListItem[] = [
   {
     id: "sell-4",
     tab: "sales",
+    filter: "disputed",
     title: "Minecraft: Java & Bedrock Edition — ключ",
     price: 3990,
     status: "dispute",
-    href: "/product/cs2-3",
+    href: "/profile/orders/sell-4",
   },
 ];
 
 const tabMap: ProfileTabType[] = ["products", "purchases", "sales"];
+const filterMap: ProfileFilterType[] = ["active", "completed", "disputed"];
 
 export function getProfileTabType(tabIndex: number): ProfileTabType {
   return tabMap[tabIndex] ?? "products";
 }
 
-export function getProfileItems(tabIndex: number): ProfileListItem[] {
+export function getProfileFilterType(filterIndex: number): ProfileFilterType {
+  return filterMap[filterIndex] ?? "active";
+}
+
+export function getProfileItems(tabIndex: number, filterIndex: number): ProfileListItem[] {
   const tab = getProfileTabType(tabIndex);
-  return mockProfileItems.filter((item) => item.tab === tab);
+  const filter = getProfileFilterType(filterIndex);
+
+  return mockProfileItems.filter((item) => item.tab === tab && item.filter === filter);
 }
 
 export function formatProfilePrice(price: number): string {

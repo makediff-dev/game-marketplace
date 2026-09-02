@@ -1,12 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Icon } from "@/components/ui/icon/icon";
 import { SafePaymentBlock } from "@/components/products/safe-payment-block/safe-payment-block";
+import { VariableUnitPurchaseBlock } from "@/components/products/variable-unit-purchase-block/variable-unit-purchase-block";
+import { ProductFulfillmentTime } from "@/components/products/product-fulfillment-time/product-fulfillment-time";
+import { ProductPaymentModal } from "@/components/products/product-payment-modal/product-payment-modal";
+import { useProductPaymentFlow } from "@/components/products/product-payment-modal/use-product-payment-flow";
 import type { ProductDetail } from "@/lib/mock/product-details";
-import { formatPrice } from "@/lib/mock/products";
+import {
+  formatProductPrice,
+  resolveProductOfferType,
+} from "@/lib/mock/checkout";
+import {
+  formatVariableUnitCardPrice,
+  formatVariableUnitRate,
+  getVariableUnitRecipientLabel,
+  hasVariableUnitPricing,
+} from "@/lib/mock/variable-pricing";
 import { useToastStore } from "@/lib/store/toast-store";
 import styles from "./product-detail-hero.module.css";
 
@@ -18,9 +30,13 @@ const HEART_PATH =
   "M22.5 9.5625C22.5 16.125 12.7697 21.4369 12.3553 21.6562C12.2461 21.715 12.124 21.7458 12 21.7458C11.876 21.7458 11.7539 21.715 11.6447 21.6562C11.2303 21.4369 1.5 16.125 1.5 9.5625C1.50174 8.02146 2.11468 6.54404 3.20436 5.45436C4.29404 4.36468 5.77146 3.75174 7.3125 3.75C9.24844 3.75 10.9434 4.5825 12 5.98969C13.0566 4.5825 14.7516 3.75 16.6875 3.75C18.2285 3.75174 19.706 4.36468 20.7956 5.45436C21.8853 6.54404 22.4983 8.02146 22.5 9.5625Z";
 
 export function ProductDetailHero({ product }: ProductDetailHeroProps) {
-  const router = useRouter();
   const showToast = useToastStore((state) => state.show);
   const [isFavorite, setIsFavorite] = useState(false);
+  const { isOpen, paymentAmount, openPayment, closePayment, proceedToPayment } =
+    useProductPaymentFlow(product);
+  const offerType = resolveProductOfferType(product);
+  const isVariableUnit = hasVariableUnitPricing(product);
+  const pricing = product.variablePricing;
 
   const handleFavoriteToggle = () => {
     setIsFavorite((current) => {
@@ -30,7 +46,12 @@ export function ProductDetailHero({ product }: ProductDetailHeroProps) {
     });
   };
 
+  const handleBuy = (purchaseAmount?: number, recipient?: string) => {
+    openPayment(purchaseAmount, recipient);
+  };
+
   return (
+    <>
     <section className={styles.hero} aria-label="Информация о товаре">
       <div className={styles.imageWrapper}>
         <Image
@@ -39,7 +60,7 @@ export function ProductDetailHero({ product }: ProductDetailHeroProps) {
           fill
           priority
           className={styles.image}
-          sizes="612px"
+          sizes="(max-width: 1280px) 100vw, (max-width: 1599px) 612px, calc(100vw - 441px - 48px)"
         />
       </div>
 
@@ -48,19 +69,28 @@ export function ProductDetailHero({ product }: ProductDetailHeroProps) {
           <h1 className={styles.title}>{product.title}</h1>
 
           <div className={styles.priceRow}>
-            <span className={styles.price}>{formatPrice(product.price)} ₽</span>
+            <span className={styles.price}>
+              {isVariableUnit && pricing
+                ? formatVariableUnitCardPrice(pricing)
+                : formatProductPrice(product.price, offerType)}
+            </span>
+            {isVariableUnit && pricing ? (
+              <span className={styles.unitRate}>{formatVariableUnitRate(pricing)}</span>
+            ) : null}
             {product.discount ? (
               <div className={styles.discountRow}>
                 <span className={styles.discountBadge}>-{product.discount}%</span>
                 {product.oldPrice ? (
                   <span className={styles.oldPrice}>
-                    {formatPrice(product.oldPrice)}
+                    {formatProductPrice(product.oldPrice, offerType)}
                     <span className={styles.oldPriceLine} />
                   </span>
                 ) : null}
               </div>
             ) : null}
           </div>
+
+          <ProductFulfillmentTime product={product} variant="detail" />
         </div>
 
         {product.verified ? (
@@ -109,16 +139,24 @@ export function ProductDetailHero({ product }: ProductDetailHeroProps) {
               />
             </svg>
           </button>
-          <button
-            type="button"
-            className={styles.buyButton}
-            onClick={() => router.push(`/product/${product.id}/checkout`)}
-          >
-            Купить
-          </button>
+          {!isVariableUnit ? (
+            <button type="button" className={styles.buyButton} onClick={() => handleBuy()}>
+              Купить
+            </button>
+          ) : null}
         </div>
 
-        <SafePaymentBlock />
+        {isVariableUnit && pricing ? (
+          <VariableUnitPurchaseBlock
+            pricing={pricing}
+            recipientLabel={getVariableUnitRecipientLabel(product.gameId)}
+            onBuy={handleBuy}
+          />
+        ) : null}
+
+        <div className={styles.paymentSection}>
+          <SafePaymentBlock />
+        </div>
 
         <button type="button" className={styles.guarantee}>
           <span>🛡️</span>
@@ -132,5 +170,13 @@ export function ProductDetailHero({ product }: ProductDetailHeroProps) {
         </button>
       </div>
     </section>
+
+    <ProductPaymentModal
+      isOpen={isOpen}
+      amount={paymentAmount}
+      onClose={closePayment}
+      onProceed={proceedToPayment}
+    />
+    </>
   );
 }

@@ -8,29 +8,34 @@ import { ArrowButton } from "@/components/ui/arrow-button/arrow-button";
 import { categories } from "@/lib/mock/categories";
 import styles from "./app-icon-grid.module.css";
 
-const VISIBLE_ITEMS = 10;
 const ITEM_WIDTH = 80;
-const ARROW_SIZE = 48;
+const ITEM_GAP = 12;
+const SWIPE_THRESHOLD = 48;
+
+function getVisibleCount(width: number, total: number): number {
+  if (width <= 0) {
+    return Math.min(10, total);
+  }
+
+  const count = Math.floor((width + ITEM_GAP) / (ITEM_WIDTH + ITEM_GAP));
+  return Math.min(total, Math.max(1, count));
+}
 
 export function AppIconGrid() {
   const gridRef = useRef<HTMLElement>(null);
+  const touchStartXRef = useRef<number | null>(null);
   const [startIndex, setStartIndex] = useState(0);
   const [gridWidth, setGridWidth] = useState(0);
 
-  const hasOverflow = categories.length > VISIBLE_ITEMS;
-  const maxStartIndex = Math.max(0, categories.length - VISIBLE_ITEMS);
+  const visibleCount =
+    gridWidth > 0
+      ? getVisibleCount(gridWidth, categories.length)
+      : Math.min(10, categories.length);
+  const hasOverflow = categories.length > visibleCount;
+  const maxStartIndex = Math.max(0, categories.length - visibleCount);
   const canScrollLeft = hasOverflow && startIndex > 0;
   const canScrollRight = hasOverflow && startIndex < maxStartIndex;
-
-  const visibleSlotCount = hasOverflow ? VISIBLE_ITEMS : categories.length;
-  const itemGap =
-    gridWidth > 0 && visibleSlotCount > 1
-      ? Math.max(0, (gridWidth - visibleSlotCount * ITEM_WIDTH) / (visibleSlotCount - 1))
-      : 0;
-  const stepSize = ITEM_WIDTH + itemGap;
-  const lastVisibleIconLeft = (VISIBLE_ITEMS - 1) * stepSize;
-  const arrowLeftPosition = ITEM_WIDTH - ARROW_SIZE / 2 - ARROW_SIZE;
-  const arrowRightPosition = lastVisibleIconLeft + ITEM_WIDTH - ARROW_SIZE / 2;
+  const stepSize = ITEM_WIDTH + ITEM_GAP;
 
   const measureGrid = useCallback(() => {
     if (!gridRef.current) {
@@ -72,65 +77,94 @@ export function AppIconGrid() {
     });
   };
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchStartXRef.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touchStartX = touchStartXRef.current;
+
+    if (touchStartX === null) {
+      return;
+    }
+
+    const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
+    const delta = touchStartX - touchEndX;
+    touchStartXRef.current = null;
+
+    if (Math.abs(delta) < SWIPE_THRESHOLD) {
+      return;
+    }
+
+    scrollBy(delta > 0 ? "right" : "left");
+  };
+
   return (
     <section ref={gridRef} className={`contentBlock ${styles.grid}`} aria-label="Категории игр">
-      <div className={styles.viewport}>
+      <div className={styles.frame}>
         <div
-          className={styles.track}
-          style={{
-            gap: `${itemGap}px`,
-            transform: `translateX(-${startIndex * stepSize}px)`,
-          }}
+          className={styles.viewport}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
-          {categories.map((category) => (
-            <Link
-              key={category.id}
-              href={
-                category.id === "steam" || category.id === "cs2"
-                  ? "/categories/counter-strike-2"
-                  : `/categories?game=${category.id}`
-              }
-              className={styles.item}
-            >
-              <div className={styles.iconWrapper}>
-                <Image
-                  src={category.image}
-                  alt={category.name}
-                  width={80}
-                  height={80}
-                  className={styles.icon}
-                />
-              </div>
-              {category.badge ? (
-                <span
-                  className={`${styles.badge} ${category.badge === "👀" ? styles.badgeEmoji : ""}`}
-                >
-                  {category.badge}
-                </span>
-              ) : null}
-              <AppIconLabel name={category.name} />
-            </Link>
-          ))}
+          <div
+            className={styles.track}
+            style={{
+              transform: `translateX(-${startIndex * stepSize}px)`,
+            }}
+          >
+            {categories.map((category) => (
+              <Link
+                key={category.id}
+                href={
+                  category.id === "steam" || category.id === "cs2"
+                    ? "/categories/counter-strike-2"
+                    : `/categories?game=${category.id}`
+                }
+                className={styles.item}
+              >
+                <div className={styles.iconWrapper}>
+                  <Image
+                    src={category.image}
+                    alt={category.name}
+                    width={80}
+                    height={80}
+                    className={styles.icon}
+                  />
+                </div>
+                {category.badge ? (
+                  <span
+                    className={`${styles.badge} ${category.badge === "👀" ? styles.badgeEmoji : ""}`}
+                  >
+                    {category.badge}
+                  </span>
+                ) : null}
+                <AppIconLabel name={category.name} />
+              </Link>
+            ))}
+          </div>
         </div>
+
+        {canScrollLeft ? (
+          <div className={styles.arrowLeft}>
+            <ArrowButton
+              direction="left"
+              onClick={() => scrollBy("left")}
+              ariaLabel="Прокрутить категории назад"
+            />
+          </div>
+        ) : null}
+
+        {canScrollRight ? (
+          <div className={styles.arrowRight}>
+            <ArrowButton
+              direction="right"
+              onClick={() => scrollBy("right")}
+              ariaLabel="Прокрутить категории вперёд"
+            />
+          </div>
+        ) : null}
       </div>
-      {canScrollLeft ? (
-        <div className={styles.arrowLeft} style={{ left: `${arrowLeftPosition}px` }}>
-          <ArrowButton
-            direction="left"
-            onClick={() => scrollBy("left")}
-            ariaLabel="Прокрутить категории назад"
-          />
-        </div>
-      ) : null}
-      {canScrollRight ? (
-        <div className={styles.arrowRight} style={{ left: `${arrowRightPosition}px` }}>
-          <ArrowButton
-            direction="right"
-            onClick={() => scrollBy("right")}
-            ariaLabel="Прокрутить категории вперёд"
-          />
-        </div>
-      ) : null}
     </section>
   );
 }

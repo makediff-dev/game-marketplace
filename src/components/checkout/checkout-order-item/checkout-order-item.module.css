@@ -33,11 +33,36 @@
   padding-top: var(--spacing-2);
 }
 
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
 .category {
   font-size: var(--font-size-caption);
   line-height: var(--line-height-caption);
   font-weight: 700;
   color: var(--text-muted);
+}
+
+.offerType {
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  font-weight: 600;
+}
+
+.offerTypeUnit {
+  color: var(--brand-500);
+  background: var(--surface-brand-muted);
+}
+
+.offerTypeService {
+  color: var(--text-primary);
+  background: var(--surface-interactive);
 }
 
 .title {
@@ -80,9 +105,31 @@
 
 .bottomRow {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: var(--spacing-12);
+}
+
+.serviceQuantity {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.unitPrice {
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+  text-align: right;
+  white-space: nowrap;
 }
 
 .price {
@@ -91,6 +138,7 @@
   line-height: var(--line-height-body-l);
   color: var(--text-primary);
   text-align: right;
+  white-space: nowrap;
 }
 
 .quantityControl {
@@ -136,4 +184,52 @@
   font-weight: 500;
   color: var(--text-primary);
   text-align: center;
+}
+
+.variableAmountControl {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.variableAmountLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
+}
+
+.variableAmountRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.variableAmountInput {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 var(--spacing-12);
+  background: var(--neutral-0);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-12);
+  font-size: var(--font-size-body-m);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.variableAmountUnit {
+  flex-shrink: 0;
+  font-size: var(--font-size-body-m);
+  color: var(--text-primary);
+}
+
+.variableRate {
+  font-size: 13px;
+  line-height: var(--line-height-body-m);
+  color: var(--text-muted);
 }

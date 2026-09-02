@@ -9,11 +9,12 @@ import { Button } from "@/components/ui/button/button";
 import { ProfileItemList } from "@/components/profile/profile-item-list/profile-item-list";
 import {
   getProfileEmptyState,
+  getProfileFilterType,
   getProfileItems,
   getProfileTabType,
   type ProfileTabType,
 } from "@/lib/mock/profile-items";
-import { mockUser, profileTabs } from "@/lib/mock/user";
+import { mockUser, profileFilters, profileTabs } from "@/lib/mock/user";
 import { useProfileProductsStore } from "@/lib/store/profile-products-store";
 import styles from "./profile-content.module.css";
 
@@ -27,6 +28,7 @@ export function ProfileContent() {
   const searchParams = useSearchParams();
   const createdProducts = useProfileProductsStore((state) => state.createdProducts);
   const [activeTab, setActiveTab] = useState(0);
+  const [activeFilter, setActiveFilter] = useState(0);
 
   useEffect(() => {
     const tabParam = searchParams.get("tab");
@@ -38,11 +40,14 @@ export function ProfileContent() {
 
   const highlightProductId = searchParams.get("product");
   const activeTabType = getProfileTabType(activeTab);
+  const activeFilterType = getProfileFilterType(activeFilter);
 
   const items = useMemo(() => {
-    const createdForTab = createdProducts.filter((item) => item.tab === activeTabType);
-    return [...createdForTab, ...getProfileItems(activeTab)];
-  }, [activeTab, activeTabType, createdProducts]);
+    const createdForTab = createdProducts.filter(
+      (item) => item.tab === activeTabType && item.filter === activeFilterType,
+    );
+    return [...createdForTab, ...getProfileItems(activeTab, activeFilter)];
+  }, [activeTab, activeTabType, activeFilter, activeFilterType, createdProducts]);
 
   const emptyState = getProfileEmptyState(activeTab);
 
@@ -88,6 +93,17 @@ export function ProfileContent() {
             label={tab}
             active={activeTab === index}
             onClick={() => setActiveTab(index)}
+          />
+        ))}
+      </div>
+
+      <div className={styles.filterRow}>
+        {profileFilters.map((filter, index) => (
+          <CategoryChip
+            key={filter}
+            label={filter}
+            active={activeFilter === index}
+            onClick={() => setActiveFilter(index)}
           />
         ))}
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button/button";
 import { Icon } from "@/components/ui/icon/icon";
@@ -12,10 +12,14 @@ import {
   CHECKOUT_COMMENT_MAX_LENGTH,
   checkoutPaymentMethods,
   getCheckoutCartTotal,
+  updateCheckoutVariableAmount,
+  validateCheckoutVariableItems,
   type CheckoutCartItem,
 } from "@/lib/mock/checkout";
 import type { ProductDetail } from "@/lib/mock/product-details";
 import { formatPrice, type Product } from "@/lib/mock/products";
+import { parseVariableUnitAmountInput } from "@/lib/mock/variable-pricing";
+import { useToastStore } from "@/lib/store/toast-store";
 import styles from "./checkout-form.module.css";
 
 interface CheckoutFormProps {
@@ -25,17 +29,24 @@ interface CheckoutFormProps {
 
 export function CheckoutForm({ product, viewedProducts }: CheckoutFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const showToast = useToastStore((state) => state.show);
+  const initialAmount = parseVariableUnitAmountInput(searchParams.get("amount") ?? "");
   const [comment, setComment] = useState("");
   const [selectedMethod, setSelectedMethod] = useState("card-ru");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [cartItems, setCartItems] = useState<CheckoutCartItem[]>(() =>
-    buildCheckoutCartItems(product),
+    buildCheckoutCartItems(product, {
+      primaryPurchaseAmount: initialAmount || undefined,
+    }),
   );
 
   const totalPrice = getCheckoutCartTotal(cartItems);
+  const validationError = validateCheckoutVariableItems(cartItems);
   const commentLength = comment.length;
   const isCommentTooLong = commentLength > CHECKOUT_COMMENT_MAX_LENGTH;
-  const canPay = cartItems.length > 0 && termsAccepted && !isCommentTooLong;
+  const canPay =
+    cartItems.length > 0 && termsAccepted && !isCommentTooLong && !validationError;
 
   const counterClassName = useMemo(() => {
     return `${styles.counter} ${isCommentTooLong ? styles.counterError : ""}`;
@@ -43,6 +54,9 @@ export function CheckoutForm({ product, viewedProducts }: CheckoutFormProps) {
 
   const handlePay = () => {
     if (!canPay) {
+      if (validationError) {
+        showToast(validationError);
+      }
       return;
     }
 
@@ -54,7 +68,7 @@ export function CheckoutForm({ product, viewedProducts }: CheckoutFormProps) {
   const handleQuantityChange = (itemId: string, delta: number) => {
     setCartItems((items) =>
       items.map((item) => {
-        if (item.id !== itemId) {
+        if (item.id !== itemId || item.offerType === "service") {
           return item;
         }
 
@@ -64,6 +78,10 @@ export function CheckoutForm({ product, viewedProducts }: CheckoutFormProps) {
         };
       }),
     );
+  };
+
+  const handlePurchaseAmountChange = (itemId: string, purchaseAmount: number) => {
+    setCartItems((items) => updateCheckoutVariableAmount(items, itemId, purchaseAmount));
   };
 
   const handleRemoveItem = (itemId: string) => {
@@ -83,6 +101,17 @@ export function CheckoutForm({ product, viewedProducts }: CheckoutFormProps) {
       <h1 className={styles.title}>Оформление заказа</h1>
 
       <div className={styles.layout}>
+        {cartItems.length > 0 ? (
+          <CheckoutOrderSummary
+            className={styles.orderSummary}
+            items={cartItems}
+            totalPrice={totalPrice}
+            onQuantityChange={handleQuantityChange}
+            onPurchaseAmountChange={handlePurchaseAmountChange}
+            onRemove={handleRemoveItem}
+          />
+        ) : null}
+
         <div className={styles.form}>
           <section className={styles.section} aria-label="Способ оплаты">
             <h2 className={styles.sectionTitle}>Способ оплаты</h2>
@@ -172,15 +201,6 @@ export function CheckoutForm({ product, viewedProducts }: CheckoutFormProps) {
             Оплатить {formatPrice(totalPrice)} ₽
           </Button>
         </div>
-
-        {cartItems.length > 0 ? (
-          <CheckoutOrderSummary
-            items={cartItems}
-            totalPrice={totalPrice}
-            onQuantityChange={handleQuantityChange}
-            onRemove={handleRemoveItem}
-          />
-        ) : null}
       </div>
 
       {viewedProducts.length > 0 ? (

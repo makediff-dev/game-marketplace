@@ -13,7 +13,11 @@ export type DealProgressStepId =
   | "awaiting_confirm"
   | "completed";
 
-export type OrderActionType = "open_dispute" | "cancel_deal" | "write_seller";
+export type OrderActionType =
+  | "open_dispute"
+  | "cancel_deal"
+  | "close_deal_early"
+  | "write_seller";
 
 export interface OrderAction {
   type: OrderActionType;
@@ -55,6 +59,8 @@ export interface OrderDetail {
   showSellerPayout: boolean;
   actions: OrderAction[];
   stepDates?: Partial<Record<DealProgressStepId, string>>;
+  dealDurationMinutes?: number;
+  sellerOnline?: boolean;
   chat: {
     systemMessages: DealChatSystemMessage[];
     messages: DealChatUserMessage[];
@@ -158,6 +164,8 @@ export const mockOrders: OrderDetail[] = [
     progressMode: "timeline",
     moneyStatusTitle: "Средства заморожены на escrow-счёте",
     showSellerPayout: false,
+    dealDurationMinutes: 120,
+    sellerOnline: true,
     actions: [
       { type: "cancel_deal", label: "Отменить сделку", variant: "ghost" },
       { type: "open_dispute", label: "Открыть спор", variant: "secondary" },
@@ -238,7 +246,12 @@ export const mockOrders: OrderDetail[] = [
     progressMode: "timeline",
     moneyStatusTitle: "Средства заморожены на escrow-счёте",
     showSellerPayout: false,
-    actions: [{ type: "open_dispute", label: "Открыть спор", variant: "secondary" }],
+    dealDurationMinutes: 45,
+    sellerOnline: true,
+    actions: [
+      { type: "cancel_deal", label: "Отменить сделку", variant: "ghost" },
+      { type: "open_dispute", label: "Открыть спор", variant: "secondary" },
+    ],
     stepDates: {
       created: "12.02.2026, 18:19:00",
       awaiting_payment: "12.02.2026, 18:19:30",
@@ -317,6 +330,8 @@ export const mockOrders: OrderDetail[] = [
     progressMode: "timeline",
     moneyStatusTitle: "Ожидается оплата покупателем",
     showSellerPayout: false,
+    dealDurationMinutes: 30,
+    sellerOnline: false,
     actions: [{ type: "cancel_deal", label: "Отменить сделку", variant: "ghost" }],
     stepDates: {
       created: "10.02.2026, 14:00:00",
@@ -325,6 +340,52 @@ export const mockOrders: OrderDetail[] = [
     chat: {
       systemMessages: [{ id: "s1", text: "Сделка создана — 10.02.2026, 14:00:00" }],
       messages: [],
+    },
+  },
+  {
+    id: "sell-1",
+    dealId: "deal-8",
+    tab: "sales",
+    status: "funds_frozen",
+    dealStatusLabel: "Средства заморожены",
+    title: "EA SPORTS FC 25 — ключ Xbox Series X|S",
+    seller: "Client",
+    buyer: "DemoBuyer",
+    price: 1890,
+    commission: 189,
+    date: "14.02.2026, 12:00:00",
+    breadcrumbSection: "Продажи",
+    currentStep: "seller_performing",
+    progressMode: "timeline",
+    moneyStatusTitle: "Средства заморожены на escrow-счёте",
+    showSellerPayout: false,
+    dealDurationMinutes: 90,
+    sellerOnline: true,
+    actions: [
+      { type: "close_deal_early", label: "Досрочно закрыть сделку", variant: "accent" },
+      { type: "cancel_deal", label: "Отменить сделку", variant: "ghost" },
+      { type: "open_dispute", label: "Открыть спор", variant: "secondary" },
+    ],
+    stepDates: {
+      created: "14.02.2026, 11:58:00",
+      awaiting_payment: "14.02.2026, 11:59:00",
+      paid: "14.02.2026, 12:00:00",
+      funds_frozen: "14.02.2026, 12:00:30",
+      seller_performing: "14.02.2026, 12:05:00",
+    },
+    chat: {
+      systemMessages: [
+        { id: "s1", text: "Заказ оплачен — 14.02.2026, 12:00:00" },
+        { id: "s2", text: "Средства заморожены — 14.02.2026, 12:00:30" },
+      ],
+      messages: [
+        {
+          id: "m1",
+          author: "DemoBuyer",
+          text: "Жду ключ, спасибо",
+          time: "12:06",
+        },
+      ],
     },
   },
   {
@@ -433,7 +494,13 @@ export function buildCreatedSaleOrder(input: CreatedSaleOrderInput): OrderDetail
     progressMode: "timeline",
     moneyStatusTitle: "Продажа создана — ожидается покупатель",
     showSellerPayout: false,
-    actions: [],
+    dealDurationMinutes: 1440,
+    sellerOnline: true,
+    actions: [
+      { type: "close_deal_early", label: "Досрочно закрыть сделку", variant: "accent" },
+      { type: "cancel_deal", label: "Отменить сделку", variant: "ghost" },
+      { type: "open_dispute", label: "Открыть спор", variant: "secondary" },
+    ],
     stepDates: {
       created: date,
     },

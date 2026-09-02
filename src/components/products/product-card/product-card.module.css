@@ -61,15 +61,32 @@
 
 .priceRow {
   display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+.priceMain {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--spacing-8);
-  width: 100%;
+  min-width: 0;
+}
+
+.unitHint {
+  font-size: var(--font-size-body-s);
+  font-weight: 500;
+  line-height: var(--line-height-body-s);
+  color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .price {
   font-size: var(--font-size-price);
   font-weight: 700;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .priceError {
@@ -85,17 +102,21 @@
 }
 
 .discountRow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--spacing-8);
+  flex-shrink: 0;
 }
 
 .discountBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: var(--spacing-2) var(--spacing-4);
   border-radius: var(--radius-full);
   font-size: var(--font-size-body-m);
   font-weight: 700;
-  line-height: var(--line-height-body-m);
+  line-height: 1;
   color: var(--text-inverse);
 }
 
@@ -112,8 +133,9 @@
   display: inline-flex;
   align-items: center;
   font-size: var(--font-size-body-m);
-  line-height: var(--line-height-body-m);
+  line-height: 1;
   color: var(--neutral-500);
+  white-space: nowrap;
 }
 
 .oldPriceLine {
@@ -160,6 +182,25 @@
   color: var(--text-tertiary);
 }
 
+.sellerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-6) var(--spacing-8);
+  width: 100%;
+  min-width: 0;
+}
+
+.sellerName {
+  min-width: 0;
+  overflow: hidden;
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+  color: var(--text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .buyButton {
   display: flex;
   align-items: center;
@@ -184,4 +225,21 @@
 
 .buyButton:active {
   transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: var(--spacing-20) var(--spacing-16);
+    gap: var(--spacing-10);
+  }
+
+  .imageWrapper {
+    height: 140px;
+  }
+
+  .buyButton {
+    height: 44px;
+    font-size: var(--font-size-body-m);
+    line-height: var(--line-height-body-m);
+  }
 }

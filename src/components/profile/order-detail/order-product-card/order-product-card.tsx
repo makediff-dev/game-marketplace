@@ -1,5 +1,7 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { SellerPresenceBadge } from "@/components/products/seller-presence-badge/seller-presence-badge";
 import {
   formatOrderPrice,
   getProductDetailForOrder,
@@ -10,13 +12,15 @@ import styles from "./order-product-card.module.css";
 
 interface OrderProductCardProps {
   order: OrderDetail;
+  dealActions?: ReactNode;
 }
 
-export function OrderProductCard({ order }: OrderProductCardProps) {
+export function OrderProductCard({ order, dealActions }: OrderProductCardProps) {
   const product = getProductForOrder(order);
   const productDetail = getProductDetailForOrder(order);
   const counterpartyLabel = order.tab === "purchases" ? "Продавец" : "Покупатель";
   const counterpartyValue = order.tab === "purchases" ? order.seller : order.buyer;
+  const isSellerOnline = order.sellerOnline ?? false;
 
   return (
     <article className={styles.card} aria-label="Товар в сделке">
@@ -34,12 +38,27 @@ export function OrderProductCard({ order }: OrderProductCardProps) {
         <span className={styles.game}>{product.game}</span>
         <span className={styles.price}>{formatOrderPrice(order.price)}</span>
         <p className={styles.title}>{order.title}</p>
-        <span className={styles.meta}>
-          {counterpartyLabel}: {counterpartyValue} · {productDetail.deliveryMethod}
-        </span>
+        <p className={styles.meta}>
+          <span>
+            {counterpartyLabel}: {counterpartyValue}
+          </span>
+          <span className={styles.metaSeparator} aria-hidden>
+            ·
+          </span>
+          <SellerPresenceBadge
+            sellerName={order.seller}
+            isOnline={isSellerOnline}
+            viewerRole={order.tab}
+          />
+          <span className={styles.metaSeparator} aria-hidden>
+            ·
+          </span>
+          <span>{productDetail.deliveryMethod}</span>
+        </p>
       </div>
 
       <div className={styles.actions}>
+        {dealActions}
         <Link href={`/product/${product.id}`} className={styles.openButton}>
           Открыть товар
         </Link>

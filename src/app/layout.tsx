@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Inter_Tight } from "next/font/google";
 import { AuthHydrator } from "@/components/auth/auth-hydrator/auth-hydrator";
+import { DealHydrator } from "@/components/deal/deal-hydrator/deal-hydrator";
 import { ThemeHydrator } from "@/components/theme/theme-hydrator/theme-hydrator";
 import { ToastProvider } from "@/components/ui/toast/toast-provider";
+import { ActiveDealTimerDock } from "@/components/deal/active-deal-timer-dock/active-deal-timer-dock";
+import { ActiveDealExpiredModal } from "@/components/deal/active-deal-expired-modal/active-deal-expired-modal";
 import "@/styles/globals.css";
 
 const interTight = Inter_Tight({
@@ -30,7 +33,12 @@ export default function RootLayout({
       <body>
         <ThemeHydrator />
         <AuthHydrator />
-        <ToastProvider>{children}</ToastProvider>
+        <DealHydrator />
+        <ToastProvider>
+          {children}
+          <ActiveDealTimerDock />
+          <ActiveDealExpiredModal />
+        </ToastProvider>
       </body>
     </html>
   );

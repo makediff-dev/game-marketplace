@@ -17,3 +17,5 @@ export const mockUser: UserProfile = {
 };
 
 export const profileTabs = ["Мои товары", "Покупки", "Продажи"] as const;
+
+export const profileFilters = ["Активные", "Завершённые", "Спорные"] as const;

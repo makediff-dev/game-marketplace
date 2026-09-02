@@ -7,12 +7,30 @@ import styles from "./cancel-deal-modal.module.css";
 
 interface CancelDealModalProps {
   isOpen: boolean;
+  role: "buyer" | "seller";
   onClose: () => void;
   onConfirm: () => void;
 }
 
-export function CancelDealModal({ isOpen, onClose, onConfirm }: CancelDealModalProps) {
+const copyByRole = {
+  buyer: {
+    body: "Вы уверены, что хотите отменить сделку? Средства вернутся на ваш баланс.",
+    confirm: "Отменить сделку",
+  },
+  seller: {
+    body: "Вы уверены, что хотите отменить сделку? Покупатель получит возврат средств.",
+    confirm: "Отменить сделку",
+  },
+} as const;
+
+export function CancelDealModal({
+  isOpen,
+  role,
+  onClose,
+  onConfirm,
+}: CancelDealModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const copy = copyByRole[role];
 
   useEffect(() => {
     if (!isOpen) {
@@ -55,13 +73,13 @@ export function CancelDealModal({ isOpen, onClose, onConfirm }: CancelDealModalP
             </h2>
             <ModalCloseButton onClick={onClose} />
           </header>
-          <p className={styles.body}>Вы уверены, что хотите отменить сделку?</p>
+          <p className={styles.body}>{copy.body}</p>
           <div className={styles.actions}>
             <button type="button" className={styles.cancelButton} onClick={onClose}>
-              Отмена
+              Назад
             </button>
             <button type="button" className={styles.confirmButton} onClick={onConfirm}>
-              Отменить сделку
+              {copy.confirm}
             </button>
           </div>
         </div>

@@ -5,7 +5,9 @@ import styles from "./order-actions.module.css";
 
 interface OrderActionsProps {
   order: OrderDetail;
+  layout?: "inline" | "stack";
   onCancelDeal?: () => void;
+  onCloseDealEarly?: () => void;
   onOpenDispute?: () => void;
 }
 
@@ -24,10 +26,24 @@ function renderAction(
   action: OrderAction,
   handlers: {
     onCancelDeal?: () => void;
+    onCloseDealEarly?: () => void;
     onOpenDispute?: () => void;
   },
 ) {
   const className = getActionClassName(action.variant);
+
+  if (action.type === "close_deal_early") {
+    return (
+      <button
+        key={action.type}
+        type="button"
+        className={className}
+        onClick={handlers.onCloseDealEarly}
+      >
+        {action.label}
+      </button>
+    );
+  }
 
   if (action.type === "cancel_deal") {
     return (
@@ -62,12 +78,14 @@ function renderAction(
   );
 }
 
-export function OrderActions({ order, onCancelDeal, onOpenDispute }: OrderActionsProps) {
-  const visibleActions = order.actions.filter(
-    (action) => action.type !== "write_seller",
-  );
-
-  if (visibleActions.length === 0) {
+export function OrderActions({
+  order,
+  layout = "inline",
+  onCancelDeal,
+  onCloseDealEarly,
+  onOpenDispute,
+}: OrderActionsProps) {
+  if (order.actions.length === 0) {
     return null;
   }
 
@@ -75,10 +93,13 @@ export function OrderActions({ order, onCancelDeal, onOpenDispute }: OrderAction
     order.tab === "purchases" ? "Действия покупателя" : "Действия продавца";
 
   return (
-    <div className={styles.actionsWrap} aria-label={sectionTitle}>
-      <div className={styles.actions}>
-        {visibleActions.map((action) =>
-          renderAction(action, { onCancelDeal, onOpenDispute }),
+    <div
+      className={`${styles.actionsWrap} ${layout === "stack" ? styles.actionsWrapStack : ""}`}
+      aria-label={sectionTitle}
+    >
+      <div className={`${styles.actions} ${layout === "stack" ? styles.actionsStack : ""}`}>
+        {order.actions.map((action) =>
+          renderAction(action, { onCancelDeal, onCloseDealEarly, onOpenDispute }),
         )}
       </div>
     </div>

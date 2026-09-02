@@ -1,10 +1,10 @@
 .card {
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--spacing-4);
-  width: 80px;
+  width: 100%;
+  min-width: 0;
   transition: transform 0.2s ease;
 }
 
@@ -12,10 +12,15 @@
   transform: translateY(-4px);
 }
 
+.iconBlock {
+  position: relative;
+  width: min(100%, 80px);
+}
+
 .iconWrapper {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  aspect-ratio: 1;
   border-radius: var(--radius-24);
   overflow: hidden;
 }
@@ -53,4 +58,27 @@
   left: 50px;
   background: var(--surface-secondary);
   color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .card:hover {
+    transform: none;
+  }
+
+  .iconWrapper {
+    border-radius: var(--radius-16);
+  }
+
+  .badge {
+    left: 12px;
+    height: 22px;
+    padding: 0 var(--spacing-8);
+    font-size: var(--font-size-caption);
+    line-height: var(--line-height-caption);
+  }
+
+  .badgeViewed {
+    left: auto;
+    right: -4px;
+  }
 }

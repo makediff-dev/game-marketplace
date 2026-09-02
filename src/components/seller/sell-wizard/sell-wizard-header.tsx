@@ -2,7 +2,7 @@ import { Icon } from "@/components/ui/icon/icon";
 import styles from "./sell-wizard.module.css";
 
 interface SellWizardHeaderProps {
-  title: string;
+  title?: string;
   showBack?: boolean;
   onBack?: () => void;
 }
@@ -15,7 +15,7 @@ export function SellWizardHeader({ title, showBack = false, onBack }: SellWizard
           <Icon src="/assets/arrow.svg" width={16} height={13} className={styles.backIcon} />
         </button>
       ) : null}
-      <h1 className={styles.title}>{title}</h1>
+      {title ? <h1 className={styles.title}>{title}</h1> : null}
     </div>
   );
 }

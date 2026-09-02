@@ -59,6 +59,12 @@
   overflow-x: auto;
 }
 
+.filterRow {
+  display: flex;
+  gap: var(--spacing-12);
+  overflow-x: auto;
+}
+
 .emptyState {
   display: flex;
   flex-direction: column;
@@ -90,4 +96,56 @@
 
 .sellButton {
   width: 258px;
+}
+
+@media (max-width: 1024px) {
+  .profile {
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .userRow {
+    align-items: flex-start;
+  }
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+  }
+
+  .userName {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+  }
+
+  .tabsRow {
+    margin-inline: calc(-1 * var(--content-inner-padding-x));
+    padding-inline: var(--content-inner-padding-x);
+    scrollbar-width: none;
+  }
+
+  .tabsRow::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filterRow {
+    margin-inline: calc(-1 * var(--content-inner-padding-x));
+    padding-inline: var(--content-inner-padding-x);
+    scrollbar-width: none;
+  }
+
+  .filterRow::-webkit-scrollbar {
+    display: none;
+  }
+
+  .emptyTitle {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+  }
+
+  .sellButton {
+    width: 100%;
+    max-width: 320px;
+  }
 }

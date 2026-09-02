@@ -173,12 +173,14 @@ export function SellerContent({ initialTermsOpen = false }: SellerContentProps) 
                 </div>
               </div>
 
-              <Icon
-                src="/assets/arrows-down-up-seller.svg"
-                width={32}
-                height={32}
-                className={styles.calcArrow}
-              />
+              <div className={styles.calcArrow} aria-hidden>
+                <Icon
+                  src="/assets/arrows-down-up-seller.svg"
+                  width={32}
+                  height={32}
+                  className={styles.calcArrowIcon}
+                />
+              </div>
 
               <div className={styles.calcField}>
                 <span className={styles.calcLabel}>Доход</span>

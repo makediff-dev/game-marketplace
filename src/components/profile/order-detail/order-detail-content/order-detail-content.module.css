@@ -30,10 +30,9 @@
 
 .bottomColumn {
   display: flex;
-  flex: 1;
   flex-direction: column;
   min-width: 0;
-  min-height: 0;
+  height: 100%;
 }
 
 .bottomPanel {
@@ -44,13 +43,19 @@
 }
 
 .progressPanel {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
   padding: var(--spacing-20);
   background: var(--surface-secondary);
   border-radius: var(--radius-20);
   box-sizing: border-box;
+}
+
+.columnActions {
+  flex-shrink: 0;
+  margin-top: var(--spacing-16);
+}
+
+.progressColumn {
+  gap: 0;
 }
 
 .chatPanel {
@@ -105,10 +110,11 @@
 
 .sectionTitleWithGap {
   composes: sectionTitle;
+  flex-shrink: 0;
   margin-bottom: var(--spacing-16);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .headerRow {
     flex-direction: column;
     align-items: stretch;
@@ -120,5 +126,28 @@
 
   .bottomPanel {
     min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .orderDetail {
+    gap: var(--spacing-24);
+    padding-bottom: var(--spacing-32);
+  }
+
+  .headerMain {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-8);
+  }
+
+  .title {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+  }
+
+  .progressPanel,
+  .chatPanel {
+    min-height: 360px;
   }
 }

@@ -58,6 +58,11 @@
   line-height: var(--line-height-body-l);
   color: var(--text-primary);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
 .cancelButton:hover {

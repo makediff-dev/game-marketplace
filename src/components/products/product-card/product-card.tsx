@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon/icon";
+import { ProductCardBuyButton } from "@/components/products/product-card/product-card-buy-button";
+import { ProductFulfillmentTime } from "@/components/products/product-fulfillment-time/product-fulfillment-time";
+import { SellerPresenceBadge } from "@/components/products/seller-presence-badge/seller-presence-badge";
+import { getProductCardPriceParts } from "@/lib/mock/checkout";
 import { formatPrice, formatReviewCount, type Product } from "@/lib/mock/products";
 import styles from "./product-card.module.css";
 
@@ -10,6 +14,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, hideBuyButton = false }: ProductCardProps) {
+  const priceParts = getProductCardPriceParts(product);
   const priceClass =
     product.priceColor === "error"
       ? styles.priceError
@@ -39,22 +44,26 @@ export function ProductCard({ product, hideBuyButton = false }: ProductCardProps
           <span className={styles.gameName}>{product.game}</span>
 
           <div className={styles.priceRow}>
-            <span className={`${styles.price} ${priceClass}`}>
-              {formatPrice(product.price)} ₽
-            </span>
-            {product.discount ? (
-              <div className={styles.discountRow}>
-                <span className={`${styles.discountBadge} ${discountClass}`}>
-                  -{product.discount}%
-                </span>
-                {product.oldPrice ? (
-                  <span className={styles.oldPrice}>
-                    {formatPrice(product.oldPrice)} ₽
-                    <span className={styles.oldPriceLine} />
+            <div className={styles.priceMain}>
+              <span className={`${styles.price} ${priceClass}`}>{priceParts.price}</span>
+              {product.discount ? (
+                <div className={styles.discountRow}>
+                  <span className={`${styles.discountBadge} ${discountClass}`}>
+                    -{product.discount}%
                   </span>
-                ) : null}
-              </div>
+                  {product.oldPrice ? (
+                    <span className={styles.oldPrice}>
+                      {formatPrice(product.oldPrice)} ₽
+                      <span className={styles.oldPriceLine} />
+                    </span>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+            {priceParts.unitHint ? (
+              <span className={styles.unitHint}>{priceParts.unitHint}</span>
             ) : null}
+            <ProductFulfillmentTime product={product} variant="card" />
           </div>
 
           <div className={styles.title}>
@@ -86,14 +95,19 @@ export function ProductCard({ product, hideBuyButton = false }: ProductCardProps
               <span className={styles.ratingCount}>{formatReviewCount(product.reviews)}</span>
             </div>
           ) : null}
+
+          <div className={styles.sellerRow}>
+            <span className={styles.sellerName}>{product.seller}</span>
+            <SellerPresenceBadge
+              sellerName={product.seller}
+              isOnline={product.sellerOnline}
+              compact
+            />
+          </div>
         </div>
       </Link>
 
-      {hideBuyButton ? null : (
-        <Link href={`/product/${product.id}/checkout`} className={styles.buyButton}>
-          Купить
-        </Link>
-      )}
+      {hideBuyButton ? null : <ProductCardBuyButton product={product} />}
     </article>
   );
 }

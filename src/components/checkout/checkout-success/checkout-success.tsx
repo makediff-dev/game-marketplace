@@ -1,11 +1,14 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button/button";
 import { Icon } from "@/components/ui/icon/icon";
-import { getCheckoutOrderId, getCheckoutPaymentLabel } from "@/lib/mock/checkout";
+import { getCheckoutOrderId, getCheckoutPaymentLabel, formatProductPriceFromProduct } from "@/lib/mock/checkout";
+import { getDealDurationMs, isDealTimerEligible } from "@/lib/deal/deal-timer";
+import { getOrderById } from "@/lib/mock/orders";
 import type { ProductDetail } from "@/lib/mock/product-details";
-import { formatPrice } from "@/lib/mock/products";
+import { useDealStore } from "@/lib/store/deal-store";
 import styles from "./checkout-success.module.css";
 
 interface CheckoutSuccessProps {
@@ -14,7 +17,23 @@ interface CheckoutSuccessProps {
 }
 
 export function CheckoutSuccess({ product, paymentMethod }: CheckoutSuccessProps) {
-  const orderHref = `/profile/orders/${getCheckoutOrderId(product.id, product.title)}`;
+  const orderId = getCheckoutOrderId(product.id, product.title);
+  const orderHref = `/profile/orders/${orderId}`;
+  const initDeal = useDealStore((state) => state.initDeal);
+
+  useEffect(() => {
+    const order = getOrderById(orderId);
+
+    if (!order || !isDealTimerEligible(order)) {
+      return;
+    }
+
+    initDeal(orderId, {
+      durationMs: getDealDurationMs(order),
+      sellerOnline: order.sellerOnline ?? true,
+      forceRestart: true,
+    });
+  }, [initDeal, orderId]);
 
   return (
     <section className={styles.page} aria-label="Оплата заказа">
@@ -37,7 +56,7 @@ export function CheckoutSuccess({ product, paymentMethod }: CheckoutSuccessProps
           </div>
 
           <div className={styles.details}>
-            <p className={styles.amount}>{formatPrice(product.price)} ₽</p>
+            <p className={styles.amount}>{formatProductPriceFromProduct(product)}</p>
             <p className={styles.detailMuted}>
               Оплачено: {getCheckoutPaymentLabel(paymentMethod)}
             </p>

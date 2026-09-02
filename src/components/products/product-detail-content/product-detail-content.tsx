@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Icon } from "@/components/ui/icon/icon";
 import { ProductCard } from "@/components/products/product-card/product-card";
+import { SellerPresenceBadge } from "@/components/products/seller-presence-badge/seller-presence-badge";
 import type { ProductDetail } from "@/lib/mock/product-details";
 import type { Product } from "@/lib/mock/products";
 import styles from "./product-detail-content.module.css";
@@ -55,11 +56,15 @@ export function ProductDetailContent({ product, similarProducts }: ProductDetail
 
         <div className={styles.sellerCard}>
           <div className={styles.sellerLogo}>P</div>
-          <div>
+          <div className={styles.sellerContent}>
             <div className={styles.sellerName}>
               {product.sellerName}
               <Image src="/assets/seal-check.svg" alt="" width={18} height={18} />
             </div>
+            <SellerPresenceBadge
+              sellerName={product.sellerName}
+              isOnline={product.sellerOnline}
+            />
             <p className={styles.sellerInfo}>{product.sellerStoreInfo}</p>
           </div>
         </div>

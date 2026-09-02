@@ -53,16 +53,60 @@
 }
 
 .meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4) var(--spacing-8);
+  margin: 0;
   font-size: var(--font-size-body-m);
   line-height: var(--line-height-body-m);
   color: var(--text-muted);
 }
 
+.metaSeparator {
+  color: var(--text-muted);
+}
+
+.presenceBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-4) var(--spacing-12);
+  background: var(--surface-brand-muted);
+  border-radius: var(--radius-full);
+}
+
+.presenceText {
+  font-size: var(--font-size-body-m);
+  font-weight: 600;
+  line-height: var(--line-height-body-m);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.presenceDot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.presenceDotOnline {
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgb(34 197 94 / 0.18);
+}
+
+.presenceDotOffline {
+  background: var(--neutral-400);
+}
+
 .actions {
   display: flex;
   flex-shrink: 0;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   gap: var(--spacing-12);
+  min-width: 220px;
 }
 
 .openButton {
@@ -85,7 +129,7 @@
   background: var(--surface-accent-soft);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .card {
     flex-direction: column;
     align-items: flex-start;
@@ -102,5 +146,17 @@
 
   .openButton {
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: var(--spacing-16);
+    gap: var(--spacing-16);
+  }
+
+  .price {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
   }
 }
