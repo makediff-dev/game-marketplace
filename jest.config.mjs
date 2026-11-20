@@ -8,12 +8,13 @@ export default createJestConfig({
   testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
+    "^@/api/(.*)$": "<rootDir>/lib/api/$1",
     "^@/(.*)$": "<rootDir>/$1",
   },
   testMatch: ["<rootDir>/__tests__/**/*.test.{ts,tsx}"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],
   collectCoverageFrom: [
-    "api/**/*.ts",
+    "lib/api/**/*.ts",
     "app/**/*.{ts,tsx}",
     "components/**/*.tsx",
     "hooks/**/*.ts",
