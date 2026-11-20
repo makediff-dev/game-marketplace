@@ -1,0 +1,263 @@
+@use "breakpoints" as *;
+
+.sales-stats-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: min(100%, 800px);
+}
+
+.sales-stats-page__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sales-stats-page__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: inherit;
+  text-decoration: none;
+  background: var(--surface-secondary);
+  border-radius: 12px;
+}
+
+.sales-stats-page__title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.sales-stats-page__periods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sales-stats-page__period {
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.sales-stats-page__period {
+  color: var(--text-primary);
+  background: var(--surface-secondary);
+
+  &--on {
+    color: var(--text-inverse);
+    background: var(--brand-500);
+  }
+}
+
+.sales-stats-page__kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sales-stats-page__kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  background: var(--surface-secondary);
+  border-radius: 16px;
+}
+
+.sales-stats-page__kpi-label {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.sales-stats-page__kpi-value {
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.sales-stats-page__kpi-change {
+  font-size: 14px;
+
+  &--positive {
+    color: var(--text-success);
+  }
+
+  &--negative {
+    color: var(--text-error);
+  }
+}
+
+.sales-stats-page__section-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.sales-stats-page__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 160px;
+  padding: 16px;
+  background: var(--surface-secondary);
+  border-radius: 16px;
+}
+
+.sales-stats-page__bar-col {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.sales-stats-page__bar-track {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+}
+
+// Empty days are a thin grey line, so a single sale does not read as a block.
+.sales-stats-page__bar {
+  width: min(100%, 36px);
+  min-height: 4px;
+  background: var(--brand-500);
+  border-radius: 10px 10px 4px 4px;
+
+  &[style*="height: 0%"] {
+    background: var(--border-strong);
+  }
+}
+
+.sales-stats-page__bar-label {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.sales-stats-page__top-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sales-stats-page__top-item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 20px 12px 12px;
+  background: var(--surface-secondary);
+  border-radius: 20px;
+}
+
+.sales-stats-page__top-rank {
+  flex-shrink: 0;
+  width: 24px;
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sales-stats-page__top-item:first-child .sales-stats-page__top-rank {
+  color: var(--brand-500);
+}
+
+.sales-stats-page__top-photo {
+  display: block;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  background: var(--surface-elevated);
+  border-radius: 14px;
+}
+
+.sales-stats-page__top-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sales-stats-page__top-title {
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sales-stats-page__top-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sales-stats-page__top-chip {
+  padding: 2px 8px;
+  color: var(--text-tertiary);
+  font-size: 12px;
+  line-height: 16px;
+  background: var(--surface-elevated);
+  border-radius: 999px;
+}
+
+.sales-stats-page__top-revenue {
+  flex-shrink: 0;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sales-stats-page__meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sales-stats-page__kpi-note {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.sales-stats-page__empty {
+  margin: 0;
+  padding: 16px 0;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 22px;
+}
+
+@include down(640px) {
+  .sales-stats-page__kpi-grid,
+  .sales-stats-page__meta-grid {
+    grid-template-columns: 1fr;
+  }
+}

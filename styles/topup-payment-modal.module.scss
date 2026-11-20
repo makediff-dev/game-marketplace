@@ -1,0 +1,205 @@
+@use "breakpoints" as *;
+
+.topup-payment-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--surface-scrim);
+}
+
+.topup-payment-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  width: min(100%, 420px);
+  max-height: min(90vh, 720px);
+  overflow: auto;
+  padding: 24px;
+  background: var(--surface-elevated, var(--neutral-0));
+  border-radius: 24px;
+}
+
+.topup-payment-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 32px;
+}
+
+.topup-payment-modal__title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: center;
+}
+
+.topup-payment-modal__close {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-full);
+  transform: translateY(-50%);
+  transition: opacity 160ms ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.topup-payment-modal__methods {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topup-payment-modal__method {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 12px 14px;
+  color: var(--text-primary);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  background: var(--surface-secondary);
+  border: 1px solid transparent;
+  border-radius: 16px;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease;
+
+  &--on {
+    border-color: var(--brand-500);
+    background: color-mix(
+      in srgb,
+      var(--brand-500) 8%,
+      var(--surface-secondary)
+    );
+  }
+}
+
+.topup-payment-modal__method-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.topup-payment-modal__method-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.topup-payment-modal__method-label {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.topup-payment-modal__radio {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-strong);
+  background: transparent;
+
+  &--on {
+    border-color: var(--brand-500);
+    background: var(--brand-500);
+  }
+}
+
+.topup-payment-modal__redirect-hint {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.topup-payment-modal__footer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topup-payment-modal__summary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.topup-payment-modal__amount {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.topup-payment-modal__kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.topup-payment-modal__confirm {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  color: var(--text-inverse);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  white-space: nowrap;
+  cursor: pointer;
+  background: var(--gradient-brand);
+  border: 0;
+  border-radius: 999px;
+  transition: opacity 160ms ease;
+
+  &:hover {
+    opacity: 0.92;
+  }
+}

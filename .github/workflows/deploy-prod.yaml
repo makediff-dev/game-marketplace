@@ -1,0 +1,31 @@
+name: Deploy to main production
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy with pm2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script_stop: true
+          command_timeout: 30m
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            export NODE_OPTIONS=--max-old-space-size=2048
+            cd ${{ secrets.PROJECT_PATH }}
+            git checkout master
+            git pull
+            npm install --no-audit --no-fund --prefer-offline
+            rm -rf .next
+            npm run build
+            pm2 restart ecosystem.config.js

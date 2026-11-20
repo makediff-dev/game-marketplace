@@ -1,0 +1,93 @@
+@use "breakpoints" as *;
+
+.sell-product-success-modal {
+  z-index: 1000;
+  background: var(--surface-scrim);
+  padding: var(--spacing-10);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.sell-product-success-modal__panel {
+  background: var(--neutral-0);
+  border-radius: var(--radius-24);
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sell-product-success-modal__content {
+  align-items: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-32) var(--spacing-32) var(--spacing-16);
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+}
+
+.sell-product-success-modal__emoji {
+  font-size: 56px;
+  line-height: 1;
+}
+
+.sell-product-success-modal__title {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: var(--line-height-h4);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.sell-product-success-modal__subtitle {
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-body-l);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.sell-product-success-modal__footer {
+  padding: 0 var(--spacing-32) var(--spacing-32);
+}
+
+.sell-product-success-modal__primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  padding: var(--spacing-12) var(--spacing-24);
+  color: var(--text-inverse);
+  font-size: var(--font-size-button);
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--gradient-brand);
+  border: none;
+  border-radius: 14px;
+}
+
+.sell-product-success-modal__secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: var(--spacing-12) var(--spacing-24);
+  color: var(--text-primary);
+  font-size: var(--font-size-button);
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--surface-secondary);
+  border: none;
+  border-radius: 14px;
+}
+
+.sell-product-success-modal__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding: var(--spacing-24) var(--spacing-32) var(--spacing-32);
+}

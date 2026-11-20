@@ -1,0 +1,119 @@
+@use "breakpoints" as *;
+
+.auth-screen__heading {
+  width: 100%;
+  padding: var(--spacing-24) 0;
+  color: var(--text-primary);
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: var(--line-height-h2);
+  text-align: center;
+}
+
+.auth-screen__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  width: min(507px, 100%);
+  margin: 0 auto;
+}
+
+.auth-screen__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  width: 100%;
+}
+
+.auth-screen__vk-one-tap {
+  width: 100%;
+  min-height: 72px;
+}
+
+.auth-screen__email-field {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  width: 100%;
+  height: 72px;
+  padding: var(--spacing-20);
+  font-family: inherit;
+  text-align: left;
+  background: var(--surface-secondary);
+  border: 0;
+  border-radius: var(--radius-20);
+
+  &:focus-within {
+    background: var(--neutral-0);
+    outline: 2px solid var(--brand-500);
+  }
+}
+
+.auth-screen__error {
+  color: var(--text-error);
+  font-size: var(--font-size-body-m);
+  font-weight: 400;
+  line-height: var(--line-height-body-m);
+}
+
+.auth-screen__email-input {
+  width: 100%;
+  padding: 0;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-h4);
+  font-weight: 400;
+  line-height: var(--line-height-h4);
+  background: transparent;
+  border: 0;
+  outline: none;
+
+  &::placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+  }
+}
+
+.auth-screen__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  padding: var(--spacing-12) var(--spacing-24);
+  color: var(--text-inverse);
+  font-family: inherit;
+  font-size: var(--font-size-button);
+  font-weight: 500;
+  line-height: var(--line-height-button);
+  text-align: center;
+  cursor: pointer;
+  background: var(--gradient-brand);
+  border: 0;
+  border-radius: 14px;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.auth-screen__legal {
+  padding-bottom: 3.8px;
+  color: var(--text-muted);
+  font-size: var(--font-size-body-m);
+  font-weight: 400;
+  line-height: var(--line-height-body-m);
+}
+
+.auth-screen__legal a {
+  color: var(--brand-500);
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+}

@@ -1,0 +1,145 @@
+:root {
+  --brand-500: #6d5df7;
+  --brand-600: #5b4be6;
+  --brand-300: #b9abff;
+  --brand-100: #e9e6ff;
+  --text-primary: #16161a;
+  --text-tertiary: #6f7280;
+  --text-muted: #9699a6;
+  --text-error: #ff3b5f;
+  --text-success: #1fa463;
+  --text-accent: #6d5df7;
+  --text-inverse: #fff;
+  --text-disabled: #bfc1cc;
+  --text-subtle: #828794;
+  --icon-color: var(--text-primary);
+  --icon-color-muted: var(--text-muted);
+  --surface-primary: #fff;
+  --surface-secondary: #f6f6f6;
+  --surface-navbar: #ffffffd9;
+  --surface-overlay: #16161a80;
+  --surface-scrim: #6f728080;
+  --surface-brand-muted: #6d5df714;
+  --surface-accent-soft: #ddd6ff;
+  --surface-interactive: #16161a0a;
+  --surface-interactive-strong: #16161a14;
+  --surface-elevated: #ffffff;
+  --surface-platform-grid: #eeeef0;
+  --surface-platform-active: #ffffff;
+  --neutral-0: #fff;
+  --neutral-200: #eeeef0;
+  --neutral-300: #dfe0e5;
+  --neutral-400: #bfc1cc;
+  --neutral-500: #9699a6;
+  --border-strong: #dfe0e5;
+  --shadow-card: 0 8px 24px #16161a1f;
+  --shadow-toggle: 0 1px 3px #16161a29;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-full: 999px;
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --surface-hero-cta: #ffffff;
+  --text-hero-cta: #16161a;
+  --font-size-caption: 12px;
+  --font-size-body-s: 12px;
+  --font-size-body-m: 14px;
+  --font-size-body-l: 16px;
+  --font-size-button: 14px;
+  --font-size-h4: 18px;
+  --font-size-price: 18px;
+  --font-size-h3: 20px;
+  --font-size-h2: 24px;
+  --font-size-h1: 32px;
+  --line-height-caption: 16px;
+  --line-height-body-s: 16px;
+  --line-height-body-m: 20px;
+  --line-height-body-l: 24px;
+  --line-height-button: 18px;
+  --line-height-h4: 24px;
+  --line-height-price: 24px;
+  --line-height-h3: 28px;
+  --line-height-h2: 32px;
+  --line-height-h1: 40px;
+  --layout-width: 1400px;
+  --content-width: var(--layout-width);
+  --content-inner-padding-x: 32px;
+  --page-padding-x: 64px;
+  --hero-width: var(--layout-width);
+  --hero-aspect-ratio: 1136 / 404;
+  /* Light theme: dark pills on the light banner frame */
+  --hero-dot: rgb(22 22 26 / 35%);
+  --hero-dot-active: #16161a;
+  --search-field-width: 1040px;
+  --product-grid-columns: 4;
+  --gradient-brand: linear-gradient(
+    89.98deg,
+    var(--brand-500) 0%,
+    var(--brand-300) 99.99%
+  );
+  --font-sans: "Inter Tight", "Inter Tight Fallback", system-ui, sans-serif;
+  --color-scheme: light;
+  --fill-0: #16161a;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --brand-500: #8b7dff;
+  --brand-600: #7a6cf0;
+  --brand-100: #2a2548;
+  --brand-300: #b9abff;
+  --text-primary: #f2f2f7;
+  --text-tertiary: #a0a3b1;
+  --text-muted: #9da0ad;
+  --text-error: #ff6b84;
+  --text-success: #34c87f;
+  --text-accent: #9d8fff;
+  --text-inverse: #fff;
+  --text-disabled: #6f7280;
+  --text-subtle: #a0a3b1;
+  --icon-color: var(--text-primary);
+  --icon-color-muted: var(--text-tertiary);
+  --surface-hero-cta: #fff;
+  --text-hero-cta: #6d5df7;
+  --surface-primary: #121218;
+  --surface-secondary: #1c1c24;
+  --surface-navbar: #121218eb;
+  --surface-overlay: #000000a6;
+  --surface-scrim: #0009;
+  --surface-brand-muted: #6d5df729;
+  --surface-accent-soft: #6d5df747;
+  --surface-interactive: #ffffff0a;
+  --surface-interactive-strong: #ffffff14;
+  --surface-elevated: #252530;
+  --surface-platform-grid: #14141a;
+  --surface-platform-active: #2e2e3a;
+  --neutral-0: #16161e;
+  --neutral-200: #252530;
+  --neutral-300: #32323f;
+  --neutral-400: #5c5f6e;
+  --neutral-500: #868997;
+  --border-strong: #32323f;
+  --hero-dot: rgb(255 255 255 / 40%);
+  --hero-dot-active: #ffffff;
+  --shadow-card: 0 8px 24px #00000059;
+  --shadow-toggle: 0 1px 3px #00000073;
+  --fill-0: #f2f2f7;
+  --gradient-brand: linear-gradient(
+    89.98deg,
+    var(--brand-500) 0%,
+    var(--brand-300) 99.99%
+  );
+}

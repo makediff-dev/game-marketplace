@@ -1,0 +1,141 @@
+@use "breakpoints" as *;
+
+.promo-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--surface-scrim);
+}
+
+.promo-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  width: min(100%, 400px);
+  padding: 28px 24px 24px;
+  background: var(--surface-elevated, var(--neutral-0));
+  border-radius: 24px;
+}
+
+.promo-modal__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+}
+
+.promo-modal__title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: center;
+}
+
+.promo-modal__close {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-full);
+  transform: translateY(-50%);
+  transition: opacity 160ms ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.promo-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.promo-modal__input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 56px;
+  padding: 0 16px;
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--brand-500);
+  border-radius: 16px;
+  outline: none;
+
+  &--error {
+    border-color: var(--text-error);
+  }
+
+  &::placeholder {
+    color: var(--text-subtle);
+    opacity: 1;
+  }
+}
+
+.promo-modal__error {
+  margin: 0;
+  padding: 0 4px;
+  color: var(--text-error);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.promo-modal__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 0 24px;
+  color: var(--text-inverse);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  cursor: pointer;
+  background: var(--gradient-brand);
+  border: 0;
+  border-radius: 16px;
+  transition: opacity 160ms ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+  }
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+}
+
+.promo-modal__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

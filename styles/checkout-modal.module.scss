@@ -1,0 +1,237 @@
+@use "breakpoints" as *;
+
+.checkout-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--surface-scrim);
+}
+
+.checkout-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(100%, 440px);
+  max-height: min(90vh, 720px);
+  overflow: auto;
+  padding: 28px;
+  background: var(--neutral-0);
+  border-radius: 20px;
+}
+
+.checkout-modal__title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.checkout-modal__product {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.checkout-modal__product-image {
+  width: 72px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--surface-secondary);
+}
+
+.checkout-modal__product-meta {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.checkout-modal__product-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.checkout-modal__product-price {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.checkout-modal__price-was {
+  color: var(--text-muted);
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.checkout-modal__promo-link {
+  align-self: flex-start;
+  margin: 0;
+  padding: 0;
+  color: var(--brand-500);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.checkout-modal__promo-field-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.checkout-modal__promo-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 10px 0 14px;
+  background: var(--surface-secondary);
+  border-radius: 14px;
+}
+
+.checkout-modal__promo-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  color: var(--brand-500);
+  font: inherit;
+  font-weight: 500;
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+
+.checkout-modal__promo-clear {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.checkout-modal__promo-hint {
+  margin: 0;
+  color: var(--brand-500);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.checkout-modal__promo-error {
+  margin: 0;
+  color: var(--text-error);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.checkout-modal__section-label {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.checkout-modal__methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.checkout-modal__method {
+  min-height: 56px;
+  padding: 12px;
+  color: var(--text-primary);
+  font: inherit;
+  text-align: left;
+  background: var(--surface-secondary);
+  border: 1px solid transparent;
+  border-radius: 14px;
+  cursor: pointer;
+
+  &--on {
+    border-color: var(--brand-500);
+    background: color-mix(
+      in srgb,
+      var(--brand-500) 12%,
+      var(--surface-secondary)
+    );
+  }
+}
+
+.checkout-modal__method-title {
+  display: block;
+  font-weight: 600;
+}
+
+.checkout-modal__method-hint {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.checkout-modal__error {
+  margin: 0;
+  color: var(--text-error);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.checkout-modal__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.checkout-modal__confirm,
+.checkout-modal__cancel {
+  flex: 1;
+  height: 48px;
+  font: inherit;
+  font-size: 16px;
+  border: 0;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.checkout-modal__confirm {
+  color: var(--text-inverse);
+  background: var(--gradient-brand);
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.checkout-modal__cancel {
+  color: var(--text-primary);
+  background: var(--surface-secondary);
+}
+
+.checkout-modal__note {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 18px;
+}

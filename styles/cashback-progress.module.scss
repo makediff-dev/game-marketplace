@@ -1,0 +1,81 @@
+@use "breakpoints" as *;
+
+.cashback-progress {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 24px 22px;
+  background: var(--surface-secondary);
+  border-radius: var(--radius-24);
+}
+
+.cashback-progress__title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.cashback-progress__track-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cashback-progress__labels,
+.cashback-progress__thresholds {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.cashback-progress__percent {
+  color: var(--brand-500);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: right;
+}
+
+.cashback-progress__threshold {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.cashback-progress__track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 6px;
+  height: 10px;
+}
+
+.cashback-progress__segment {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 100%;
+  background: color-mix(in srgb, var(--brand-500) 16%, var(--surface-elevated));
+  border-radius: 999px;
+}
+
+.cashback-progress__segment-fill {
+  display: block;
+  height: 100%;
+  background: var(--brand-500);
+  border-radius: inherit;
+}
+
+@include down(640px) {
+  .cashback-progress {
+    padding: 16px;
+  }
+
+  .cashback-progress__percent,
+  .cashback-progress__threshold {
+    font-size: 12px;
+  }
+}

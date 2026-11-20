@@ -1,0 +1,362 @@
+@use "breakpoints" as *;
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  width: 100%;
+  height: 100%;
+  padding: var(--spacing-12) var(--spacing-12) var(--spacing-16);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-24);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: var(--shadow-card);
+    transform: translateY(-4px);
+  }
+}
+
+.product-card__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  width: 100%;
+  min-height: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-card__image-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: 174px;
+  overflow: hidden;
+  border-radius: var(--radius-16);
+}
+
+.product-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing-10);
+  width: 100%;
+  padding-inline: var(--spacing-4);
+}
+
+// The game is a label on the photo; the goods title is the headline.
+.product-card__game-name {
+  position: absolute;
+  top: var(--spacing-8);
+  left: var(--spacing-8);
+  max-width: calc(100% - 16px);
+  padding: 4px 10px;
+  overflow: hidden;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: rgb(22 22 26 / 64%);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(6px);
+}
+
+.product-card__footer {
+  display: flex;
+  gap: var(--spacing-8);
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: auto;
+  padding-inline: var(--spacing-4);
+}
+
+.product-card__price-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.product-card__price-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  align-items: center;
+  min-width: 0;
+}
+
+.product-card__unit-hint {
+  color: var(--text-muted);
+  font-size: var(--font-size-body-s);
+  font-weight: 500;
+  line-height: var(--line-height-body-s);
+  white-space: nowrap;
+}
+
+.product-card__price {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+
+  &--error {
+    color: var(--text-error);
+  }
+
+  &--accent {
+    color: var(--text-accent);
+  }
+
+  &--success {
+    color: var(--text-success);
+  }
+}
+
+.product-card__discount-row {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--spacing-8);
+  align-items: center;
+}
+
+.product-card__discount-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2) var(--spacing-4);
+  color: var(--text-inverse);
+  font-size: var(--font-size-body-m);
+  font-weight: 700;
+  line-height: 1;
+  border-radius: var(--radius-full);
+
+  &--error {
+    background: var(--text-error);
+  }
+
+  &--accent {
+    background: var(--brand-600);
+  }
+}
+
+.product-card__old-price {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--neutral-500);
+  font-size: var(--font-size-body-m);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.product-card__old-price-line {
+  position: absolute;
+  top: 50%;
+  right: -0.2px;
+  left: 0;
+  height: 2px;
+  background: var(--neutral-400);
+  border-radius: var(--radius-full);
+  transform: translateY(-50%);
+}
+
+.product-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: calc(var(--spacing-4) * -1);
+}
+
+// Paid lift to the top of the catalog.
+.product-card__top {
+  padding: 3px 10px;
+  color: var(--text-inverse);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  background: var(--gradient-brand);
+  border-radius: var(--radius-full);
+}
+
+// Game section of the goods: Аккаунты, Скины, Подписка…
+.product-card__type {
+  align-self: flex-start;
+  max-width: 100%;
+  padding: 3px 10px;
+  overflow: hidden;
+  color: var(--brand-500);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: var(--surface-brand-muted);
+  border-radius: var(--radius-full);
+}
+
+// Sits right above the price, so it lines up across a row of cards.
+.product-card__seller {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  width: 100%;
+  margin-top: auto;
+}
+
+.product-card__sold {
+  color: var(--text-muted);
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-body-s);
+}
+
+
+
+
+
+.product-card__title {
+  display: -webkit-box;
+  width: 100%;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+
+
+
+
+.product-card__seller-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-6) var(--spacing-8);
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.product-card__seller-name {
+  display: inline-flex;
+  gap: var(--spacing-4);
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: var(--font-size-body-m);
+  line-height: var(--line-height-body-m);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-card__presence {
+  display: inline-flex;
+  gap: var(--spacing-6);
+  align-items: center;
+  padding: var(--spacing-2) var(--spacing-8);
+  background: var(--surface-brand-muted);
+  border-radius: var(--radius-full);
+}
+
+.product-card__presence-text {
+  color: var(--text-primary);
+  font-size: var(--font-size-body-s);
+  font-weight: 500;
+  line-height: var(--line-height-body-s);
+  white-space: nowrap;
+}
+
+.product-card__presence-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+
+  &--online {
+    background: #22c55e;
+    box-shadow: 0 0 0 2px #22c55e2e;
+  }
+
+  &--offline {
+    background: var(--neutral-400);
+  }
+}
+
+.product-card__buy-button {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 var(--spacing-20);
+  color: var(--text-inverse);
+  font-size: var(--font-size-body-l);
+  font-weight: 500;
+  line-height: var(--line-height-body-l);
+  text-decoration: none;
+  background: var(--gradient-brand);
+  border: 0;
+  border-radius: var(--radius-16);
+  cursor: pointer;
+  transition:
+    opacity 0.2s,
+    transform 0.15s;
+
+  &:hover {
+    opacity: 0.92;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+@include down(768px) {
+  .product-card {
+    gap: var(--spacing-10);
+    padding: var(--spacing-8) var(--spacing-8) var(--spacing-12);
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .product-card__image-wrapper {
+    height: 140px;
+  }
+
+  .product-card__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-card__title {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .product-card__price {
+    font-size: 19px;
+  }
+
+  .product-card__buy-button {
+    height: 40px;
+    font-size: var(--font-size-body-m);
+    line-height: var(--line-height-body-m);
+  }
+}

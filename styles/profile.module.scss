@@ -1,0 +1,638 @@
+@use "breakpoints" as *;
+
+// Tabs and filters sit level with the person card,
+// the list starts level with the balance.
+.profile {
+  display: grid;
+  grid-template:
+    "card head" auto
+    "balance list" auto
+    "menu list" 1fr
+    / 320px minmax(0, 1fr);
+  gap: 12px 32px;
+  align-items: start;
+  width: 100%;
+}
+
+.profile__side,
+.profile__main {
+  display: contents;
+}
+
+.profile__card {
+  grid-area: card;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--surface-secondary);
+  border-radius: 24px;
+}
+
+.profile__person-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.profile__name {
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile__stars {
+  display: flex;
+  gap: 2px;
+}
+
+.profile__star {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.profile__since {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+// Desktop keeps the menu in the sidebar; the button is for phones.
+.profile__menu-button {
+  display: none;
+  flex-shrink: 0;
+  color: var(--text-primary);
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  cursor: pointer;
+  background: var(--surface-elevated);
+  border: 0;
+  border-radius: 14px;
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+}
+
+.profile__balance {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  color: var(--text-inverse);
+  text-decoration: none;
+  background: var(--gradient-brand);
+  border-radius: 24px;
+  transition: opacity 160ms ease;
+  grid-area: balance;
+
+  &:hover {
+    opacity: 0.94;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+}
+
+.profile__balance-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile__balance-label {
+  font-size: 13px;
+  line-height: 18px;
+  opacity: 0.85;
+}
+
+.profile__balance-amount {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.profile__balance-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgb(255 255 255 / 20%);
+  border-radius: 50%;
+}
+
+.profile__side-menu {
+  grid-area: menu;
+  padding: 16px 8px;
+  background: var(--surface-secondary);
+  border-radius: 24px;
+}
+
+.profile__main-head {
+  grid-area: head;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.profile__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.profile__tabs {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface-secondary);
+  border-radius: 999px;
+}
+
+.profile__tab {
+  flex: 1;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+}
+
+.profile__tab--on {
+  color: var(--text-primary);
+  background: var(--surface-elevated);
+  box-shadow: var(--shadow-toggle);
+}
+
+.profile__tab--off {
+  color: var(--text-muted);
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+.profile__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.profile__filter {
+  padding: 6px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  border-radius: 999px;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+}
+
+.profile__filter--on {
+  color: var(--brand-500);
+  background: var(--surface-brand-muted);
+  border: 1px solid transparent;
+}
+
+.profile__filter--off {
+  color: var(--text-primary);
+  background: transparent;
+  border: 1px solid var(--border-strong, #e4e4ea);
+
+  &:hover {
+    border-color: var(--brand-500);
+  }
+}
+
+.profile__list-loading {
+  grid-area: list;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.profile__list-loading-bar {
+  display: block;
+  height: 72px;
+  background: var(--surface-secondary);
+  border-radius: 16px;
+  animation: profilePulse 1.2s ease-in-out infinite;
+}
+
+@keyframes profilePulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.profile__list[data-fetching="true"] {
+  opacity: 0.72;
+  transition: opacity 160ms ease;
+}
+
+.profile__list {
+  grid-area: list;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profile__item-card,
+.profile__item-link {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 10px 10px 16px;
+  color: inherit;
+  text-decoration: none;
+  background: var(--surface-secondary);
+  border-radius: 20px;
+  transition: box-shadow 180ms ease;
+}
+
+.profile__item-link:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.profile__item-link:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+}
+
+.profile__item-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--surface-primary);
+  border-radius: 14px;
+
+  &--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+  }
+}
+
+.profile__item-title,
+.profile__item-description,
+.profile__item-meta,
+.profile__item-note {
+  padding-inline: 6px;
+}
+
+.profile__item-description {
+  display: -webkit-box;
+  margin: -6px 0 0;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.profile__item-title {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+// Size container: the lift button is placed by the photo height (16:10 of the width).
+.profile__item-row {
+  position: relative;
+  container-type: inline-size;
+}
+
+// Room on the right of the title for the lift button.
+.profile__item-card--promote .profile__item-title {
+  padding-right: 112px;
+}
+
+// Lift to the top: on the title row, on the right, centred on its first line.
+// A sibling of the card link, so it is placed over the room the title leaves.
+.profile__item-promote {
+  position: absolute;
+  top: calc(10px + (100cqw - 20px) * 10 / 16 + 5px);
+  right: 10px;
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  max-width: calc(100% - 20px);
+  height: 36px;
+  padding: 0 14px 0 8px;
+  color: var(--brand-500);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--surface-brand-muted);
+  border: 0;
+  border-radius: 999px;
+  transition: background-color 160ms ease;
+
+  // Native 24px: a smaller icon draws blurry fractional lines.
+  svg {
+    flex-shrink: 0;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    background: color-mix(in srgb, var(--brand-500) 16%, transparent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+
+  &--on {
+    color: var(--text-inverse);
+    background: var(--brand-500);
+
+    &:hover {
+      background: var(--brand-600);
+    }
+  }
+}
+
+.profile__item-edit {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--text-muted);
+  background: var(--surface-primary);
+  border-radius: 50%;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+
+  &:hover {
+    color: var(--brand-500);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+}
+
+.profile__add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--surface-secondary);
+  border-radius: 16px;
+
+  &:hover {
+    color: var(--brand-500);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+}
+
+.profile__add-button {
+  height: 36px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile__item-edit,
+  .profile__tab,
+  .profile__filter,
+  .profile__balance,
+  .profile__item-link {
+    transition: none;
+  }
+}
+
+.profile__item-note {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.profile__item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.profile__item-price {
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.profile__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  border-radius: 999px;
+
+  &--brand {
+    color: var(--brand-500);
+    background: var(--surface-brand-muted);
+  }
+
+  &--archived {
+    color: var(--text-muted);
+    background: var(--surface-interactive-strong);
+  }
+
+  &--warning {
+    color: #c47a00;
+    background: #ffb02029;
+  }
+
+  &--success {
+    color: var(--text-success);
+    background: #1fa4631f;
+  }
+
+  &--dispute {
+    color: var(--text-error);
+    background: #ff3b5f1f;
+  }
+}
+
+html[data-theme="dark"] .profile__badge--warning {
+  color: #ffc14d;
+}
+
+.profile__empty {
+  grid-area: list;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 32px;
+  background: var(--surface-secondary);
+  border-radius: 24px;
+}
+
+.profile__empty-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.profile__empty-text {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.profile__sell-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 24px;
+  margin-top: 8px;
+  color: var(--text-inverse);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: none;
+  background: var(--gradient-brand);
+  border-radius: 14px;
+}
+
+// Tablets and phones: one column, the menu opens from the card button.
+@include down(1024px) {
+  .profile {
+    grid-template:
+      "card" auto
+      "balance" auto
+      "head" auto
+      "list" auto
+      / minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .profile__side-menu {
+    display: none;
+  }
+
+  .profile__menu-button {
+    display: inline-flex;
+  }
+}
+
+@include down(600px) {
+  .profile__card {
+    padding: 16px;
+  }
+
+  .profile__tab {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+
+  .profile__add-button {
+    width: 100%;
+  }
+
+  .profile__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .profile__empty {
+    padding: 24px 20px;
+  }
+}

@@ -1,0 +1,143 @@
+@use "breakpoints" as *;
+
+.favorites-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: min(100%, 720px);
+}
+
+.favorites-page__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.favorites-page__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: inherit;
+  text-decoration: none;
+  background: var(--surface-secondary);
+  border-radius: 12px;
+}
+
+.favorites-page__title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.favorites-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.favorites-page__card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  color: inherit;
+  text-decoration: none;
+  background: var(--surface-secondary);
+  border-radius: 16px;
+}
+
+.favorites-page__image {
+  flex-shrink: 0;
+  width: 88px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.favorites-page__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.favorites-page__item-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.favorites-page__price {
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.favorites-page__empty {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 48px 0;
+}
+
+.favorites-page__empty-title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.favorites-page__empty-text {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.favorites-page__empty-link {
+  align-self: flex-start;
+  margin-top: 8px;
+  color: var(--brand-500);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+@include down(480px) {
+  .favorites-page__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .favorites-page__title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .favorites-page__card {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .favorites-page__image {
+    width: 72px;
+    height: 60px;
+  }
+}

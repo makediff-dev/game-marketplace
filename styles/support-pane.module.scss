@@ -1,0 +1,203 @@
+@use "breakpoints" as *;
+
+.support-pane__body,
+.support-pane__form {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+  margin-top: 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.support-pane__new {
+  align-self: flex-start;
+  height: 44px;
+  padding: 0 20px;
+  color: var(--text-inverse);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--gradient-brand);
+  border: 0;
+  border-radius: 999px;
+
+  &:hover {
+    opacity: 0.92;
+  }
+}
+
+.support-pane__empty {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.support-pane__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.support-pane__ticket {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 14px;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  background: var(--surface-elevated);
+  border: 0;
+  border-radius: 16px;
+  transition: opacity 160ms ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.support-pane__ticket-top {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.support-pane__ticket-title {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.support-pane__ticket-order,
+.support-pane__ticket-time {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.support-pane__ticket-preview {
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.support-pane__status {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 999px;
+
+  &--open {
+    color: #b26a00;
+    background: #fff1d6;
+  }
+
+  &--answered {
+    color: var(--text-success);
+    background: color-mix(in srgb, var(--text-success) 14%, transparent);
+  }
+
+  &--closed {
+    color: var(--text-muted);
+    background: #e8e8ee;
+  }
+}
+
+:global(html[data-theme="dark"]) .support-pane__status {
+  &--open {
+    color: #ffc266;
+    background: #3a2c12;
+  }
+
+  &--closed {
+    background: #2a2a32;
+  }
+}
+
+.support-pane__back {
+  flex-shrink: 0;
+  padding: 0;
+  color: var(--brand-500);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  border: 0;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.support-pane__submit {
+  align-self: flex-start;
+}
+
+.support-pane__link,
+.support-pane__resolve {
+  padding: 0;
+  color: var(--brand-500);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  border: 0;
+
+  &:hover:not(:disabled) {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+.support-pane__resolve {
+  align-self: center;
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+// The deal chat head turns into a grid on phones.
+@include down(480px) {
+  .support-pane__new {
+    align-self: stretch;
+  }
+
+  .support-pane__back {
+    grid-area: status;
+  }
+
+  .support-pane__head-status {
+    grid-area: link;
+  }
+}

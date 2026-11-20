@@ -1,0 +1,117 @@
+@use "breakpoints" as *;
+
+.auth {
+  --border: var(--border-strong);
+  --muted: var(--text-tertiary);
+  --accent: var(--brand-500);
+  --danger: var(--text-error);
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 64px 16px;
+  color: var(--text-primary);
+}
+
+.auth__title {
+  font-size: 24px;
+  color: var(--text-primary);
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth__field label {
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+.auth__field input {
+  padding: 10px 12px;
+  color: inherit;
+  font: inherit;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.auth__field input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.auth__field input::-ms-reveal {
+  display: none;
+}
+
+.auth__password {
+  position: relative;
+  display: flex;
+}
+
+.auth__password input {
+  flex: 1;
+  min-width: 0;
+  padding-right: 44px;
+}
+
+.auth__toggle {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: var(--muted);
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  transform: translateY(-50%);
+}
+
+.auth__error {
+  color: var(--danger);
+  font-size: 14px;
+}
+
+.auth__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  color: var(--text-inverse);
+  font: inherit;
+  cursor: pointer;
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.auth__switch {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.auth__switch a {
+  color: var(--accent);
+}

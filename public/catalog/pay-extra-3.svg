@@ -1,0 +1,21 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Clip path group">
+<mask id="mask0_0_4" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+<path id="Vector" d="M0 0H32V32H0V0V0" fill="white"/>
+</mask>
+<g mask="url(#mask0_0_4)">
+<g id="Group">
+<path id="Vector_2" fill-rule="evenodd" clip-rule="evenodd" d="M8.62299 11V11.004C8.61903 11.004 7.37305 11 7.04079 12.1906C6.73621 13.2823 5.87787 16.2964 5.85414 16.3795H5.61681C5.61681 16.3795 4.73869 13.2981 4.43016 12.1866C4.0979 10.996 2.84796 11 2.84796 11H0V20.0581H2.84796V14.6786H2.96662H3.08529L4.7466 20.0581H6.72435L8.38566 14.6826H8.62299V20.0581H11.4709V11H8.62299V11" fill="#4DB45E"/>
+<path id="Vector_3" fill-rule="evenodd" clip-rule="evenodd" d="M19.0261 11C19.0261 11 18.1915 11.0752 17.7999 11.9493L15.7826 16.3795H15.5452V11H12.6973V20.0581H15.387C15.387 20.0581 16.2612 19.979 16.6528 19.1088L18.6305 14.6786H18.8678V20.0581H21.7158V11H19.0261V11" fill="#4DB45E"/>
+<path id="Vector_4" fill-rule="evenodd" clip-rule="evenodd" d="M22.9824 15.1133V20.0577H25.8304V17.1701H28.9157C30.2605 17.1701 31.3997 16.3118 31.823 15.1133H22.9824V15.1133" fill="#4DB45E"/>
+<path id="Vector_5" fill-rule="evenodd" clip-rule="evenodd" d="M28.9148 11H22.582C22.8985 12.7246 24.1919 14.109 25.8651 14.5599C26.2448 14.6628 26.6443 14.7182 27.0557 14.7182H31.9368C31.9803 14.5125 32.0001 14.3028 32.0001 14.0853C32.0001 12.3805 30.6196 11 28.9148 11V11" fill="url(#paint0_linear_0_4)"/>
+</g>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="22.5828" y1="12.8591" x2="32.0001" y2="12.8591" gradientUnits="userSpaceOnUse">
+<stop offset="0.3" stop-color="#00B4E6"/>
+<stop offset="1" stop-color="#088CCB"/>
+</linearGradient>
+</defs>
+</svg>

@@ -1,0 +1,203 @@
+@use "breakpoints" as *;
+
+.promote-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--surface-scrim);
+}
+
+.promote-dialog__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: 440px;
+  max-width: 100%;
+  padding: 32px 28px 28px;
+  text-align: center;
+  background: var(--surface-elevated);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.promote-dialog__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.promote-dialog__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+  color: var(--brand-500);
+  background: var(--surface-brand-muted);
+  border-radius: 18px;
+}
+
+.promote-dialog__title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.promote-dialog__subject {
+  max-width: 100%;
+  margin: 4px 0 0;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.promote-dialog__text {
+  margin: 16px 0 0;
+  color: var(--text-tertiary);
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.promote-dialog__methods {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.promote-dialog__method {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  padding: 12px 14px;
+  color: var(--brand-500);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  background: var(--surface-secondary);
+  border: 1.5px solid transparent;
+  border-radius: 16px;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease;
+
+  &:hover:not(:disabled) {
+    border-color: var(--border-strong);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+
+  &--on,
+  &--on:hover:not(:disabled) {
+    background: var(--surface-brand-muted);
+    border-color: var(--brand-500);
+  }
+
+  img {
+    flex-shrink: 0;
+  }
+}
+
+.promote-dialog__method-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.promote-dialog__method-title {
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.promote-dialog__method-note {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.promote-dialog__error {
+  margin: 12px 0 0;
+  color: var(--text-error);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.promote-dialog__primary {
+  width: 100%;
+  height: 52px;
+  margin-top: 20px;
+  color: var(--text-inverse);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--gradient-brand);
+  border: 0;
+  border-radius: 16px;
+  transition: opacity 160ms ease;
+
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+}
+
+// Phones: a sheet from the bottom edge.
+@include down(600px) {
+  .promote-dialog {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .promote-dialog__panel {
+    width: 100%;
+    padding: 28px 16px calc(20px + env(safe-area-inset-bottom));
+    border-radius: 24px 24px 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promote-dialog__method,
+  .promote-dialog__primary {
+    transition: none;
+  }
+}

@@ -1,0 +1,186 @@
+@use "breakpoints" as *;
+
+.notifications-menu {
+  position: relative;
+}
+
+.notifications-menu__panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 400px;
+  max-height: min(560px, 70dvh);
+  padding: 16px 8px 8px;
+  overflow: auto;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+// Inside the phone menu: the list opens under the row, no popover.
+.notifications-menu--inline {
+  width: 100%;
+
+  .notifications-menu__panel {
+    position: static;
+    width: 100%;
+    max-height: none;
+    margin-top: 8px;
+    box-shadow: none;
+  }
+}
+
+.notifications-menu__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 8px 12px;
+}
+
+.notifications-menu__title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.notifications-menu__settings {
+  color: var(--brand-500);
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.notifications-menu__empty {
+  margin: 0;
+  padding: 24px 8px;
+  color: var(--text-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.notifications-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notifications-menu__item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 14px;
+  transition: background-color 160ms ease;
+
+  &:is(a):hover {
+    background: var(--surface-secondary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: -2px;
+  }
+}
+
+.notifications-menu__dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+
+.notifications-menu__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.notifications-menu__item-title {
+  color: var(--text-tertiary);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.notifications-menu__item-text {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 18px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.notifications-menu__time {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+// New: tinted row, brand dot, dark bold title. Read ones stay quiet.
+.notifications-menu__item--new {
+  background: var(--surface-brand-muted);
+
+  &:is(a):hover {
+    background: var(--surface-brand-muted);
+    filter: brightness(0.98);
+  }
+
+  .notifications-menu__dot {
+    background: var(--brand-500);
+  }
+
+  .notifications-menu__item-title {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .notifications-menu__item-text {
+    color: var(--text-tertiary);
+  }
+
+  .notifications-menu__time {
+    color: var(--brand-500);
+  }
+}
+
+.notifications-menu__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@include down(1024px) {
+  .notifications-menu__panel {
+    width: min(400px, calc(100vw - 32px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notifications-menu__item {
+    transition: none;
+  }
+}
